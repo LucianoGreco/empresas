@@ -1,0 +1,16 @@
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "orq": "node D:\\empresas\\ferreluc\\gestion\\scripts\\orquestador.cjs",
+    "export": "node D:\\empresas\\ferreluc\\gestion\\scripts\\exportar_json.cjs",
+    "imgs": "node D:\\empresas\\ferreluc\\gestion\\scripts\\colocar_imagenes.cjs"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "exceljs": "^4.4.0",
+    "fs-extra": "^11.3.2",
+    "xlsx": "^0.18.5"
+  }
+}

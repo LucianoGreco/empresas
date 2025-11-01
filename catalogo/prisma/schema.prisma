@@ -1,0 +1,201 @@
+// prisma/schema.prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL") // ej: file:./data/catalogo.db
+}
+
+// =====================
+// ENUMS
+// =====================
+
+enum OrderStatus {
+  pending
+  paid
+  cancelled
+}
+
+enum PaymentStatus {
+  approved
+  pending
+  rejected
+  refunded
+  error
+}
+
+// =====================
+// MODELOS
+// =====================
+
+model Customer {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  name      String?
+  phone     String?
+  dniCuit   String?
+  tenantId  String
+
+  orders    Order[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([tenantId])
+  @@index([email])
+}
+
+model Order {
+  id        String       @id @default(cuid())
+  code      String
+  status    OrderStatus  @default(pending)
+
+  tenantId   String
+  customer   Customer    @relation(fields: [customerId], references: [id])
+  customerId String
+
+  buyerEmail   String
+  buyerName    String?
+  buyerPhone   String?
+  buyerDniCuit String?
+
+  shipStreet     String?
+  shipNumber     String?
+  shipZip        String?
+  shipCity       String?
+  shipState      String?
+  shippingMethod String?
+
+  currency  String @default("ARS")
+  subtotal  Int    @default(0)
+  shipping  Int    @default(0)
+  discount  Int    @default(0)
+  tax       Int    @default(0)
+  total     Int    @default(0)
+
+  notes          String?
+  idempotencyKey String?
+  paidAt         DateTime?
+
+  items    OrderItem[]
+  payments Payment[]
+  events   WebhookEvent[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([tenantId, code]) // evita colisiones por tenant
+  @@index([tenantId])
+  @@index([idempotencyKey])
+  @@index([createdAt])
+}
+
+model OrderItem {
+  id        String @id @default(cuid())
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  orderId   String
+
+  sku       String
+  title     String
+  brand     String?
+  category  String?
+  image     String?
+  currency  String @default("ARS")
+  quantity  Int
+  unitPrice Int
+  total     Int
+  meta      String?
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([sku])
+}
+
+model Payment {
+  id           String        @id @default(cuid())
+  eventId      String        @unique
+  provider     String
+  providerRef  String?
+  status       PaymentStatus @default(pending)
+
+  currency     String  @default("ARS")
+  amount       Int     @default(0)
+
+  rawPayload   String?
+  errorMessage String?
+
+  order     Order? @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  orderId   String?
+
+  tenantId  String?
+
+  events    WebhookEvent[]
+
+  createdAt DateTime @default(now())
+
+  @@index([orderId])
+  @@index([provider, providerRef])
+  @@index([tenantId])
+  @@index([createdAt])
+}
+
+model WebhookEvent {
+  id           String   @id @default(cuid())
+  provider     String
+  eventId      String   @unique
+  eventType    String
+  signature    String?
+  payload      String?
+  receivedAt   DateTime @default(now())
+  processedOk  Boolean  @default(false)
+  errorMessage String?
+
+  payment   Payment? @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+  paymentId String?
+
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: SetNull)
+  orderId   String?
+
+  createdAt DateTime @default(now())
+
+  @@index([provider])
+  @@index([orderId])
+  @@index([paymentId])
+  @@index([createdAt])
+}
+
+// =====================
+// AUTH USUARIOS
+// =====================
+
+model User {
+  id            String        @id @default(cuid())
+  email         String        @unique
+  name          String?
+  passwordHash  String
+  role          String        @default("user") // user | admin
+  isActive      Boolean       @default(false)  // aprobado por admin
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  sessions      UserSession[]
+}
+
+model UserSession {
+  id         String   @id @default(cuid())
+  user       User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  token      String   @unique
+  expiresAt  DateTime
+  createdAt  DateTime @default(now())
+
+  @@index([userId])
+  @@index([token])
+  @@index([expiresAt]) // para limpieza eficiente
+}
+
+/* fin */

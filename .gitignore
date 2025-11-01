@@ -1,0 +1,28 @@
+# Node
+node_modules/
+npm-debug.log*
+yarn.lock
+pnpm-lock.yaml
+
+# Next / build
+.next/
+out/
+
+# Env
+.env
+.env.local
+.env.*.local
+
+# Prisma sqlite
+catalogo/prisma/data/*.db
+catalogo/prisma/data/*.db-journal
+
+# Datos de gestión (volátiles)
+ferreluc/gestion/imagenes/
+ferreluc/gestion/listas/originales/
+ferreluc/gestion/listas/normalizadas/**/reportes/
+ferreluc/gestion/json/producto_grais.json
+
+# SO
+.DS_Store
+Thumbs.db
