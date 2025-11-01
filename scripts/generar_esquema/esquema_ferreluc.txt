@@ -1,0 +1,1072 @@
+📁 D:\empresas
+│└── 📁 ferreluc
+│    └── 📁 gestion
+│        ├── 📁 imagenes
+│        │   ├── 1. abrazadera mini.png
+│        │   ├── 2. abrazadera reforzada.png
+│        │   ├── 3. abrazadera std.png
+│        │   ├── 4. abrazadera super presion resorte.png
+│        │   ├── 5. abrazadera super presion.png
+│        │   ├── 6. abrazadera tornillo y tuerca.png
+│        │   ├── 7. abrazadera track.png
+│        │   ├── 8. abrazadera u - bolt.png
+│        │   ├── 9. abrazaderas caño escape.png
+│        │   ├── 10. abrazaderas cierre rápido.png
+│        │   ├── 11. acido clorhidrico muriatico.png
+│        │   ├── 12. acople manguera garrafa 10 kg.png
+│        │   ├── 13. acople manguera garrafa 3 kg.png
+│        │   ├── 14. adaptador acople 10 a 3 kg.png
+│        │   ├── 15. adaptador acople 3 a 10 kg.png
+│        │   ├── 16. adaptador cartucho 250 g mini.png
+│        │   ├── 17. adaptador copa sds max.png
+│        │   ├── 18. adaptador copa sds plus con mecha.png
+│        │   ├── 19. adaptador disco fibra.png
+│        │   ├── 20. adaptador weldon con mandril.png
+│        │   ├── 21. alambre acero forrado.png
+│        │   ├── 22. alicate corte diagonal cuerda piano.png
+│        │   ├── 23. alicate corte diagonal.png
+│        │   ├── 24. amoladora_angular.png
+│        │   ├── 25. anafe 1 hornalla blanco.png
+│        │   ├── 26. anafe 1 hornalla electrico.png
+│        │   ├── 27. anafe 1 hornalla negro.png
+│        │   ├── 28. anafe 1 hornallas cartucho.png
+│        │   ├── 29. anafe 2 hornalla electrico.png
+│        │   ├── 30. anafe 2 hornallas acero inoxidable.png
+│        │   ├── 31. anafe 2 hornallas blanco.png
+│        │   ├── 32. anafe 2 hornallas negro.png
+│        │   ├── 33. aplicador barra fina.png
+│        │   ├── 34. aplicador barra gruesa.png
+│        │   ├── 35. aplicador cartucho reforzado.png
+│        │   ├── 36. aplicador cartuchos profesional.png
+│        │   ├── 37. aplicador cartuchos rojo.png
+│        │   ├── 38. aplicador esqueleto pesado.png
+│        │   ├── 39. arandela caucho.png
+│        │   ├── 40. arandela h ø g casquillo hongo.png
+│        │   ├── 41. arandela plana galvanizada.png
+│        │   ├── 42. arandela_vulcanizada.png
+│        │   ├── 43. arco sierra junior.png
+│        │   ├── 44. arco sierra profesional.png
+│        │   ├── 45. arco_sierra_convencional.png
+│        │   ├── 46. arco_sierra_multiuso_profesional.png
+│        │   ├── 47. armas_aerosol_penetrit.png
+│        │   ├── 48. armas_penetrit.png
+│        │   ├── 49. azada carpir n 0 sin cabo.png
+│        │   ├── 50. azada carpir n 1 sin cabo.png
+│        │   ├── 51. azada forjada tipo mendocina con cabo.png
+│        │   ├── 52. azada forjada tipo mendocina sin cabo.png
+│        │   ├── 53. balde plastico albanil azul con pico.png
+│        │   ├── 54. balde plastico albanil rojo con pico.png
+│        │   ├── 55. balde plastico albanil.png
+│        │   ├── 56. balines 4,5 apolo.png
+│        │   ├── 57. balines 5 apolo.png
+│        │   ├── 58. balines 5 lata monster.png
+│        │   ├── 59. barbijo.png
+│        │   ├── 60. barniz mate 240 cc kuwait.png
+│        │   ├── 61. barniz transparente 240 cc kuwait.png
+│        │   ├── 62. barra adhesiva premium.png
+│        │   ├── 63. barra extension.png
+│        │   ├── 64. barra redonda grilon polietileno.png
+│        │   ├── 65. barra tipo t.png
+│        │   ├── 66. barral corto 10 kg sin llave.png
+│        │   ├── 67. barral curvo color extender.webp
+│        │   ├── 68. barral curvo pulido extender.png
+│        │   ├── 69. barral extensible blanco.png
+│        │   ├── 70. barral extensible lujo blanco.png
+│        │   ├── 71. barral extensible pulido.png
+│        │   ├── 72. barral_doble.png
+│        │   ├── 73. barral_largo_sin_llave.png
+│        │   ├── 74. barreno.png
+│        │   ├── 75. barreta acero.png
+│        │   ├── 76. bateria 12 v atornillador.png
+│        │   ├── 77. bioclin pozos ciegos.png
+│        │   ├── 78. blister destornilladores.png
+│        │   ├── 79. block cebadera brumoline.png
+│        │   ├── 80. block uso profesional brumoline.png
+│        │   ├── 81. bocallaves encastre.png
+│        │   ├── 82. boquilla magnetica.png
+│        │   ├── 83. bota frigorifico blanca.png
+│        │   ├── 84. bota tractor.png
+│        │   ├── 85. broca chapa escalon.png
+│        │   ├── 86. broca perforacion vidrio.png
+│        │   ├── 87. broca piloto.png
+│        │   ├── 88. broca porcelanato max.png
+│        │   ├── 89. broca sds plus.png
+│        │   ├── 90. broca vastago reducido.png
+│        │   ├── 91. buje traba raulet.png
+│        │   ├── 92. bulon arandela tuerca.png
+│        │   ├── 93. bulon_1010_unc.png
+│        │   ├── 94. bulon_astm.png
+│        │   ├── 95. bulon_cabeza_de_tanque_tuerca.png
+│        │   ├── 96. bulon_g_2_unc.png
+│        │   ├── 97. bulon_g_5_unc.png
+│        │   ├── 98. bulon_g_8_m.png
+│        │   ├── 99. burletes_aerosol_150_cc_penetrit.png
+│        │   ├── 100. buscapolo phillips.png
+│        │   ├── 101. buscapolo plano.png
+│        │   ├── 102. cabezal desmalezadora.png
+│        │   ├── 103. cabezal sanogass.png
+│        │   ├── 104. cable acero forrado.png
+│        │   ├── 105. cadena patente.png
+│        │   ├── 106. calefactor conveccion.png
+│        │   ├── 107. calefon acero inoxidable diluvio.png
+│        │   ├── 108. calefon blanco diluvio.png
+│        │   ├── 109. calefon electrico.png
+│        │   ├── 110. calefon encendido lateral diluvio.png
+│        │   ├── 111. calefon negro diluvio.png
+│        │   ├── 112. calefon plastico plus apilable.png
+│        │   ├── 113. calentador blindado termo 12 v brogas.png
+│        │   ├── 114. calentador cartucho 227 g brogas.png
+│        │   ├── 115. calentador encendido electrico con rosca.png
+│        │   ├── 116. calentador enlozado micro garrafa aligas.png
+│        │   ├── 117. calentador estuche linea mini 230 g brogas.png
+│        │   ├── 118. calentador gas clasico brogas.png
+│        │   ├── 119. caloventor brolux aire vertical w brogas.png
+│        │   ├── 120. camisa farol.png
+│        │   ├── 121. candado arco largo.webp
+│        │   ├── 122. candado combinacion.png
+│        │   ├── 123. candado sekur.png
+│        │   ├── 124. candado.png
+│        │   ├── 125. cinta persiana.png
+│        │   ├── 126. manguera caño cristal.png
+│        │   ├── 127. manguera caño riego.png
+│        │   ├── 128. papel junta.png
+│        │   ├── 129. plancha cuadrada grilon polietileno blanca.png
+│        │   ├── 130. plancha cuadrada grilon polietileno negra.png
+│        │   ├── 131. sin_imagen.png
+│        │   ├── 132. soga multifilamento.png
+│        │   └── 133. tel dry t1 aguja.png
+│        ├── 📁 json
+│        │   └── 134. producto_grais.json
+│        ├── 📁 listas
+│        │   ├── 📁 normalizadas
+│        │   │   └── 📁 grais
+│        │   │       ├── 📁 reportes
+│        │   │       │   └── 135. no_encontrados.xlsx
+│        │   │       └── 136. data.xlsx
+│        │   └── 📁 originales
+│        │       └── 📁 grais
+│        │           └── 137. data.xlsx
+│        └── 📁 scripts
+│            ├── 138. colocar_imagenes.cjs
+│            ├── 139. common.cjs
+│            ├── 140. config.cjs
+│            ├── 141. descripcion_flexxus.cjs
+│            ├── 142. exportar_json.cjs
+│            ├── 143. importar_precios.cjs
+│            ├── 144. orquestador.cjs
+│            └── 145. package.json
+
+--------------------------------------------
+
+134. D:\empresas\ferreluc\gestion\json\producto_grais.json
+
+// gestion/json/producto_grais.json
+
+{
+  "codigo_flexxus": "31-92110",
+  "categoria": "barra redonda grilon polietileno",
+  "nombre_descripcion": "barra redonda grilon polietileno 10 mm x 1000 mm a.p.m nth",
+  "marca": "NTH",
+  "moneda": "ars",
+  "costo": 14808.13,
+  "venta": 500,
+  "precio_venta": 12238.13,
+  "mayorista": 0,
+  "inventario": 0,
+  "inv_minimo": 0,
+  "inv_maximo": 0,
+  "descripcion_flexxus": "A.P.M. Barra Redonda NTH    10mm",
+  "caja": 1,
+  "iva": 2570.01,
+  "ganancia": 5923.25,
+  "imagen": "/imagenes/barra redonda grilon polietileno.png"
+}
+
+--------------------------------------------
+
+135. D:\empresas\ferreluc\gestion\listas\normalizadas\grais\reportes\no_encontrados.xlsx
+
+// gestion/listas/normalizadas/grais/reportes/no_encontrados.xlsx
+
+	├── Columna A: PROVEEDOR	: 
+	├── Columna B: CODIGO	: 
+	├── Columna C: CODIGO FLEXXUS	: -
+	├── Columna D: Descripcion Flexxus	: 
+	└── Columna E: PRECIO VENTA	:
+
+--------------------------------------------
+
+136. D:\empresas\ferreluc\gestion\listas\normalizadas\grais\data.xlsx
+
+// gestion/listas/normalizadas/grais/data.xlsx
+
+	├── Columna A: codigo flexxus	: 31-92110
+	├── Columna B: nombre descripcion	: barra redonda grilon polietileno 10 mm x 1000 mm a.p.m nth
+	├── Columna C: costo	: 14808.13
+	├── Columna D: venta	: 500
+	├── Columna E: mayorista	: 
+	├── Columna F: inventario	: 
+	├── Columna G: inv_minimo	: 
+	├── Columna H: inv_máximo	: 
+	├── Columna I: proveedor	: 
+	├── Columna J: descripcion flexxus	: A.P.M. Barra Redonda NTH    10mm
+	├── Columna K: precio venta	: 12238.13
+	├── Columna L: caja	: 1
+	├── Columna M: iva	: 2570.01
+	├── Columna N: ganancia	: 5923.25
+	├── Columna O: imagen	: D:\empresas\ferreluc\gestion\imagenes\barra redonda grilon polietileno.png
+	├── Columna P: marca	: NTH
+	├── Columna Q: categoria	: barra redonda grilon polietileno
+	└── Columna R: moneda	: ars
+
+--------------------------------------------
+
+137. D:\empresas\ferreluc\gestion\listas\originales\grais\data.xlsx
+
+// gestion/listas/originales/grais/data.xlsx
+
+	├── Columna A: PROVEEDOR	: 1
+	├── Columna B: CODIGO	: 54
+	├── Columna C: CODIGO FLEXXUS	: 1-54
+	├── Columna D: Descripcion Flexxus	: Soga Envainada PANAMA  4mm (x200m)
+	└── Columna E: PRECIO VENTA	: 142.67592
+
+--------------------------------------------
+
+138. D:\empresas\ferreluc\gestion\scripts\colocar_imagenes.cjs
+
+// gestion/scripts/colocar_imagenes.cjs
+
+// colocar_imagenes.cjs — rellena Columna O "imagen" según categoría (fuzzy) con fallback
+// Requisitos: npm i exceljs
+const ExcelJS = require("exceljs");
+const path = require("path");
+const { RUTAS } = require("./config.cjs");
+const {
+  scanImages, bestFuzzyMatch, normName, tokensOf,
+  buildHeaderIndex, readCellText,
+} = require("./common.cjs");
+
+const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
+const IMAGES_DIR   = RUTAS.IMAGES_DIR;
+const FALLBACK_IMG = RUTAS.FALLBACK_IMG;
+
+const SCORE_THRESHOLD = 0.6;
+
+async function main() {
+  console.time("colocar_imagenes");
+  try {
+    // 1) Indexar imágenes
+    const { byKey, list } = scanImages(IMAGES_DIR);
+    console.log(`Imagenes indexadas: exact=${byKey.size} | fuzzy_candidates=${list.length}`);
+
+    // 2) Abrir XLSX destino
+    const wb = new ExcelJS.Workbook();
+    await wb.xlsx.readFile(DESTINO_XLSX);
+    const ws = wb.worksheets[0];
+    const idx = buildHeaderIndex(ws);
+
+    const colImg = idx.get(normName("imagen")) || 15;     // O
+    const colCat = idx.get(normName("categoria")) || 17;  // Q
+    const colNom = idx.get(normName("nombre descripcion")); // opcional
+
+    let actualizados = 0;
+    let sinImagen = 0;
+
+    for (let r = 2; r <= ws.rowCount; r++) {
+      const row = ws.getRow(r);
+      const catRaw = readCellText(row.getCell(colCat));
+      const nombreRaw = colNom ? readCellText(row.getCell(colNom)) : "";
+
+      const catKey = normName(catRaw);
+      let chosen = byKey.get(catKey);
+
+      if (!chosen) {
+        chosen = bestFuzzyMatch(catRaw, list, SCORE_THRESHOLD);
+        if (!chosen && nombreRaw) {
+          const ntoks = tokensOf(nombreRaw).slice(0, 4).join(" ");
+          chosen = bestFuzzyMatch(ntoks, list, SCORE_THRESHOLD);
+        }
+      }
+
+      if (!chosen) { chosen = FALLBACK_IMG; sinImagen++; }
+
+      row.getCell(colImg).value = chosen.replace(/\\/g, "\\\\");
+      row.commit();
+      actualizados++;
+    }
+
+    await wb.xlsx.writeFile(DESTINO_XLSX);
+    console.log(`Actualizados: ${actualizados} | Sin imagen: ${sinImagen}`);
+  } catch (err) {
+    console.error("ERROR:", err.message);
+    process.exitCode = 1;
+  } finally {
+    console.timeEnd("colocar_imagenes");
+  }
+}
+
+if (require.main === module) main();
+module.exports = { main };
+
+
+--------------------------------------------
+
+139. D:\empresas\ferreluc\gestion\scripts\common.cjs
+
+// gestion/scripts/common.cjs
+
+// common.cjs (NUEVO) — utilidades compartidas para todos los scripts .cjs
+
+const fs = require("fs");
+const path = require("path");
+
+// ---------- Strings / Headers ----------
+function normalizeHeader(s) {
+  return String(s || "")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase()
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+const HEADER_MAP = {
+  "codigo flexxus": "codigo_flexxus",
+  "nombre descripcion": "nombre_descripcion",
+  "costo": "costo",
+  "venta": "venta",
+  "mayorista": "mayorista",
+  "inventario": "inventario",
+  "inv_minimo": "inv_minimo",
+  "inv minimo": "inv_minimo",
+  "inv_maximo": "inv_maximo",
+  "inv maximo": "inv_maximo",
+  "inv_máximo": "inv_maximo",
+  "inv máximo": "inv_maximo",
+  "proveedor": "proveedor",
+  "descripcion flexxus": "descripcion_flexxus",
+  "precio venta": "precio_venta",
+  "caja": "caja",
+  "iva": "iva",
+  "ganancia": "ganancia",
+  "imagen": "imagen",
+  "marca": "marca",
+  "categoria": "categoria",
+  "moneda": "moneda",
+};
+
+const PREFERRED_ORDER = [
+  "codigo_flexxus",
+  "nombre_descripcion",
+  "costo",
+  "venta",
+  "mayorista",
+  "inventario",
+  "inv_minimo",
+  "inv_maximo",
+  "proveedor",
+  "descripcion_flexxus",
+  "precio_venta",
+  "caja",
+  "iva",
+  "ganancia",
+  "imagen",
+  "marca",
+  "categoria",
+  "moneda",
+];
+
+function toSnakeCase(s) {
+  return String(s)
+    .replace(/[^\w\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase()
+    .replace(/\s+/g, "_");
+}
+
+function sortKeys(obj) {
+  const known = {};
+  const rest = {};
+  for (const k of Object.keys(obj)) {
+    if (PREFERRED_ORDER.includes(k)) known[k] = obj[k];
+    else rest[k] = obj[k];
+  }
+  const out = {};
+  for (const k of PREFERRED_ORDER) if (k in known) out[k] = known[k];
+  for (const k of Object.keys(rest).sort()) out[k] = rest[k];
+  return out;
+}
+
+// ---------- Números / Casting ----------
+function parsePrecio(val) {
+  if (val == null) return null;
+  if (typeof val === "number") return Number.isFinite(val) ? val : null;
+  const s = String(val).trim();
+  if (!s) return null;
+  // "12.345,67" -> 12345.67  || "12345.67" -> 12345.67
+  const normalized = s.replace(/\./g, "").replace(/,/g, ".");
+  const num = Number(normalized);
+  return Number.isFinite(num) ? num : null;
+}
+
+function round2(n) {
+  return Math.round((Number(n) + Number.EPSILON) * 100) / 100;
+}
+
+function castValue(v) {
+  if (v === null || v === undefined) return null;
+  if (typeof v === "number" || typeof v === "boolean") return v;
+  let s = String(v).trim();
+  if (s === "") return null;
+  if (/^(true|false)$/i.test(s)) return /^true$/i.test(s);
+  const numCandidate = s.replace(/\./g, "").replace(/,/g, ".");
+  if (/^-?\d+(\.\d+)?$/.test(numCandidate)) {
+    const n = Number(numCandidate);
+    if (!Number.isNaN(n)) return n;
+  }
+  return s;
+}
+
+// ---------- Archivos / FS ----------
+function ensureDir(p) {
+  if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
+}
+
+// ---------- Excel helpers (exceljs) ----------
+function toKey(s) {
+  return String(s ?? "")
+    .trim()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/\s+/g, " ")
+    .toLowerCase();
+}
+
+function buildHeaderIndex(worksheet) {
+  const headerRow = worksheet.getRow(1);
+  const map = new Map();
+  for (let c = 1; c <= worksheet.columnCount; c++) {
+    const key = toKey(headerRow.getCell(c).value);
+    if (key) map.set(key, c);
+  }
+  return map;
+}
+
+function readCellText(cell) {
+  if (!cell) return "";
+  if (cell.text && String(cell.text).trim()) return String(cell.text).trim();
+  const v = cell.value;
+  if (v && typeof v === "object" && "result" in v && v.result) return String(v.result).trim();
+  if (v && typeof v === "object" && "richText" in v && Array.isArray(v.richText)) {
+    return v.richText.map((t) => t.text).join("");
+  }
+  if (v != null) return String(v).trim();
+  return "";
+}
+
+// ---------- Imágenes ----------
+function normalizeImagenPath(val) {
+  if (val == null || val === "") return "/imagenes/sin_imagen.png";
+  let s = String(val).trim();
+  s = s.replace(/\\/g, "/");
+  s = s.replace(/^D:\/empresas\/ferreluc\/gestion\/imagenes\//i, "/imagenes/");
+  if (!/^https?:\/\//i.test(s) && !s.startsWith("/")) s = "/imagenes/" + s;
+  return s;
+}
+
+function normName(s) {
+  return String(s ?? "")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+    .replace(/[_.:\/\\]+/g, " ")
+    .replace(/[(){}[\]-]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+}
+
+function tokensOf(s) {
+  return normName(s).split(" ").filter(Boolean);
+}
+
+function tokenOverlapScore(a, b) {
+  const ta = new Set(tokensOf(a));
+  const tb = new Set(tokensOf(b));
+  if (ta.size === 0 || tb.size === 0) return 0;
+  let inter = 0;
+  for (const t of ta) if (tb.has(t)) inter++;
+  const denom = Math.max(ta.size, tb.size);
+  return inter / denom;
+}
+
+function scanImages(dir) {
+  if (!fs.existsSync(dir)) return { byKey: new Map(), list: [] };
+  const files = fs.readdirSync(dir);
+  const pref = { ".png": 5, ".jpg": 4, ".jpeg": 4, ".webp": 3, ".gif": 2, "": 1 };
+
+  const byKey = new Map();
+  const list = [];
+
+  for (const f of files) {
+    const full = path.join(dir, f);
+    const stat = fs.statSync(full);
+    if (!stat.isFile()) continue;
+    const parsed = path.parse(full);
+    const base = parsed.name;
+    const key = normName(base);
+    const ext = (parsed.ext || "").toLowerCase();
+    const score = pref[ext] ?? 0;
+
+    list.push({ full, base, key, ext, pref: score });
+
+    const cur = byKey.get(key);
+    if (!cur) {
+      byKey.set(key, full);
+    } else {
+      const curExt = (path.parse(cur).ext || "").toLowerCase();
+      const curScore = pref[curExt] ?? 0;
+      if (score > curScore) byKey.set(key, full);
+    }
+  }
+
+  return { byKey, list };
+}
+
+function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
+  const qn = normName(query);
+  if (!qn) return null;
+
+  let best = null;
+  let bestScore = 0;
+
+  for (const entry of imageEntries) {
+    const includeBoost =
+      entry.key.includes(qn) || qn.includes(entry.key) ? 0.15 : 0;
+
+    const baseScore = tokenOverlapScore(qn, entry.key);
+
+    const sizeSimBoost = Math.min(tokensOf(qn).length, tokensOf(entry.key).length) /
+                         Math.max(tokensOf(qn).length, tokensOf(entry.key).length) * 0.05;
+
+    const score = baseScore + includeBoost + sizeSimBoost;
+
+    const tiebreak = entry.pref / 100;
+
+    if (score + tiebreak > bestScore) {
+      bestScore = score + tiebreak;
+      best = entry;
+    }
+  }
+  return (best && bestScore >= threshold) ? best.full : null;
+}
+
+module.exports = {
+  // headers / orden / casting
+  normalizeHeader, HEADER_MAP, PREFERRED_ORDER, toSnakeCase, sortKeys,
+  // números
+  parsePrecio, round2, castValue,
+  // fs
+  ensureDir,
+  // excel
+  toKey, buildHeaderIndex, readCellText,
+  // imágenes
+  normalizeImagenPath, scanImages, bestFuzzyMatch, normName, tokensOf, tokenOverlapScore,
+};
+
+
+--------------------------------------------
+
+140. D:\empresas\ferreluc\gestion\scripts\config.cjs
+
+// gestion/scripts/config.cjs
+
+// config.cjs (NUEVO) — centraliza rutas usadas por los scripts .cjs
+
+const ROOT = "D:/empresas/ferreluc/gestion";
+const LISTAS = `${ROOT}/listas`;
+const NORMALIZADAS_GRAIS = `${LISTAS}/normalizadas/grais`;
+const ORIGINALES_GRAIS = `${LISTAS}/originales/grais`;
+const IMG_DIR = `${ROOT}/imagenes`;
+const JSON_DIR = `${ROOT}/json`;
+
+module.exports = {
+  RUTAS: {
+    ORIGEN_XLSX:  `${ORIGINALES_GRAIS}/data.xlsx`,
+    DESTINO_XLSX: `${NORMALIZADAS_GRAIS}/data.xlsx`,
+    REPORTE_DIR:  `${NORMALIZADAS_GRAIS}/reportes`,
+    REPORTE_XLSX: `${NORMALIZADAS_GRAIS}/reportes/no_encontrados.xlsx`,
+    IMAGES_DIR:   IMG_DIR,
+    FALLBACK_IMG: `${IMG_DIR}/sin_imagen.png`,
+    OUTPUT_DIR:   JSON_DIR,
+    OUTPUT_PATH:  `${JSON_DIR}/producto_grais.json`,
+  },
+  // Política de cálculos (por si cambia IVA/markup):
+  CALC: {
+    IVA: 0.21,
+    GANANCIA: 0.40,
+  }
+};
+
+
+--------------------------------------------
+
+141. D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
+
+// gestion/scripts/descripcion_flexxus.cjs
+
+// descripcion_flexxus.cjs — copia "Descripcion Flexxus" desde ORIGEN(D) a DESTINO(J) por CODIGO FLEXXUS
+// Requisitos: npm i exceljs
+const fs = require("fs");
+const ExcelJS = require("exceljs");
+const { RUTAS } = require("./config.cjs");
+const { buildHeaderIndex, readCellText, toKey } = require("./common.cjs");
+
+const ORIGEN_XLSX  = RUTAS.ORIGEN_XLSX;
+const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
+
+async function cargarOrigen(ruta) {
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(ruta);
+  const ws = wb.worksheets[0];
+  const idx = buildHeaderIndex(ws);
+
+  const colProv = idx.get(toKey("PROVEEDOR")) || 1;
+  const colCod  = idx.get(toKey("CODIGO")) || 2;
+  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || 3;
+  const colDesc = idx.get(toKey("Descripcion Flexxus")) || 4;
+
+  const map = new Map();
+
+  ws.eachRow((row, r) => {
+    if (r === 1) return;
+
+    let codigoFlex = readCellText(row.getCell(colFlex));
+    if (!codigoFlex) {
+      const proveedor = readCellText(row.getCell(colProv));
+      const codigo = readCellText(row.getCell(colCod));
+      if (proveedor || codigo) codigoFlex = `${proveedor}-${codigo}`.trim();
+    }
+
+    const descripcion = readCellText(row.getCell(colDesc));
+    if (codigoFlex) map.set(codigoFlex, descripcion);
+  });
+
+  return map;
+}
+
+async function escribirDestino(rutaDestino, origenMap) {
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(rutaDestino);
+  const ws = wb.worksheets[0];
+  const idx = buildHeaderIndex(ws);
+
+  const colFlexDst = idx.get(toKey("codigo flexxus")) || 1;
+  const colDescDst = idx.get(toKey("descripcion flexxus")) || 10;
+
+  let actualizados = 0;
+  let sinMatch = 0;
+
+  for (let r = 2; r <= ws.rowCount; r++) {
+    const row = ws.getRow(r);
+    const key = readCellText(row.getCell(colFlexDst));
+    if (!key) { sinMatch++; continue; }
+
+    const desc = origenMap.get(key);
+    if (desc == null || desc === "") { sinMatch++; continue; }
+
+    row.getCell(colDescDst).value = desc;
+    row.commit();
+    actualizados++;
+  }
+
+  await wb.xlsx.writeFile(rutaDestino);
+  return { actualizados, sinMatch };
+}
+
+async function main() {
+  console.time("descripcion_flexxus");
+  try {
+    const origenMap = await cargarOrigen(ORIGEN_XLSX);
+    const { actualizados, sinMatch } = await escribirDestino(DESTINO_XLSX, origenMap);
+    console.log(`Actualizados: ${actualizados} | Sin coincidencia/desc vacía: ${sinMatch}`);
+  } catch (err) {
+    console.error("ERROR:", err.message);
+    process.exitCode = 1;
+  } finally {
+    console.timeEnd("descripcion_flexxus");
+  }
+}
+
+if (require.main === module) main();
+module.exports = { main };
+
+
+--------------------------------------------
+
+142. D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs
+
+// gestion/scripts/exportar_json.cjs
+
+// exportar_json.cjs — lee XLSX y exporta JSON del catálogo (orden de claves estable)
+// Requisitos: npm i xlsx chokidar
+const fs = require("fs");
+const path = require("path");
+const XLSX = require("xlsx");
+const chokidar = require("chokidar");
+const { RUTAS } = require("./config.cjs");
+const {
+  normalizeHeader, HEADER_MAP, toSnakeCase, castValue,
+  sortKeys, normalizeImagenPath,
+} = require("./common.cjs");
+
+const XLSX_PATH   = RUTAS.DESTINO_XLSX;
+const OUTPUT_DIR  = RUTAS.OUTPUT_DIR;
+const OUTPUT_PATH = RUTAS.OUTPUT_PATH;
+
+async function exportOnce() {
+  try {
+    if (!fs.existsSync(XLSX_PATH)) {
+      console.error(`[exportar_json] No se encontró el Excel: ${XLSX_PATH}`);
+      return;
+    }
+    const wb = XLSX.readFile(XLSX_PATH, { cellDates: false });
+    const firstSheetName = wb.SheetNames[0];
+    if (!firstSheetName) {
+      console.error("[exportar_json] El archivo no tiene hojas.");
+      return;
+    }
+    const sheet = wb.Sheets[firstSheetName];
+    const rows = XLSX.utils.sheet_to_json(sheet, { defval: null, raw: false });
+
+    const out = rows.map((row) => {
+      const outRow = {};
+      for (const [rawHeader, rawValue] of Object.entries(row)) {
+        const norm = normalizeHeader(rawHeader);
+        const destKey = HEADER_MAP[norm] || toSnakeCase(norm);
+        outRow[destKey] = castValue(rawValue);
+      }
+      outRow.imagen = normalizeImagenPath(outRow.imagen);
+      return sortKeys(outRow);
+    });
+
+    await fs.promises.mkdir(OUTPUT_DIR, { recursive: true });
+    await fs.promises.writeFile(OUTPUT_PATH, JSON.stringify(out, null, 2), "utf8");
+    console.log(`[exportar_json] Exportado ${out.length} registros → ${OUTPUT_PATH}`);
+  } catch (err) {
+    console.error("[exportar_json] Error exportando:", err.message);
+  }
+}
+
+function startWatcher() {
+  console.log(`[exportar_json] Observando cambios en: ${XLSX_PATH}`);
+  let timer = null;
+  const trigger = () => { clearTimeout(timer); timer = setTimeout(() => exportOnce(), 600); };
+  const watcher = chokidar.watch(XLSX_PATH, {
+    ignoreInitial: false,
+    awaitWriteFinish: { stabilityThreshold: 500, pollInterval: 100 },
+  });
+  watcher
+    .on("add", trigger)
+    .on("change", trigger)
+    .on("error", (e) => console.error("[exportar_json] Watcher error:", e.message));
+}
+
+if (require.main === module) {
+  exportOnce().then(() => startWatcher());
+}
+
+module.exports = { exportOnce, startWatcher };
+
+
+--------------------------------------------
+
+143. D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
+
+// gestion/scripts/importar_precios.cjs
+
+// importar_precios.cjs — Actualiza K y recalcula C, M, N, D. Genera reporte no_encontrados.xlsx
+// Requisitos: npm i exceljs
+const fs = require("fs");
+const path = require("path");
+const ExcelJS = require("exceljs");
+const { RUTAS, CALC } = require("./config.cjs");
+const {
+  toKey, buildHeaderIndex, readCellText,
+  parsePrecio, round2, ensureDir,
+} = require("./common.cjs");
+
+const ORIGEN_XLSX  = RUTAS.ORIGEN_XLSX;
+const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
+const REPORTE_XLSX = RUTAS.REPORTE_XLSX;
+
+async function leerOrigen(ruta) {
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(ruta);
+  const ws = wb.worksheets[0];
+  const idx = buildHeaderIndex(ws);
+
+  const colProv   = idx.get(toKey("PROVEEDOR"));
+  const colCod    = idx.get(toKey("CODIGO"));
+  const colFlex   = idx.get(toKey("CODIGO FLEXXUS"));
+  const colDesc   = idx.get(toKey("Descripcion Flexxus"));
+  const colPrecio = idx.get(toKey("PRECIO VENTA"));
+
+  if (!colProv || !colCod || !colFlex || !colDesc || !colPrecio) {
+    throw new Error("El archivo ORIGEN no tiene los encabezados esperados.");
+  }
+
+  const map = new Map();
+  ws.eachRow((row, rowNumber) => {
+    if (rowNumber === 1) return;
+
+    const proveedorVal = row.getCell(colProv);
+    const codigoVal    = row.getCell(colCod);
+    const flexCell     = row.getCell(colFlex);
+
+    const proveedor = proveedorVal?.text ?? proveedorVal?.value;
+    const codigo    = codigoVal?.text ?? codigoVal?.value;
+
+    let codigoFlex = "";
+    if (flexCell) {
+      const v = flexCell.value;
+      const txt = flexCell.text;
+      if (txt && String(txt).trim()) {
+        codigoFlex = String(txt).trim();
+      } else if (v && typeof v === "object" && "result" in v && v.result) {
+        codigoFlex = String(v.result).trim();
+      } else if (v && typeof v !== "object") {
+        codigoFlex = String(v).trim();
+      }
+    }
+    if (!codigoFlex && (proveedor != null && codigo != null)) {
+      codigoFlex = `${String(proveedor).trim()}-${String(codigo).trim()}`;
+    }
+
+    const descripcionCell = row.getCell(colDesc);
+    const descripcion = descripcionCell?.text ?? descripcionCell?.value;
+
+    const precioRaw = row.getCell(colPrecio).value;
+
+    const key = String(codigoFlex ?? "").trim();
+    if (!key) return;
+
+    const precio = parsePrecio(precioRaw);
+    map.set(key, {
+      proveedor,
+      codigo,
+      codigoFlexxus: key,
+      descripcionFlexxus: descripcion,
+      precioOrigen: precio,
+    });
+  });
+
+  return map;
+}
+
+async function procesarDestino(rutaDestino, origenMap) {
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(rutaDestino);
+  const ws = wb.worksheets[0];
+  const idx = buildHeaderIndex(ws);
+
+  const colFlex        = idx.get(toKey("codigo flexxus"));
+  const colPrecioVenta = idx.get(toKey("precio venta"));
+  const colCaja        = idx.get(toKey("caja"));
+  const colIva         = idx.get(toKey("iva"));
+  const colCosto       = idx.get(toKey("costo"));
+  const colGan         = idx.get(toKey("ganancia"));
+  const colVenta       = idx.get(toKey("venta"));
+
+  const required = [colFlex, colPrecioVenta, colCaja, colIva, colCosto, colGan, colVenta];
+  if (required.some((c) => !c)) {
+    throw new Error("DESTINO sin encabezados mínimos (codigo flexxus, precio venta, caja, iva, costo, ganancia, venta).");
+  }
+
+  const destCodes = new Set();
+  for (let r = 2; r <= ws.rowCount; r++) {
+    const code = ws.getRow(r).getCell(colFlex).value;
+    if (code) destCodes.add(String(code).trim());
+  }
+
+  let actualizados = 0;
+  let sinPrecio = 0;
+
+  for (let r = 2; r <= ws.rowCount; r++) {
+    const row = ws.getRow(r);
+    const codigoFlex = String(row.getCell(colFlex).value ?? "").trim();
+    if (!codigoFlex) continue;
+
+    const src = origenMap.get(codigoFlex);
+    if (!src) continue;
+
+    const precioOrigen = src.precioOrigen;
+    if (precioOrigen == null) {
+      sinPrecio++;
+      continue;
+    }
+
+    let caja = parsePrecio(row.getCell(colCaja).value);
+    if (!caja || caja <= 0) caja = 1;
+
+    // K — PRECIO VENTA (del origen)
+    row.getCell(colPrecioVenta).value = round2(precioOrigen);
+
+    // M — iva
+    const iva = (precioOrigen / caja) * CALC.IVA;
+    row.getCell(colIva).value = round2(iva);
+
+    // C — costo = precio unidad + IVA unidad
+    const costo = precioOrigen / caja + iva;
+    row.getCell(colCosto).value = round2(costo);
+
+    // N — ganancia
+    const ganancia = costo * CALC.GANANCIA;
+    row.getCell(colGan).value = round2(ganancia);
+
+    // D — venta
+    const venta = costo + ganancia;
+    row.getCell(colVenta).value = round2(venta);
+
+    row.commit();
+    actualizados++;
+  }
+
+  await wb.xlsx.writeFile(rutaDestino);
+  return { actualizados, sinPrecio, destCodes };
+}
+
+async function escribirReporteNoEncontrados(rutaReporte, origenMap, destCodes) {
+  ensureDir(path.dirname(rutaReporte));
+  const wb = new ExcelJS.Workbook();
+  const ws = wb.addWorksheet("no_encontrados");
+
+  ws.addRow(["PROVEEDOR","CODIGO","CODIGO FLEXXUS","Descripcion Flexxus","PRECIO VENTA"]);
+
+  let count = 0;
+  for (const src of origenMap.values()) {
+    if (!destCodes.has(src.codigoFlexxus)) {
+      ws.addRow([
+        src.proveedor ?? "",
+        src.codigo ?? "",
+        src.codigoFlexxus ?? "",
+        src.descripcionFlexxus ?? "",
+        src.precioOrigen != null ? round2(src.precioOrigen) : "",
+      ]);
+      count++;
+    }
+  }
+  await wb.xlsx.writeFile(rutaReporte);
+  return count;
+}
+
+async function main() {
+  console.time("importar_precios");
+  try {
+    const origenMap = await leerOrigen(ORIGEN_XLSX);
+    const { actualizados, sinPrecio, destCodes } = await procesarDestino(DESTINO_XLSX, origenMap);
+    const noEncontrados = await escribirReporteNoEncontrados(REPORTE_XLSX, origenMap, destCodes);
+
+    console.log(`Actualizados: ${actualizados} | Sin precio válido: ${sinPrecio} | No encontrados: ${noEncontrados}`);
+  } catch (err) {
+    console.error("ERROR:", err.message);
+    process.exitCode = 1;
+  } finally {
+    console.timeEnd("importar_precios");
+  }
+}
+
+if (require.main === module) main();
+module.exports = { main };
+
+
+--------------------------------------------
+
+144. D:\empresas\ferreluc\gestion\scripts\orquestador.cjs
+
+// gestion/scripts/orquestador.cjs
+
+// orquestador.cjs — observa Excel/Imágenes y corre: colocar_imagenes -> exportar_json
+const chokidar = require("chokidar");
+const { RUTAS } = require("./config.cjs");
+const { main: runColocarImagenes } = require("./colocar_imagenes.cjs");
+const { exportOnce } = require("./exportar_json.cjs");
+
+const XLSX_PATH  = RUTAS.DESTINO_XLSX;
+const IMAGES_DIR = RUTAS.IMAGES_DIR;
+
+let timer = null;
+let running = false;
+let pending = false;
+
+function trigger() { clearTimeout(timer); timer = setTimeout(pipeline, 500); }
+
+async function pipeline() {
+  if (running) { pending = true; return; }
+  running = true;
+  try {
+    console.log("[orquestador] ▶ colocar_imagenes...");
+    await runColocarImagenes();
+    console.log("[orquestador] ✔ colocar_imagenes OK");
+
+    console.log("[orquestador] ▶ exportar_json...");
+    await exportOnce();
+    console.log("[orquestador] ✔ exportar_json OK");
+  } catch (e) {
+    console.error("[orquestador] ERROR:", e?.message || e);
+  } finally {
+    running = false;
+    if (pending) { pending = false; trigger(); }
+  }
+}
+
+console.log("[orquestador] Observando:");
+console.log(" - Excel:", XLSX_PATH);
+console.log(" - Imágenes:", IMAGES_DIR);
+
+chokidar
+  .watch([XLSX_PATH], {
+    ignoreInitial: false,
+    awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
+  })
+  .on("add", trigger)
+  .on("change", trigger)
+  .on("error", (e) => console.error("[orquestador] watcher xlsx:", e.message));
+
+chokidar
+  .watch([IMAGES_DIR], {
+    ignoreInitial: true,
+    depth: 1,
+    awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
+  })
+  .on("add", trigger)
+  .on("change", trigger)
+  .on("unlink", trigger)
+  .on("addDir", trigger)
+  .on("unlinkDir", trigger)
+  .on("error", (e) => console.error("[orquestador] watcher img:", e.message));
+
+pipeline();
+
+
+--------------------------------------------
+
+145. D:\empresas\ferreluc\gestion\scripts\package.json
+
+// gestion/scripts/package.json
+
+{
+  "name": "scripts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "orq": "node D:\\empresas\\ferreluc\\gestion\\scripts\\orquestador.cjs",
+    "export": "node D:\\empresas\\ferreluc\\gestion\\scripts\\exportar_json.cjs",
+    "imgs": "node D:\\empresas\\ferreluc\\gestion\\scripts\\colocar_imagenes.cjs"
+  },
+  "dependencies": {
+    "chokidar": "^4.0.3",
+    "exceljs": "^4.4.0",
+    "fs-extra": "^11.3.2",
+    "xlsx": "^0.18.5"
+  }
+}
