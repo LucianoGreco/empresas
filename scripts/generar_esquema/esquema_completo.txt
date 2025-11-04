@@ -142,10 +142,13 @@
 ││       │   │   └── 📁 grais
 ││       │   │       ├── 📁 reportes
 ││       │   │       │   └── no_encontrados.xlsx
+││       │   │       ├── ~$data.xlsx
 ││       │   │       └── data.xlsx
 ││       │   └── 📁 originales
 ││       │       └── 📁 grais
-││       │           └── data.xlsx
+││       │           ├── ~$data_ultima.xlsx
+││       │           ├── data_original.xlsx
+││       │           └── data_ultima.xlsx
 ││       └── 📁 scripts
 ││           ├── cleanup-sessions.mjs
 ││           ├── colocar_imagenes.cjs
@@ -155,7 +158,10 @@
 ││           ├── exportar_json.cjs
 ││           ├── importar_precios.cjs
 ││           ├── orquestador.cjs
-││           └── package.json
+││           ├── package.json
+││           ├── pipeline-core.cjs
+││           ├── pipeline-manifest.cjs
+││           └── shared-keys.cjs
 │└── 📁 catalogo
 │    ├── 📁 app
 │    │   ├── 📁 admin
@@ -163,6 +169,9 @@
 │    │   │   │   └── page.jsx
 │    │   │   ├── 📁 login
 │    │   │   │   └── page.jsx
+│    │   │   ├── 📁 pipeline
+│    │   │   │   ├── page.jsx
+│    │   │   │   └── PipelineClient.jsx
 │    │   │   ├── 📁 productos
 │    │   │   │   └── 📁 update
 │    │   │   │       └── route.js
@@ -186,7 +195,9 @@
 │    │   │   │   ├── 📁 pipeline
 │    │   │   │   │   ├── 📁 grais
 │    │   │   │   │   │   └── route.js
-│    │   │   │   │   └── 📁 reporte
+│    │   │   │   │   ├── 📁 reporte
+│    │   │   │   │   │   └── route.js
+│    │   │   │   │   └── 📁 status
 │    │   │   │   │       └── route.js
 │    │   │   │   ├── 📁 users
 │    │   │   │   │   └── route.js
@@ -208,6 +219,8 @@
 │    │   │   │   │   ├── mercadopago.js
 │    │   │   │   │   ├── redirect.js
 │    │   │   │   │   └── stripe.js
+│    │   │   │   └── route.js
+│    │   │   ├── 📁 cliente
 │    │   │   │   └── route.js
 │    │   │   ├── 📁 orders
 │    │   │   │   ├── 📁 [code]
@@ -233,6 +246,8 @@
 │    │   │   ├── 📁 success
 │    │   │   │   └── page.jsx
 │    │   │   └── page.jsx
+│    │   ├── 📁 cliente
+│    │   │   └── page.jsx
 │    │   ├── 📁 imagenes
 │    │   │   └── 📁 [...path]
 │    │   │       └── route.js
@@ -255,6 +270,7 @@
 │    │   ├── admin.js
 │    │   ├── auth.js
 │    │   ├── catalog.js
+│    │   ├── client-profile.js
 │    │   ├── config.js
 │    │   ├── csrf.js
 │    │   ├── db.js
@@ -277,9 +293,9 @@
 │    │   │   │   └── migration.sql
 │    │   │   └── migration_lock.toml
 │    │   ├── 📁 prisma
-│    │   │   └── 📁 data
-│    │   │       └── dev.db
-│    │   ├── schema.prisma
+│    │   │   ├── 📁 data
+│    │   │   │   └── dev.db
+│    │   │   └── schema.prisma
 │    │   └── seed.mjs
 │    ├── 📁 public
 │    │   └── 📁 imagenes
@@ -968,17 +984,10 @@ D:\empresas\ferreluc\gestion\json\producto_grais.json:
   "nombre_descripcion": "barra redonda grilon polietileno 10 mm x 1000 mm a.p.m nth",
   "marca": "NTH",
   "moneda": "ars",
-  "costo": 14808.13,
-  "venta": 500,
-  "precio_venta": 12238.13,
+  "venta": 20731.39,
   "mayorista": 0,
   "inventario": 0,
-  "inv_minimo": 0,
-  "inv_maximo": 0,
-  "descripcion_flexxus": "A.P.M. Barra Redonda NTH    10mm",
   "caja": 1,
-  "iva": 2570.01,
-  "ganancia": 5923.25,
   "imagen": "/imagenes/barra redonda grilon polietileno.png"
 }
 
@@ -987,9 +996,14 @@ D:\empresas\ferreluc\gestion\json\producto_grais.json:
 D:\empresas\ferreluc\gestion\listas\normalizadas\grais\reportes\no_encontrados.xlsx:
 	├── Columna A: PROVEEDOR	: 
 	├── Columna B: CODIGO	: 
-	├── Columna C: CODIGO FLEXXUS	: -
+	├── Columna C: CODIGO FLEXXUS	: 
 	├── Columna D: Descripcion Flexxus	: 
 	└── Columna E: PRECIO VENTA	:
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\listas\normalizadas\grais\~$data.xlsx:
+	└── Columna A: Usuario                                                U s u a r i o                                                                                               	:
 
 --------------------------------------------
 
@@ -997,7 +1011,7 @@ D:\empresas\ferreluc\gestion\listas\normalizadas\grais\data.xlsx:
 	├── Columna A: codigo flexxus	: 31-92110
 	├── Columna B: nombre descripcion	: barra redonda grilon polietileno 10 mm x 1000 mm a.p.m nth
 	├── Columna C: costo	: 14808.13
-	├── Columna D: venta	: 500
+	├── Columna D: venta	: 20731.39
 	├── Columna E: mayorista	: 
 	├── Columna F: inventario	: 
 	├── Columna G: inv_minimo	: 
@@ -1008,19 +1022,33 @@ D:\empresas\ferreluc\gestion\listas\normalizadas\grais\data.xlsx:
 	├── Columna L: caja	: 1
 	├── Columna M: iva	: 2570.01
 	├── Columna N: ganancia	: 5923.25
-	├── Columna O: imagen	: D:\empresas\ferreluc\gestion\imagenes\barra redonda grilon polietileno.png
+	├── Columna O: imagen	: /imagenes/barra redonda grilon polietileno.png
 	├── Columna P: marca	: NTH
 	├── Columna Q: categoria	: barra redonda grilon polietileno
 	└── Columna R: moneda	: ars
 
 --------------------------------------------
 
-D:\empresas\ferreluc\gestion\listas\originales\grais\data.xlsx:
+D:\empresas\ferreluc\gestion\listas\originales\grais\~$data_ultima.xlsx:
+	└── Columna A: Usuario                                                U s u a r i o                                                                                               	:
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\listas\originales\grais\data_original.xlsx:
 	├── Columna A: PROVEEDOR	: 1
 	├── Columna B: CODIGO	: 54
 	├── Columna C: CODIGO FLEXXUS	: 1-54
 	├── Columna D: Descripcion Flexxus	: Soga Envainada PANAMA  4mm (x200m)
 	└── Columna E: PRECIO VENTA	: 142.67592
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\listas\originales\grais\data_ultima.xlsx:
+	├── Columna A: PROVEEDOR	: 1
+	├── Columna B: CODIGO	: 54
+	├── Columna C: CODIGO FLEXXUS	: 1-54
+	├── Columna D: Descripcion Flexxus	: Soga Envainada PANAMA  4mm (x200m)
+	└── Columna E: PRECIO VENTA	: 151.23852
 
 --------------------------------------------
 
@@ -1083,12 +1111,12 @@ run()
 
 D:\empresas\ferreluc\gestion\scripts\colocar_imagenes.cjs:
 // D:\empresas\ferreluc\gestion\scripts\colocar_imagenes.cjs
-// PISA SIEMPRE la columna "imagen" a partir de la columna "categoria"
+// Actualiza la columna "imagen" a partir de la columna "categoria"
 // Requisitos: npm i exceljs
 // Usa helpers compartidos de common.cjs para NO duplicar fuzzy ni normalización.
 
 const ExcelJS = require("exceljs");
-const { RUTAS } = require("./config.cjs");
+const { RUTAS, PARAMS } = require("./config.cjs");
 const {
   buildHeaderIndex,
   readCellText,
@@ -1103,6 +1131,9 @@ const FALLBACK_IMG = RUTAS.FALLBACK_IMG;
 
 async function main() {
   console.time("colocar_imagenes");
+  const onlyEmpty = PARAMS.IMAGES_ONLY_EMPTY;
+  const colNames = PARAMS.DEFAULT_COLUMNS;
+  const fuzzyThreshold = PARAMS.IMAGE_FUZZY_THRESHOLD;
 
   try {
     // 1. Cargar workbook destino
@@ -1112,40 +1143,64 @@ async function main() {
 
     // 2. Index de headers
     const idx = buildHeaderIndex(ws);
-    const colImg = idx.get("imagen") || 15; // O
-    const colCat = idx.get("categoria") || 17; // Q
+
+    // nombre normalizado de header → índice de columna
+    const colImg =
+      idx.get(colNames.IMAGEN.toLowerCase()) ||
+      idx.get("imagen") ||
+      15; // O por compatibilidad
+    const colCat =
+      idx.get(colNames.CATEGORIA.toLowerCase()) ||
+      idx.get("categoria") ||
+      17; // Q por compatibilidad
 
     // 3. Indexar imágenes del FS UNA SOLA VEZ
     const { list: imageEntries } = scanImages(IMAGES_DIR);
 
     let actualizados = 0;
+    let completados = 0;
+    let sinCategoria = 0;
 
     // 4. Recorrer filas
     for (let r = 2; r <= ws.rowCount; r++) {
       const row = ws.getRow(r);
       const categoria = readCellText(row.getCell(colCat)).trim();
+      const currentImg = readCellText(row.getCell(colImg)).trim();
 
-      let imgAbs = null;
-
-      if (categoria) {
-        // fuzzy sobre las imágenes reales que hay en el disco
-        imgAbs = bestFuzzyMatch(categoria, imageEntries, 0.55);
+      if (!categoria) {
+        // no hay categoría, no sabemos qué buscar
+        if (!onlyEmpty) {
+          // igual ponemos fallback
+          row.getCell(colImg).value = normalizeImagenPath(FALLBACK_IMG);
+          row.commit();
+          actualizados++;
+        }
+        sinCategoria++;
+        continue;
       }
 
+      // si el modo es "solo completar vacíos" y ya hay imagen, seguimos
+      if (onlyEmpty && currentImg) {
+        continue;
+      }
+
+      // fuzzy sobre las imágenes reales que hay en el disco
+      let imgAbs = bestFuzzyMatch(categoria, imageEntries, fuzzyThreshold);
+
       // si no hubo match, fallback físico → y después lo pasamos a /imagenes/...
-      const finalPath =
-        imgAbs != null ? imgAbs : FALLBACK_IMG;
+      const finalPath = imgAbs != null ? imgAbs : FALLBACK_IMG;
 
       // esto deja la ruta lista para el Next: /imagenes/loquesea.png
       row.getCell(colImg).value = normalizeImagenPath(finalPath);
       row.commit();
       actualizados++;
+      if (!currentImg) completados++;
     }
 
     // 5. Guardar
     await wb.xlsx.writeFile(DESTINO_XLSX);
     console.log(
-      `[colocar_imagenes] Columna "imagen" actualizada. Filas procesadas: ${actualizados}`
+      `[colocar_imagenes] OK. Filas: ${ws.rowCount - 1}. Actualizadas: ${actualizados}. Completadas (vacías): ${completados}. Sin categoría: ${sinCategoria}. Modo solo vacíos: ${onlyEmpty}`
     );
   } catch (err) {
     console.error("[colocar_imagenes] ERROR:", err.message);
@@ -1172,7 +1227,7 @@ D:\empresas\ferreluc\gestion\scripts\common.cjs:
 
 const fs = require("fs");
 const path = require("path");
-const { HEADERS_JSON_CANDIDATES, RUTAS } = require("./config.cjs");
+const { HEADERS_JSON_CANDIDATES, RUTAS, PARAMS } = require("./config.cjs");
 
 // === Fuente única de headers (JSON) con fallback ===
 function loadHeadersJson() {
@@ -1213,17 +1268,17 @@ const FALLBACK_HEADER_ALIASES = {
   venta: "venta",
   mayorista: "mayorista",
   inventario: "inventario",
-  "inv_minimo": "inv_minimo",
+  inv_minimo: "inv_minimo",
   "inv minimo": "inv_minimo",
-  "inv_maximo": "inv_maximo",
+  inv_maximo: "inv_maximo",
   "inv maximo": "inv_maximo",
   "inv_máximo": "inv_maximo",
   "inv máximo": "inv_maximo",
   proveedor: "proveedor",
   "descripcion flexxus": "descripcion_flexxus",
-  "descripcion_flexxus": "descripcion_flexxus",
+  descripcion_flexxus: "descripcion_flexxus",
   "precio venta": "precio_venta",
-  "precio_venta": "precio_venta",
+  precio_venta: "precio_venta",
   caja: "caja",
   iva: "iva",
   ganancia: "ganancia",
@@ -1362,6 +1417,16 @@ function readCellText(cell) {
   return "";
 }
 
+// mapea una fila de excel a un objeto con claves canónicas
+function mapHeadersFromRow(row, headerIndex) {
+  const out = {};
+  for (const [rawKey, colIdx] of headerIndex.entries()) {
+    const canon = HEADER_MAP[rawKey] || toSnakeCase(rawKey);
+    out[canon] = readCellText(row.getCell(colIdx));
+  }
+  return sortKeys(out);
+}
+
 // ---------- Imágenes ----------
 function normalizeImagenPath(val) {
   // 1) nada -> fallback
@@ -1378,7 +1443,8 @@ function normalizeImagenPath(val) {
     ? String(RUTAS.IMAGES_DIR).replace(/\\/g, "/")
     : "D:/empresas/ferreluc/gestion/imagenes";
 
-  if (s.toLowerCase().startsWith(gestionImgPrefix.toLowerCase())) {
+  const lowerPrefix = gestionImgPrefix.toLowerCase();
+  if (s.toLowerCase().startsWith(lowerPrefix)) {
     s = s.slice(gestionImgPrefix.length);
   }
 
@@ -1422,6 +1488,7 @@ function tokenOverlapScore(a, b) {
 function scanImages(dir) {
   if (!fs.existsSync(dir)) return { byKey: new Map(), list: [] };
   const files = fs.readdirSync(dir);
+
   // preferencia por extensión
   const pref = { ".png": 5, ".jpg": 4, ".jpeg": 4, ".webp": 3, ".gif": 2, "": 1 };
 
@@ -1454,7 +1521,9 @@ function scanImages(dir) {
   return { byKey, list };
 }
 
-function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
+function bestFuzzyMatch(query, imageEntries, threshold) {
+  const realThreshold =
+    typeof threshold === "number" ? threshold : PARAMS.IMAGE_FUZZY_THRESHOLD;
   const qn = normName(query);
   if (!qn) return null;
 
@@ -1462,11 +1531,12 @@ function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
   let bestScore = 0;
 
   for (const entry of imageEntries) {
-    const includeBoost = entry.key.includes(qn) || qn.includes(entry.key) ? 0.15 : 0;
+    const includeBoost =
+      entry.key.includes(qn) || qn.includes(entry.key) ? 0.15 : 0;
     const baseScore = tokenOverlapScore(qn, entry.key);
     const sizeSimBoost =
       (Math.min(tokensOf(qn).length, tokensOf(entry.key).length) /
-        Math.max(tokensOf(qn).length, tokensOf(entry.key).length)) *
+        Math.max(tokensOf(qn).length, tokensOf(entry.key).length || 1)) *
       0.05;
 
     const score = baseScore + includeBoost + sizeSimBoost;
@@ -1477,7 +1547,8 @@ function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
       best = entry;
     }
   }
-  return best && bestScore >= threshold ? best.full : null;
+
+  return best && bestScore >= realThreshold ? best.full : null;
 }
 
 module.exports = {
@@ -1488,6 +1559,7 @@ module.exports = {
   PREFERRED_ORDER,
   toSnakeCase,
   sortKeys,
+  mapHeadersFromRow,
 
   // números
   parsePrecio,
@@ -1516,8 +1588,8 @@ module.exports = {
 
 D:\empresas\ferreluc\gestion\scripts\config.cjs:
 // D:\empresas\ferreluc\gestion\scripts\config.cjs
-// Centraliza rutas y políticas de cálculo para TODOS los .cjs
-// Si mañana movés el proyecto de disco, solo tocás acá.
+// Centraliza rutas, políticas de cálculo y parámetros de normalización
+// para TODOS los .cjs. Si mañana movés el proyecto de disco, solo tocás acá.
 
 const path = require("path");
 
@@ -1533,51 +1605,83 @@ const IMG_DIR = `${ROOT}/imagenes`;
 const JSON_DIR = `${ROOT}/json`;
 const REPORTES_DIR = `${NORMALIZADAS_GRAIS}/reportes`;
 
+// helper chiquito para rutas relativas al ROOT
+function fromRoot(...segs) {
+  return path
+    .resolve(ROOT, ...segs)
+    .replace(/\\/g, "/");
+}
+
+const RUTAS = {
+  // Excel origen (crudo del proveedor)
+  ORIGEN_XLSX: `${ORIGINALES_GRAIS}/data.xlsx`,
+
+  // Excel destino (el que tocan todos los scripts)
+  DESTINO_XLSX: `${NORMALIZADAS_GRAIS}/data.xlsx`,
+
+  // Reportes
+  REPORTE_DIR: REPORTES_DIR,
+  REPORTE_XLSX: `${REPORTES_DIR}/no_encontrados.xlsx`,
+
+  // Imágenes
+  IMAGES_DIR: IMG_DIR,
+  // Esto es ruta física; los scripts de imagen la van a mapear a /imagenes/...
+  FALLBACK_IMG: `${IMG_DIR}/sin_imagen.png`,
+
+  // JSON de salida (para el catálogo)
+  OUTPUT_DIR: JSON_DIR,
+  OUTPUT_PATH: `${JSON_DIR}/producto_grais.json`,
+};
+
+// Política de cálculos (por si cambia IVA/markup)
+const CALC = {
+  // IVA del proveedor / país
+  IVA: Number(process.env.CALC_IVA ?? 0.21),
+  // Margen que querés sobre costo (40% por defecto)
+  GANANCIA: Number(process.env.CALC_GANANCIA ?? 0.4),
+};
+
+// Dónde está el headers.json del otro proyecto (el Next)
+// Esto lo usan los helpers para mapear columnas.
+const HEADERS_JSON_CANDIDATES = [
+  process.env.HEADERS_JSON_PATH &&
+    path.resolve(process.env.HEADERS_JSON_PATH),
+  // ruta fija que ya usabas
+  "D:/empresas/catalogo/lib/headers.json",
+  // por si estás parado en el repo de catálogo
+  path.resolve(process.cwd(), "lib", "headers.json"),
+].filter(Boolean);
+
+// Parámetros genéricos reutilizables por los scripts
+const PARAMS = {
+  // umbral global para fuzzy de imágenes
+  IMAGE_FUZZY_THRESHOLD: Number(process.env.IMAGE_FUZZY_THRESHOLD ?? 0.55),
+
+  // columnas por defecto en el Excel destino
+  DEFAULT_COLUMNS: {
+    IMAGEN: process.env.COL_IMAGEN || "imagen",
+    CATEGORIA: process.env.COL_CATEGORIA || "categoria",
+  },
+
+  // si está en true, los scripts de imagen SOLO completan celdas vacías
+  IMAGES_ONLY_EMPTY: /^true$/i.test(process.env.IMAGES_ONLY_EMPTY || ""),
+};
+
 module.exports = {
   ROOT,
   LISTAS,
-  RUTAS: {
-    // Excel origen (crudo del proveedor)
-    ORIGEN_XLSX: `${ORIGINALES_GRAIS}/data.xlsx`,
-    // Excel destino (el que tocan todos los scripts)
-    DESTINO_XLSX: `${NORMALIZADAS_GRAIS}/data.xlsx`,
-
-    // Reportes
-    REPORTE_DIR: REPORTES_DIR,
-    REPORTE_XLSX: `${REPORTES_DIR}/no_encontrados.xlsx`,
-
-    // Imágenes
-    IMAGES_DIR: IMG_DIR,
-    // Esto es ruta física; los scripts de imagen la van a mapear a /imagenes/...
-    FALLBACK_IMG: `${IMG_DIR}/sin_imagen.png`,
-
-    // JSON de salida (para el catálogo)
-    OUTPUT_DIR: JSON_DIR,
-    OUTPUT_PATH: `${JSON_DIR}/producto_grais.json`,
-  },
-
-  // Política de cálculos (por si cambia IVA/markup)
-  CALC: {
-    // IVA del proveedor / país
-    IVA: Number(process.env.CALC_IVA ?? 0.21),
-    // Margen que querés sobre costo (40% por defecto)
-    GANANCIA: Number(process.env.CALC_GANANCIA ?? 0.4),
-  },
-
-  // Dónde está el headers.json del otro proyecto (el Next)
-  // Esto lo usan los helpers para mapear columnas.
-  HEADERS_JSON_CANDIDATES: [
-    process.env.HEADERS_JSON_PATH &&
-      path.resolve(process.env.HEADERS_JSON_PATH),
-    "D:/empresas/catalogo/lib/headers.json",
-    path.resolve(process.cwd(), "lib", "headers.json"),
-  ].filter(Boolean),
+  RUTAS,
+  CALC,
+  HEADERS_JSON_CANDIDATES,
+  PARAMS,
+  fromRoot,
 };
 
 
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs:
+// descripcion_flexxus.cjs
 // D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
 // Copia "Descripcion Flexxus" desde ORIGEN → DESTINO por "CODIGO FLEXXUS"
 // Requisitos: npm i exceljs
@@ -1589,6 +1693,7 @@ const {
   readCellText,
   toKey,
 } = require("./common.cjs");
+const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
@@ -1599,34 +1704,46 @@ async function cargarOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  // columnas esperadas en ORIGEN
-  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor") || 1;
-  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo") || 2;
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus") || 3;
-  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus") || 4;
+  // columnas esperadas en ORIGEN (pero con tolerancia)
+  const colProv =
+    idx.get(toKey("PROVEEDOR")) ||
+    idx.get("proveedor") ||
+    1;
+  const colCod =
+    idx.get(toKey("CODIGO")) ||
+    idx.get("codigo") ||
+    2;
+  const colFlex =
+    idx.get(toKey("CODIGO FLEXXUS")) ||
+    idx.get("codigo flexxus") ||
+    idx.get("codigo_flexxus") ||
+    3;
+  const colDesc =
+    idx.get(toKey("Descripcion Flexxus")) ||
+    idx.get("descripcion flexxus") ||
+    idx.get("descripcion_flexxus") ||
+    4;
 
   const map = new Map();
 
   ws.eachRow((row, r) => {
     if (r === 1) return;
 
-    let codigoFlex = readCellText(row.getCell(colFlex));
-
-    if (!codigoFlex) {
-      // mismo criterio que en importar_precios.cjs
-      const proveedor = readCellText(row.getCell(colProv));
-      const codigo = readCellText(row.getCell(colCod));
-      if (proveedor || codigo) {
-        codigoFlex = `${proveedor}-${codigo}`.trim();
-      }
-    }
-
+    const proveedor = readCellText(row.getCell(colProv));
+    const codigo = readCellText(row.getCell(colCod));
+    const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descripcion = readCellText(row.getCell(colDesc));
 
-    if (codigoFlex) {
-      // si hay filas duplicadas en origen, la última gana
-      map.set(codigoFlex, descripcion);
-    }
+    const key = buildFlexxusKey({
+      codigoFlexxus,
+      proveedor,
+      codigo,
+    });
+
+    if (!key) return;
+
+    // si hay filas duplicadas en origen, la última gana
+    map.set(key, descripcion);
   });
 
   return map;
@@ -1641,11 +1758,13 @@ async function escribirDestino(rutaDestino, origenMap) {
   const colFlexDst =
     idx.get(toKey("codigo flexxus")) ||
     idx.get("codigo flexxus") ||
+    idx.get("codigo_flexxus") ||
     1;
 
   const colDescDst =
     idx.get(toKey("descripcion flexxus")) ||
     idx.get("descripcion flexxus") ||
+    idx.get("descripcion_flexxus") ||
     10;
 
   let actualizados = 0;
@@ -1700,27 +1819,31 @@ module.exports = { main };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs:
+// exportar_json.cjs
 // D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs
-// Lee el XLSX destino y lo vuelca a un JSON ordenado que usa el catálogo.
-// Requisitos: npm i xlsx chokidar
+// Lee el XLSX destino (ya normalizado) y lo vuelca a un JSON ordenado que usa el catálogo.
+// Además genera un META con info útil para el Next.
+// Requisitos: npm i chokidar exceljs
 
 const fs = require("fs");
-const path = require("path");
-const XLSX = require("xlsx");
 const chokidar = require("chokidar");
-const { RUTAS } = require("./config.cjs");
+const crypto = require("crypto");
+const { RUTAS, ROOT } = require("./config.cjs");
 const {
-  normalizeHeader,
-  HEADER_MAP,
-  toSnakeCase,
-  castValue,
-  sortKeys,
-  normalizeImagenPath,
-} = require("./common.cjs");
+  loadDestinoWorkbook,
+  worksheetToObjects,
+  exportToJson,
+  ensureImagenField,
+} = require("./pipeline-core.cjs");
 
 const XLSX_PATH = RUTAS.DESTINO_XLSX;
 const OUTPUT_DIR = RUTAS.OUTPUT_DIR;
 const OUTPUT_PATH = RUTAS.OUTPUT_PATH;
+const META_PATH = `${OUTPUT_DIR}/producto_grais.meta.json`;
+
+function makeHash(data) {
+  return crypto.createHash("md5").update(data).digest("hex");
+}
 
 async function exportOnce() {
   try {
@@ -1729,42 +1852,41 @@ async function exportOnce() {
       return;
     }
 
-    const wb = XLSX.readFile(XLSX_PATH, { cellDates: false });
-    const firstSheetName = wb.SheetNames[0];
-    if (!firstSheetName) {
-      console.error("[exportar_json] El archivo no tiene hojas.");
-      return;
-    }
+    const { ws } = await loadDestinoWorkbook();
+    let rows = worksheetToObjects(ws);
 
-    const sheet = wb.Sheets[firstSheetName];
-    const rows = XLSX.utils.sheet_to_json(sheet, {
-      defval: null,
-      raw: false,
-    });
+    // asegurar imagen normalizada para el Next
+    rows = rows.map((r) => ensureImagenField(r));
 
-    const out = rows.map((row) => {
-      const outRow = {};
-      for (const [rawHeader, rawValue] of Object.entries(row)) {
-        const norm = normalizeHeader(rawHeader);
-        const destKey = HEADER_MAP[norm] || toSnakeCase(norm);
-        outRow[destKey] = castValue(rawValue);
-      }
-
-      // asegurar imagen normalizada para el Next
-      outRow.imagen = normalizeImagenPath(outRow.imagen);
-
-      return sortKeys(outRow);
-    });
-
+    // escribir JSON principal
     await fs.promises.mkdir(OUTPUT_DIR, { recursive: true });
+    const jsonString = JSON.stringify(rows, null, 2);
+    await fs.promises.writeFile(OUTPUT_PATH, jsonString, "utf-8");
+
+    // armar META para el catálogo
+    const meta = {
+      source_excel: XLSX_PATH,
+      generated_at: new Date().toISOString(),
+      root: ROOT,
+      total: rows.length,
+      hash_md5: makeHash(jsonString),
+      files: {
+        data: OUTPUT_PATH,
+      },
+      pipeline: {
+        // el catálogo puede mostrar esto
+        ran: ["importar_precios", "descripcion_flexxus", "colocar_imagenes", "exportar_json"],
+      },
+    };
+
     await fs.promises.writeFile(
-      OUTPUT_PATH,
-      JSON.stringify(out, null, 2),
-      "utf8"
+      META_PATH,
+      JSON.stringify(meta, null, 2),
+      "utf-8"
     );
 
     console.log(
-      `[exportar_json] Exportado ${out.length} registros → ${OUTPUT_PATH}`
+      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta)`
     );
   } catch (err) {
     console.error("[exportar_json] Error exportando:", err.message);
@@ -1803,6 +1925,7 @@ module.exports = { exportOnce, startWatcher };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs:
+// importar_precios.cjs
 // D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
 // Actualiza precios y recalcula IVA, costo, ganancia y venta.
 // Genera reporte de origenes que NO están en el destino.
@@ -1819,6 +1942,7 @@ const {
   round2,
   ensureDir,
 } = require("./common.cjs");
+const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
@@ -1831,13 +1955,13 @@ async function leerOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colProv = idx.get(toKey("PROVEEDOR"));
-  const colCod = idx.get(toKey("CODIGO"));
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS"));
-  const colDesc = idx.get(toKey("Descripcion Flexxus"));
-  const colPrecio = idx.get(toKey("PRECIO VENTA"));
+  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor");
+  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo");
+  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus");
+  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus");
+  const colPrecio = idx.get(toKey("PRECIO VENTA")) || idx.get("precio venta");
 
-  if (!colProv || !colCod || !colFlex || !colDesc || !colPrecio) {
+  if (!colProv || !colCod || !colDesc || !colPrecio) {
     throw new Error(
       "[importar_precios] El archivo ORIGEN no tiene los encabezados esperados."
     );
@@ -1850,27 +1974,24 @@ async function leerOrigen(ruta) {
 
     const proveedor = readCellText(row.getCell(colProv));
     const codigo = readCellText(row.getCell(colCod));
-    const codigoFlexxusRaw = readCellText(row.getCell(colFlex));
+    const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descFlexxus = readCellText(row.getCell(colDesc));
     const precioRaw = row.getCell(colPrecio).value;
 
-    // construir key
-    let codigoFlex = codigoFlexxusRaw;
-    if (!codigoFlex) {
-      if (proveedor && codigo) {
-        codigoFlex = `${proveedor}-${codigo}`;
-      } else {
-        // sin key no sirve
-        return;
-      }
-    }
+    const key = buildFlexxusKey({
+      codigoFlexxus,
+      proveedor,
+      codigo,
+    });
+
+    if (!key) return;
 
     const precio = parsePrecio(precioRaw);
 
-    map.set(codigoFlex, {
+    map.set(key, {
       proveedor,
       codigo,
-      codigoFlexxus: codigoFlex,
+      codigoFlexxus: key,
       descripcionFlexxus: descFlexxus,
       precioOrigen: precio,
     });
@@ -1886,13 +2007,13 @@ async function procesarDestino(rutaDestino, origenMap) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colFlex = idx.get(toKey("codigo flexxus"));
-  const colPrecioVenta = idx.get(toKey("precio venta"));
-  const colCaja = idx.get(toKey("caja"));
-  const colIva = idx.get(toKey("iva"));
-  const colCosto = idx.get(toKey("costo"));
-  const colGan = idx.get(toKey("ganancia"));
-  const colVenta = idx.get(toKey("venta"));
+  const colFlex = idx.get(toKey("codigo flexxus")) || idx.get("codigo flexxus");
+  const colPrecioVenta = idx.get(toKey("precio venta")) || idx.get("precio venta");
+  const colCaja = idx.get(toKey("caja")) || idx.get("caja");
+  const colIva = idx.get(toKey("iva")) || idx.get("iva");
+  const colCosto = idx.get(toKey("costo")) || idx.get("costo");
+  const colGan = idx.get(toKey("ganancia")) || idx.get("ganancia");
+  const colVenta = idx.get(toKey("venta")) || idx.get("venta");
 
   const required = [
     colFlex,
@@ -2025,29 +2146,96 @@ module.exports = { main };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\orquestador.cjs:
-// orquestador.cjs — observa Excel/Imágenes y corre: colocar_imagenes -> exportar_json
+// orquestador.cjs
+// D:\empresas\ferreluc\gestion\scripts\orquestador.cjs
+// Orquesta el pipeline completo:
+//
+// 1) si cambia ORIGEN → importar_precios → descripcion_flexxus
+// 2) si cambia DESTINO (externo) → descripcion_flexxus
+// 3) si cambian IMÁGENES → colocar_imagenes
+// 4) siempre al final → exportar_json
+//
+// Además: evita el loop de auto-disparo ignorando los cambios en DESTINO
+// que fueron provocados por ESTE MISMO proceso en los últimos N ms.
+
 const chokidar = require("chokidar");
 const { RUTAS } = require("./config.cjs");
+const { main: runImportarPrecios } = require("./importar_precios.cjs");
+const { main: runDescripcionFlexxus } = require("./descripcion_flexxus.cjs");
 const { main: runColocarImagenes } = require("./colocar_imagenes.cjs");
 const { exportOnce } = require("./exportar_json.cjs");
 
-const XLSX_PATH  = RUTAS.DESTINO_XLSX;
+const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
+const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const IMAGES_DIR = RUTAS.IMAGES_DIR;
+
+// ventana de tiempo para considerar "esto lo escribí yo"
+const SELF_WRITE_WINDOW_MS = 2000;
 
 let timer = null;
 let running = false;
 let pending = false;
 
-function trigger() { clearTimeout(timer); timer = setTimeout(pipeline, 500); }
+// flags para saber qué cambió
+let origenChanged = false;
+let destinoChanged = false;
+let imagesChanged = false;
+
+// timestamps de última escritura hecha por el pipeline
+let lastDestinoWriteTs = 0;
+
+function markDestinoWritten() {
+  lastDestinoWriteTs = Date.now();
+}
+
+function isSelfWrite(ts) {
+  return Date.now() - ts < SELF_WRITE_WINDOW_MS;
+}
+
+function schedulePipeline() {
+  clearTimeout(timer);
+  timer = setTimeout(pipeline, 500);
+}
 
 async function pipeline() {
-  if (running) { pending = true; return; }
+  if (running) {
+    pending = true;
+    return;
+  }
   running = true;
-  try {
-    console.log("[orquestador] ▶ colocar_imagenes...");
-    await runColocarImagenes();
-    console.log("[orquestador] ✔ colocar_imagenes OK");
 
+  try {
+    // si cambió origen: hay que recalcular todo lo numérico
+    if (origenChanged) {
+      console.log("[orquestador] ▶ importar_precios (por cambio en ORIGEN)...");
+      await runImportarPrecios();
+      console.log("[orquestador] ✔ importar_precios OK");
+
+      // importar_precios escribe DESTINO
+      markDestinoWritten();
+
+      console.log("[orquestador] ▶ descripcion_flexxus (reaplicar)...");
+      await runDescripcionFlexxus();
+      console.log("[orquestador] ✔ descripcion_flexxus OK");
+
+      // descripcion_flexxus también escribe DESTINO
+      markDestinoWritten();
+    } else if (destinoChanged) {
+      console.log("[orquestador] ▶ descripcion_flexxus (por cambio en DESTINO)...");
+      await runDescripcionFlexxus();
+      console.log("[orquestador] ✔ descripcion_flexxus OK");
+
+      markDestinoWritten();
+    }
+
+    // si cambiaron imágenes o cualquier cosa anterior, recolocamos
+    if (imagesChanged || origenChanged || destinoChanged) {
+      console.log("[orquestador] ▶ colocar_imagenes...");
+      await runColocarImágenesSeguro();
+      console.log("[orquestador] ✔ colocar_imagenes OK");
+    }
+
+    // siempre que llegamos acá exportamos
     console.log("[orquestador] ▶ exportar_json...");
     await exportOnce();
     console.log("[orquestador] ✔ exportar_json OK");
@@ -2055,37 +2243,80 @@ async function pipeline() {
     console.error("[orquestador] ERROR:", e?.message || e);
   } finally {
     running = false;
-    if (pending) { pending = false; trigger(); }
+    // reseteo flags
+    origenChanged = false;
+    destinoChanged = false;
+    imagesChanged = false;
+
+    if (pending) {
+      pending = false;
+      schedulePipeline();
+    }
   }
 }
 
+// pequeño wrapper para poder marcar que tocamos el destino
+async function runColocarImágenesSeguro() {
+  await runColocarImagenes();
+  // este script también pisa DESTINO
+  markDestinoWritten();
+}
+
 console.log("[orquestador] Observando:");
-console.log(" - Excel:", XLSX_PATH);
+console.log(" - ORIGEN:", ORIGEN_XLSX);
+console.log(" - DESTINO:", DESTINO_XLSX);
 console.log(" - Imágenes:", IMAGES_DIR);
 
+// watcher de ORIGEN
 chokidar
-  .watch([XLSX_PATH], {
+  .watch([ORIGEN_XLSX], {
     ignoreInitial: false,
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
-  .on("add", trigger)
-  .on("change", trigger)
-  .on("error", (e) => console.error("[orquestador] watcher xlsx:", e.message));
+  .on("add", () => {
+    origenChanged = true;
+    schedulePipeline();
+  })
+  .on("change", () => {
+    origenChanged = true;
+    schedulePipeline();
+  })
+  .on("error", (e) => console.error("[orquestador] watcher origen:", e.message));
 
+// watcher de DESTINO
+chokidar
+  .watch([DESTINO_XLSX], {
+    ignoreInitial: false,
+    awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
+  })
+  .on("add", () => {
+    // si lo acabamos de escribir nosotros, ignorar
+    if (isSelfWrite(lastDestinoWriteTs)) return;
+    destinoChanged = true;
+    schedulePipeline();
+  })
+  .on("change", () => {
+    if (isSelfWrite(lastDestinoWriteTs)) return;
+    destinoChanged = true;
+    schedulePipeline();
+  })
+  .on("error", (e) => console.error("[orquestador] watcher destino:", e.message));
+
+// watcher de IMÁGENES
 chokidar
   .watch([IMAGES_DIR], {
     ignoreInitial: true,
     depth: 1,
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
-  .on("add", trigger)
-  .on("change", trigger)
-  .on("unlink", trigger)
-  .on("addDir", trigger)
-  .on("unlinkDir", trigger)
+  .on("all", () => {
+    imagesChanged = true;
+    schedulePipeline();
+  })
   .on("error", (e) => console.error("[orquestador] watcher img:", e.message));
 
-pipeline();
+// correr una vez al inicio
+schedulePipeline();
 
 
 --------------------------------------------
@@ -2107,6 +2338,134 @@ D:\empresas\ferreluc\gestion\scripts\package.json:
     "xlsx": "^0.18.5"
   }
 }
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs:
+// (NUEVO) D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs
+// Núcleo reutilizable para los scripts de ETL (grais)
+
+const ExcelJS = require("exceljs");
+const { RUTAS } = require("./config.cjs");
+const {
+  buildHeaderIndex,
+  readCellText,
+  mapHeadersFromRow,
+  normalizeImagenPath,
+} = require("./common.cjs");
+
+// carga el excel destino ya normalizado
+async function loadDestinoWorkbook() {
+  const wb = new ExcelJS.Workbook();
+  await wb.xlsx.readFile(RUTAS.DESTINO_XLSX);
+  const ws = wb.worksheets[0];
+  return { wb, ws };
+}
+
+// lee todas las filas a objetos canónicos
+function worksheetToObjects(ws) {
+  const idx = buildHeaderIndex(ws);
+  const rows = [];
+  for (let r = 2; r <= ws.rowCount; r++) {
+    const row = ws.getRow(r);
+    const obj = mapHeadersFromRow(row, idx);
+    rows.push(obj);
+  }
+  return rows;
+}
+
+// exporta a json usando la ruta del config
+function exportToJson(objs) {
+  const fs = require("fs");
+  const path = require("path");
+  const outDir = RUTAS.OUTPUT_DIR;
+  const outFile = RUTAS.OUTPUT_PATH;
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+  fs.writeFileSync(outFile, JSON.stringify(objs, null, 2), "utf-8");
+  return outFile;
+}
+
+// normaliza campo imagen en un objeto
+function ensureImagenField(o) {
+  if (!o) return o;
+  o.imagen = normalizeImagenPath(o.imagen);
+  return o;
+}
+
+module.exports = {
+  loadDestinoWorkbook,
+  worksheetToObjects,
+  exportToJson,
+  ensureImagenField,
+};
+
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\scripts\pipeline-manifest.cjs:
+// pipeline-manifest.cjs
+// (NUEVO) mini utilidad para generar un manifest de lo que hay en /json
+// Lo puede leer el catálogo para saber qué colecciones tiene.
+
+const fs = require("fs");
+const { RUTAS } = require("./config.cjs");
+
+async function writeManifest() {
+  const outDir = RUTAS.OUTPUT_DIR;
+  const manifestPath = `${outDir}/manifest.json`;
+
+  const manifest = {
+    updated_at: new Date().toISOString(),
+    datasets: [
+      {
+        id: "producto_grais",
+        path: RUTAS.OUTPUT_PATH,
+        description: "Listado normalizado de proveedor Grais",
+        kind: "products",
+      },
+    ],
+  };
+
+  await fs.promises.mkdir(outDir, { recursive: true });
+  await fs.promises.writeFile(
+    manifestPath,
+    JSON.stringify(manifest, null, 2),
+    "utf-8"
+  );
+
+  return manifestPath;
+}
+
+if (require.main === module) {
+  writeManifest().then((p) => console.log("[pipeline-manifest] escrito:", p));
+}
+
+module.exports = { writeManifest };
+
+
+--------------------------------------------
+
+D:\empresas\ferreluc\gestion\scripts\shared-keys.cjs:
+// shared-keys.cjs
+// Construcción consistente de la key "codigo flexxus"
+// Preferencia: explicito > proveedor+codigo > null
+
+function buildFlexxusKey({ codigoFlexxus, proveedor, codigo }) {
+  const flex = (codigoFlexxus || "").trim();
+  if (flex) return flex;
+
+  const prov = (proveedor || "").trim();
+  const cod = (codigo || "").trim();
+
+  if (prov && cod) return `${prov}-${cod}`;
+
+  return null;
+}
+
+module.exports = {
+  buildFlexxusKey,
+};
+
 
 --------------------------------------------
 
@@ -2702,6 +3061,214 @@ export default function AdminLoginPage() {
         Tip: podés ir directo a <code>/admin/users?admin_token=TU_ADMIN_TOKEN</code>;
         el middleware setea la cookie.
       </p>
+    </div>
+  );
+}
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\admin\pipeline\page.jsx:
+// app/admin/pipeline/page.jsx
+import PipelineClient from "./PipelineClient.jsx";
+import { isAdminPage } from "@/lib/admin"; // asumimos que tenés un helper así; si no, podés reusar el whoami del cliente
+
+export const dynamic = "force-dynamic";
+
+export default async function Page() {
+  const ok = await isAdminPage?.();
+  // si no tenés isAdminPage en el server, podés dejar que el client llame a /api/admin/whoami
+  // y mostrar spinner hasta que responda
+  return (
+    <div className="space-y-6">
+      <PipelineClient />
+    </div>
+  );
+}
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\admin\pipeline\PipelineClient.jsx:
+// app/admin/pipeline/PipelineClient.jsx
+"use client";
+
+import { useEffect, useState } from "react";
+
+const ACTION_LABELS = {
+  preview: "Solo previsualizar",
+  precios: "Importar precios",
+  imagenes: "Colocar imágenes",
+  export: "Exportar JSON",
+  todo: "Correr todo",
+};
+
+export default function PipelineClient() {
+  const [status, setStatus] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [runningAction, setRunningAction] = useState(null);
+  const [error, setError] = useState("");
+  const [lastResult, setLastResult] = useState(null);
+
+  async function loadStatus() {
+    try {
+      const res = await fetch("/api/admin/pipeline/status", {
+        cache: "no-store",
+      });
+      if (!res.ok) throw new Error("No se pudo leer el estado");
+      const json = await res.json();
+      setStatus(json);
+      setError("");
+    } catch (e) {
+      setError(e.message);
+    }
+  }
+
+  useEffect(() => {
+    loadStatus();
+  }, []);
+
+  async function runAction(action) {
+    setRunningAction(action);
+    setError("");
+    try {
+      const res = await fetch(`/api/admin/pipeline/grais?action=${action}`, {
+        cache: "no-store",
+      });
+      const json = await res.json().catch(() => ({}));
+      if (!res.ok || json?.error) {
+        throw new Error(json?.error || `Fallo action: ${action}`);
+      }
+      setLastResult({
+        action,
+        at: new Date().toISOString(),
+        data: json?.data ?? null,
+      });
+      // refresco status porque pudo haber cambiado el XLSX / JSON
+      await loadStatus();
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setRunningAction(null);
+    }
+  }
+
+  function downloadReporte() {
+    // que el browser haga GET directo al endpoint que ya tenés
+    window.open("/api/admin/pipeline/reporte", "_blank");
+  }
+
+  return (
+    <div className="space-y-6">
+      <header className="flex items-center justify-between gap-4">
+        <div>
+          <h1 className="text-2xl font-semibold tracking-tight">
+            Pipeline GRAIS
+          </h1>
+          <p className="text-sm text-muted-foreground">
+            Ejecutá desde el catálogo lo que hoy corre en gestion.
+          </p>
+        </div>
+        <button
+          onClick={loadStatus}
+          className="rounded-md border px-3 py-1 text-sm hover:bg-muted"
+          disabled={loading}
+        >
+          Actualizar
+        </button>
+      </header>
+
+      {error ? (
+        <div className="rounded-md border border-red-500/40 bg-red-500/10 px-3 py-2 text-sm text-red-200">
+          {error}
+        </div>
+      ) : null}
+
+      {/* Archivos */}
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
+        {["origen", "destino", "json", "reporte"].map((key) => {
+          const f = status?.files?.[key];
+          return (
+            <div
+              key={key}
+              className="rounded-xl border bg-card p-4 text-sm shadow-sm"
+            >
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <span className="font-medium capitalize">{key}</span>
+                <span
+                  className={
+                    f?.exists
+                      ? "rounded bg-emerald-500/10 px-2 py-0.5 text-xs text-emerald-300"
+                      : "rounded bg-red-500/10 px-2 py-0.5 text-xs text-red-200"
+                  }
+                >
+                  {f?.exists ? "OK" : "No existe"}
+                </span>
+              </div>
+              <p className="line-clamp-3 text-xs text-muted-foreground">
+                {f?.path || "—"}
+              </p>
+              {f?.exists ? (
+                <p className="mt-2 text-[11px] text-muted-foreground">
+                  {f.size} bytes
+                  {f.mtime ? ` · ${new Date(f.mtime).toLocaleString()}` : ""}
+                </p>
+              ) : null}
+              {key === "reporte" ? (
+                <button
+                  onClick={downloadReporte}
+                  className="mt-3 w-full rounded-md bg-secondary/80 px-2 py-1 text-xs hover:bg-secondary"
+                >
+                  Descargar
+                </button>
+              ) : null}
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Acciones */}
+      <div className="rounded-xl border bg-card p-4 shadow-sm">
+        <p className="mb-3 text-sm text-muted-foreground">
+          Acciones disponibles
+        </p>
+        <div className="flex flex-wrap gap-2">
+          {(status?.actions || ["preview", "precios", "imagenes", "export", "todo"]).map(
+            (action) => (
+              <button
+                key={action}
+                onClick={() => runAction(action)}
+                disabled={!!runningAction}
+                className={`rounded-md px-3 py-1.5 text-sm transition ${
+                  runningAction === action
+                    ? "bg-primary text-primary-foreground opacity-80"
+                    : "bg-muted hover:bg-muted/80"
+                }`}
+              >
+                {runningAction === action ? "Ejecutando..." : ACTION_LABELS[action] ?? action}
+              </button>
+            )
+          )}
+        </div>
+      </div>
+
+      {/* Resultado */}
+      {lastResult ? (
+        <div className="rounded-xl border bg-muted/20 p-4 text-sm">
+          <p className="mb-2 text-xs uppercase tracking-wide text-muted-foreground">
+            Última ejecución
+          </p>
+          <p className="text-sm">
+            Acción: <strong>{lastResult.action}</strong> ·{" "}
+            {new Date(lastResult.at).toLocaleString()}
+          </p>
+          {lastResult.data ? (
+            <pre className="mt-3 max-h-64 overflow-auto rounded bg-background/40 p-3 text-xs">
+              {JSON.stringify(lastResult.data, null, 2)}
+            </pre>
+          ) : null}
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -3918,6 +4485,57 @@ export async function GET(req) {
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\api\admin\pipeline\status\route.js:
+// app/api/admin/pipeline/status/route.js
+import fs from "fs";
+import { NextResponse } from "next/server";
+import { isAdminApi } from "@/lib/admin";
+import { CFG } from "@/lib/config"; // ya tenés las rutas acá :contentReference[oaicite:7]{index=7}
+
+function statOrNull(path) {
+  try {
+    if (!path) return null;
+    if (!fs.existsSync(path)) return { exists: false, path };
+    const s = fs.statSync(path);
+    return {
+      exists: true,
+      path,
+      size: s.size,
+      mtime: s.mtime,
+    };
+  } catch {
+    return { exists: false, path };
+  }
+}
+
+export async function GET(req) {
+  const ok = await isAdminApi(req);
+  if (!ok) return new NextResponse("Unauthorized", { status: 401 });
+
+  // vienen del config del catálogo
+  const origen = statOrNull(CFG.origenXlsxGrais);
+  const destino = statOrNull(CFG.destinoXlsxGrais);
+  const json = statOrNull(CFG.jsonPath);
+  const reporte = statOrNull(CFG.noEncontradosXlsx);
+
+  // acciones que soporta el endpoint real
+  const actions = ["preview", "precios", "imagenes", "export", "todo"];
+
+  return NextResponse.json(
+    {
+      ok: true,
+      files: { origen, destino, json, reporte },
+      actions,
+      // por si querés mostrar un “path de trabajo” en la UI
+      rootGestion: process.env.GESTION_ROOT || "D:/empresas/ferreluc/gestion",
+    },
+    { headers: { "Cache-Control": "no-store" } }
+  );
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\api\admin\users\route.js:
 // app/api/admin/users/route.js
 import { NextResponse } from "next/server";
@@ -4405,6 +5023,52 @@ export async function POST(req) {
 }
 
 /* fin */
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\api\cliente\route.js:
+// app/api/cliente/route.js
+import { NextResponse } from "next/server";
+import { getUserFromSession } from "@/lib/auth";
+import { getClienteByUserId, upsertClienteByUserId } from "@/lib/client-profile";
+
+export async function GET() {
+  const user = await getUserFromSession();
+  if (!user) {
+    return NextResponse.json({ __anonymous: true }, { status: 200 });
+  }
+
+  const cliente = await getClienteByUserId(user.id);
+  return NextResponse.json(cliente || {}, { status: 200 });
+}
+
+export async function PUT(req) {
+  const body = await req.json();
+
+  if (!body.email || !body.nombreCompleto) {
+    return NextResponse.json(
+      { error: "Faltan campos obligatorios: nombreCompleto, email" },
+      { status: 400 }
+    );
+  }
+
+  const user = await getUserFromSession();
+
+  if (!user) {
+    return NextResponse.json(
+      {
+        ok: true,
+        anonymous: true,
+        ...body, // ← FIX: antes decía ".body," y rompía la respuesta
+      },
+      { status: 200 }
+    );
+  }
+
+  const saved = await upsertClienteByUserId(user.id, body);
+  return NextResponse.json(saved, { status: 200 });
+}
 
 
 --------------------------------------------
@@ -5872,6 +6536,596 @@ export default function CheckoutPage() {
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\cliente\page.jsx:
+"use client";
+
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const STORAGE_KEY = "cliente-form-v1";
+const FROZEN_FIELDS = ["nombreCompleto", "email", "telefono", "documento"];
+
+const EMPTY = {
+  nombreCompleto: "",
+  email: "",
+  telefono: "",
+  documento: "",
+
+  calle: "",
+  numero: "",
+  piso: "",
+  referencia: "",
+  codigoPostal: "",
+  ciudad: "",
+  provincia: "",
+  pais: "",
+  tipoEnvio: "",
+  comentariosEnvio: "",
+
+  metodoPago: "",
+  titularTarjeta: "",
+  numeroTarjeta: "",
+  vencimientoTarjeta: "",
+  cvvTarjeta: "",
+  direccionFacturacion: "",
+  comprobanteTransferencia: "",
+
+  tipoFactura: "",
+  razonSocial: "",
+  cuit: "",
+  direccionFiscal: "",
+
+  aceptaTerminos: false,
+  aceptaPromos: false,
+};
+
+/* ===== styled ===== */
+
+const Page = styled.div`
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const HeadRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+`;
+
+const Title = styled.h1`
+  font-size: 1.6rem;
+  font-weight: 600;
+`;
+
+const Status = styled.span`
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  color: #166534;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+`;
+
+const EditBtn = styled.button`
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.7rem;
+  cursor: pointer;
+`;
+
+const ErrorBox = styled.div`
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  color: #b91c1c;
+  padding: 8px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+const Card = styled.section`
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+`;
+
+const CardTitle = styled.h2`
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(${(p) => p.$cols || 2}, minmax(0, 1fr));
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Field = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.72rem;
+`;
+
+const Input = styled.input`
+  border: 1px solid
+    ${(p) => (p.$locked ? "rgba(148, 163, 184, 0.35)" : "rgba(148, 163, 184, 0.5)")};
+  background: ${(p) => (p.$locked ? "rgba(248, 250, 252, 0.6)" : "#fff")};
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+`;
+
+const Select = styled.select`
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+`;
+
+const Textarea = styled.textarea`
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+  min-height: 80px;
+`;
+
+const CheckRow = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+`;
+
+const SaveBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Button = styled.button`
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+`;
+
+// función helper para normalizar lo que vuelve del backend
+function normalizeFromApi(j = {}) {
+  return {
+    ...EMPTY,
+    ...j,
+    aceptaTerminos: !!j.aceptaTerminos,
+    aceptaPromos: !!j.aceptaPromos,
+  };
+}
+
+export default function ClientePage() {
+  const [data, setData] = useState(EMPTY);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [lockedFields, setLockedFields] = useState([]);
+
+  const isLocked = (name) => lockedFields.includes(name);
+
+  // cargar primero de localStorage, luego de API
+  useEffect(() => {
+    let cancelled = false;
+
+    // 1) localStorage
+    let local = null;
+    if (typeof window !== "undefined") {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          local = JSON.parse(raw);
+        } catch {
+          local = null;
+        }
+      }
+    }
+
+    // mostrar lo local primero
+    if (local && !cancelled) {
+      const localNorm = normalizeFromApi(local);
+      setData(localNorm);
+      const frozen = FROZEN_FIELDS.filter((f) => localNorm[f]);
+      setLockedFields(frozen);
+    }
+
+    // 2) API
+    (async () => {
+      try {
+        const r = await fetch("/api/cliente", { cache: "no-store" });
+        // si tira 401/500 → no rompas el form
+        if (!r.ok) throw new Error(await r.text());
+
+        const j = await r.json();
+        if (cancelled) return;
+
+        // si la API devolvió datos reales (no __anonymous) los usamos
+        if (j && !j.__anonymous && Object.keys(j).length > 0) {
+          const fromApi = normalizeFromApi(j);
+          setData(fromApi);
+          const frozen = FROZEN_FIELDS.filter((f) => fromApi[f]);
+          setLockedFields(frozen);
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fromApi));
+          }
+        } else if (!local) {
+          // no había local y API no tiene nada → mostramos vacío
+          setData(EMPTY);
+        }
+      } catch (e) {
+        // si hay local, no muestres error
+        if (!cancelled && !local) {
+          setError(typeof e === "string" ? e : e?.message || "No se pudo cargar el cliente");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // guardar en localStorage cada cambio
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }, [data]);
+
+  const onChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    // si es un campo básico congelado → no lo toques
+    if (isLocked(name)) return;
+    setData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError("");
+    try {
+      const r = await fetch("/api/cliente", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const text = await r.text(); // leemos SIEMPRE
+      if (!r.ok) {
+        // si el backend devolvió JSON con error, tratá de mostrarlo
+        let msg = "No se pudo guardar";
+        try {
+          const parsed = JSON.parse(text);
+          msg = parsed?.error || msg;
+        } catch {
+          msg = text || msg;
+        }
+        throw new Error(msg);
+      }
+
+      // si llegó acá, el backend devolvió algo (JSON o lo que sea)
+      let saved = null;
+      try {
+        saved = JSON.parse(text);
+      } catch {
+        saved = null;
+      }
+
+      // congelo básicos
+      const frozen = FROZEN_FIELDS.filter((f) => data[f]);
+      setLockedFields(frozen);
+
+      // si el backend devolvió info real, la guardo en local
+      const newData = saved ? normalizeFromApi(saved) : data;
+      setData(newData);
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleEditBasics = () => {
+    setLockedFields([]);
+  };
+
+  if (loading) {
+    return <Page>Cargando ficha de cliente…</Page>;
+  }
+
+  return (
+    <Page>
+      <HeadRow>
+        <Title>Ficha del cliente</Title>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          {lockedFields.length > 0 ? <Status>Datos básicos fijados</Status> : null}
+          {lockedFields.length > 0 ? (
+            <EditBtn onClick={handleEditBasics} type="button">
+              Editar básicos
+            </EditBtn>
+          ) : null}
+        </div>
+      </HeadRow>
+
+      {error ? <ErrorBox>{error}</ErrorBox> : null}
+
+      <Form onSubmit={onSubmit}>
+        <Card>
+          <CardTitle>🧍 Datos del cliente</CardTitle>
+          <Grid>
+            <Field>
+              Nombre completo
+              <Input
+                name="nombreCompleto"
+                value={data.nombreCompleto}
+                onChange={onChange}
+                $locked={isLocked("nombreCompleto")}
+                disabled={isLocked("nombreCompleto")}
+                required
+              />
+            </Field>
+            <Field>
+              Email
+              <Input
+                name="email"
+                type="email"
+                value={data.email}
+                onChange={onChange}
+                $locked={isLocked("email")}
+                disabled={isLocked("email")}
+                required
+              />
+            </Field>
+            <Field>
+              Teléfono
+              <Input
+                name="telefono"
+                value={data.telefono}
+                onChange={onChange}
+                $locked={isLocked("telefono")}
+                disabled={isLocked("telefono")}
+              />
+            </Field>
+            <Field>
+              DNI / CUIT
+              <Input
+                name="documento"
+                value={data.documento}
+                onChange={onChange}
+                $locked={isLocked("documento")}
+                disabled={isLocked("documento")}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>🏠 Dirección de envío</CardTitle>
+          <Grid $cols={3}>
+            <Field style={{ gridColumn: "span 2" }}>
+              Calle
+              <Input name="calle" value={data.calle} onChange={onChange} />
+            </Field>
+            <Field>
+              Número
+              <Input name="numero" value={data.numero} onChange={onChange} />
+            </Field>
+            <Field>
+              Piso / Dpto / Ref.
+              <Input name="piso" value={data.piso} onChange={onChange} />
+            </Field>
+            <Field>
+              Código postal
+              <Input
+                name="codigoPostal"
+                value={data.codigoPostal}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Ciudad
+              <Input name="ciudad" value={data.ciudad} onChange={onChange} />
+            </Field>
+            <Field>
+              Provincia / Estado
+              <Input name="provincia" value={data.provincia} onChange={onChange} />
+            </Field>
+            <Field>
+              País
+              <Input name="pais" value={data.pais} onChange={onChange} />
+            </Field>
+            <Field>
+              Tipo de envío
+              <Select name="tipoEnvio" value={data.tipoEnvio} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="domicilio">Domicilio</option>
+                <option value="sucursal">Retiro en sucursal</option>
+                <option value="tienda">Retiro en tienda</option>
+              </Select>
+            </Field>
+          </Grid>
+          <Field>
+            Comentarios adicionales
+            <Textarea
+              name="comentariosEnvio"
+              value={data.comentariosEnvio}
+              onChange={onChange}
+            />
+          </Field>
+        </Card>
+
+        <Card>
+          <CardTitle>💳 Información de pago</CardTitle>
+          <Grid>
+            <Field>
+              Método de pago
+              <Select name="metodoPago" value={data.metodoPago} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="mercado_pago">Mercado Pago</option>
+              </Select>
+            </Field>
+            <Field>
+              Dirección de facturación
+              <Input
+                name="direccionFacturacion"
+                value={data.direccionFacturacion}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Titular de la tarjeta
+              <Input
+                name="titularTarjeta"
+                value={data.titularTarjeta}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Número de tarjeta
+              <Input
+                name="numeroTarjeta"
+                value={data.numeroTarjeta}
+                onChange={onChange}
+                inputMode="numeric"
+              />
+            </Field>
+            <Field>
+              Vencimiento (MM/AA)
+              <Input
+                name="vencimientoTarjeta"
+                value={data.vencimientoTarjeta}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              CVV
+              <Input
+                name="cvvTarjeta"
+                value={data.cvvTarjeta}
+                onChange={onChange}
+                inputMode="numeric"
+              />
+            </Field>
+            <Field>
+              Comprobante de transferencia
+              <Input
+                name="comprobanteTransferencia"
+                value={data.comprobanteTransferencia}
+                onChange={onChange}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>🧾 Facturación</CardTitle>
+          <Grid>
+            <Field>
+              Tipo de factura
+              <Select name="tipoFactura" value={data.tipoFactura} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="CF">Consumidor final</option>
+              </Select>
+            </Field>
+            <Field>
+              Razón social
+              <Input name="razonSocial" value={data.razonSocial} onChange={onChange} />
+            </Field>
+            <Field>
+              CUIT / CUIL
+              <Input name="cuit" value={data.cuit} onChange={onChange} />
+            </Field>
+            <Field>
+              Dirección fiscal
+              <Input
+                name="direccionFiscal"
+                value={data.direccionFiscal}
+                onChange={onChange}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>✅ Confirmación</CardTitle>
+          <CheckRow>
+            <input
+              type="checkbox"
+              name="aceptaTerminos"
+              checked={data.aceptaTerminos}
+              onChange={onChange}
+            />
+            Acepto los términos y condiciones
+          </CheckRow>
+          <CheckRow>
+            <input
+              type="checkbox"
+              name="aceptaPromos"
+              checked={data.aceptaPromos}
+              onChange={onChange}
+            />
+            Deseo recibir novedades y promociones
+          </CheckRow>
+        </Card>
+
+        <SaveBar>
+          <Button type="submit" disabled={saving}>
+            {saving ? "Guardando…" : "Confirmar y guardar"}
+          </Button>
+        </SaveBar>
+      </Form>
+    </Page>
+  );
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\imagenes\[...path]\route.js:
 // D:\empresas\catalogo\app\imagenes\[...path]\route.js
 // Sirve imágenes físicas desde CFG.imgsDir con tolerancia de nombre
@@ -7165,7 +8419,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const UserPill = styled.span`
+const UserPillLink = styled(Link)`
   padding: 5px 10px;
   border: 1px dashed #e5e7eb;
   border-radius: 999px;
@@ -7175,6 +8429,11 @@ const UserPill = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 12.5px;
+  text-decoration: none;
+
+  &:hover {
+    background: #f8fafc;
+  }
 `;
 
 const Btn = styled.button`
@@ -7270,10 +8529,7 @@ export default function HeaderCart() {
   useEffect(() => {
     const prev = prevPathRef.current;
     const current = pathname;
-    // si antes estaba en /admin/import y ahora estoy en /
     if (prev === "/admin/import" && current === "/") {
-      // forzá recarga total para que tome el JSON nuevo
-      // (no usamos router.refresh() porque a veces queda el fetch cacheado por otro componente)
       window.location.reload();
     }
     prevPathRef.current = current;
@@ -7287,7 +8543,6 @@ export default function HeaderCart() {
     setMe(null);
     setIsAdminWhoami(false);
     setLoading(false);
-    // limpiar carrito local para que el icono no quede con número viejo
     clear?.();
 
     try {
@@ -7296,10 +8551,9 @@ export default function HeaderCart() {
         fetch("/api/admin/logout", { method: "POST", cache: "no-store" }),
       ]);
     } catch {
-      // no nos importa, ya limpiamos UI
+      // no nos importa
     }
 
-    // mandamos al login
     router.replace("/login");
   };
 
@@ -7309,10 +8563,12 @@ export default function HeaderCart() {
     </StyledLink>
   );
 
+  const displayName = me?.name?.trim() || me?.email || "Cliente";
+
   return (
     <Topbar>
       <TopbarInner>
-        {/* Marca + logo (esto ya es "Catálogo") */}
+        {/* Marca + logo */}
         <BrandWrap>
           <Link href="/" prefetch>
             <Logo src="/imagenes/logo.png" alt="Ferreluc" />
@@ -7324,7 +8580,6 @@ export default function HeaderCart() {
 
         {/* Navegación principal */}
         <NavLeft>
-          {/* NO repetimos "Catálogo" porque el brand ya lo hace */}
           {isLogged && isAdmin && <NavLink href="/orders">Mis órdenes</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/users">Cuentas</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/import">Importar Excel</NavLink>}
@@ -7348,7 +8603,10 @@ export default function HeaderCart() {
 
           {!loading && isLogged && (
             <>
-              <UserPill title={me.email}>{me.name?.trim() || me.email}</UserPill>
+              {/* ← ahora es clickeable y te lleva a la ficha */}
+              <UserPillLink href="/cliente" prefetch title={displayName}>
+                {displayName}
+              </UserPillLink>
               <Btn onClick={handleLogout}>Cerrar sesión</Btn>
             </>
           )}
@@ -8613,6 +9871,63 @@ export function projectPublic(row) {
 
 --------------------------------------------
 
+D:\empresas\catalogo\lib\client-profile.js:
+// lib/client-profile.js
+import { prisma } from "@/lib/db";
+
+const SELECT = {
+  id: true,
+  userId: true,
+  nombreCompleto: true,
+  email: true,
+  telefono: true,
+  documento: true,
+  calle: true,
+  numero: true,
+  piso: true,
+  referencia: true,
+  codigoPostal: true,
+  ciudad: true,
+  provincia: true,
+  pais: true,
+  tipoEnvio: true,
+  comentariosEnvio: true,
+  metodoPago: true,
+  titularTarjeta: true,
+  numeroTarjeta: true,
+  vencimientoTarjeta: true,
+  cvvTarjeta: true,
+  direccionFacturacion: true,
+  comprobanteTransferencia: true,
+  tipoFactura: true,
+  razonSocial: true,
+  cuit: true,
+  direccionFiscal: true,
+  aceptaTerminos: true,
+  aceptaPromos: true,
+  createdAt: true,
+  updatedAt: true,
+};
+
+export async function getClienteByUserId(userId) {
+  return prisma.clientePerfil.findUnique({
+    where: { userId },
+    select: SELECT,
+  });
+}
+
+export async function upsertClienteByUserId(userId, data) {
+  return prisma.clientePerfil.upsert({
+    where: { userId },
+    update: data,
+    create: { userId, ...data },
+    select: SELECT,
+  });
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\lib\config.js:
 // lib/config.js
 import fs from "fs";
@@ -9864,7 +11179,7 @@ D:\empresas\catalogo\prisma\prisma\data\dev.db:
 
 --------------------------------------------
 
-D:\empresas\catalogo\prisma\schema.prisma:
+D:\empresas\catalogo\prisma\prisma\schema.prisma:
 [archivo binario/no textual]
 
 --------------------------------------------

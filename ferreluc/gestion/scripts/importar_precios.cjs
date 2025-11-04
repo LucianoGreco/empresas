@@ -1,3 +1,4 @@
+// importar_precios.cjs
 // D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
 // Actualiza precios y recalcula IVA, costo, ganancia y venta.
 // Genera reporte de origenes que NO están en el destino.
@@ -14,6 +15,7 @@ const {
   round2,
   ensureDir,
 } = require("./common.cjs");
+const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
@@ -26,13 +28,13 @@ async function leerOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colProv = idx.get(toKey("PROVEEDOR"));
-  const colCod = idx.get(toKey("CODIGO"));
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS"));
-  const colDesc = idx.get(toKey("Descripcion Flexxus"));
-  const colPrecio = idx.get(toKey("PRECIO VENTA"));
+  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor");
+  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo");
+  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus");
+  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus");
+  const colPrecio = idx.get(toKey("PRECIO VENTA")) || idx.get("precio venta");
 
-  if (!colProv || !colCod || !colFlex || !colDesc || !colPrecio) {
+  if (!colProv || !colCod || !colDesc || !colPrecio) {
     throw new Error(
       "[importar_precios] El archivo ORIGEN no tiene los encabezados esperados."
     );
@@ -45,27 +47,24 @@ async function leerOrigen(ruta) {
 
     const proveedor = readCellText(row.getCell(colProv));
     const codigo = readCellText(row.getCell(colCod));
-    const codigoFlexxusRaw = readCellText(row.getCell(colFlex));
+    const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descFlexxus = readCellText(row.getCell(colDesc));
     const precioRaw = row.getCell(colPrecio).value;
 
-    // construir key
-    let codigoFlex = codigoFlexxusRaw;
-    if (!codigoFlex) {
-      if (proveedor && codigo) {
-        codigoFlex = `${proveedor}-${codigo}`;
-      } else {
-        // sin key no sirve
-        return;
-      }
-    }
+    const key = buildFlexxusKey({
+      codigoFlexxus,
+      proveedor,
+      codigo,
+    });
+
+    if (!key) return;
 
     const precio = parsePrecio(precioRaw);
 
-    map.set(codigoFlex, {
+    map.set(key, {
       proveedor,
       codigo,
-      codigoFlexxus: codigoFlex,
+      codigoFlexxus: key,
       descripcionFlexxus: descFlexxus,
       precioOrigen: precio,
     });
@@ -81,13 +80,13 @@ async function procesarDestino(rutaDestino, origenMap) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colFlex = idx.get(toKey("codigo flexxus"));
-  const colPrecioVenta = idx.get(toKey("precio venta"));
-  const colCaja = idx.get(toKey("caja"));
-  const colIva = idx.get(toKey("iva"));
-  const colCosto = idx.get(toKey("costo"));
-  const colGan = idx.get(toKey("ganancia"));
-  const colVenta = idx.get(toKey("venta"));
+  const colFlex = idx.get(toKey("codigo flexxus")) || idx.get("codigo flexxus");
+  const colPrecioVenta = idx.get(toKey("precio venta")) || idx.get("precio venta");
+  const colCaja = idx.get(toKey("caja")) || idx.get("caja");
+  const colIva = idx.get(toKey("iva")) || idx.get("iva");
+  const colCosto = idx.get(toKey("costo")) || idx.get("costo");
+  const colGan = idx.get(toKey("ganancia")) || idx.get("ganancia");
+  const colVenta = idx.get(toKey("venta")) || idx.get("venta");
 
   const required = [
     colFlex,

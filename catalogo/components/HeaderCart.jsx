@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\components\HeaderCart.jsx
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
@@ -10,7 +11,6 @@ const Topbar = styled.header`
   border-bottom: 1px solid #e5e7eb;
   background: #fff;
 `;
-
 const TopbarInner = styled.div`
   display: flex;
   align-items: center;
@@ -19,39 +19,33 @@ const TopbarInner = styled.div`
   max-width: 1100px;
   margin: 0 auto;
 `;
-
 const BrandWrap = styled.div`
   display: flex;
   align-items: center;
   gap: 6px;
 `;
-
 const Logo = styled.img`
   width: 32px;
   height: 32px;
   object-fit: contain;
 `;
-
 const BrandText = styled(Link)`
   font-weight: 600;
   color: #111;
   text-decoration: none;
 `;
-
 const NavLeft = styled.nav`
   display: flex;
   gap: 8px;
   margin-left: 16px;
   flex-wrap: wrap;
 `;
-
 const NavRight = styled.div`
   display: flex;
   gap: 8px;
   margin-left: auto;
   align-items: center;
 `;
-
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: #111;
@@ -65,8 +59,7 @@ const StyledLink = styled(Link)`
     background: #f8fafc;
   }
 `;
-
-const UserPill = styled.span`
+const UserPillLink = styled(Link)`
   padding: 5px 10px;
   border: 1px dashed #e5e7eb;
   border-radius: 999px;
@@ -76,8 +69,12 @@ const UserPill = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 12.5px;
-`;
+  text-decoration: none;
 
+  &:hover {
+    background: #f8fafc;
+  }
+`;
 const Btn = styled.button`
   border: 1px solid #e5e7eb;
   padding: 5px 10px;
@@ -90,7 +87,6 @@ const Btn = styled.button`
     background: #f8fafc;
   }
 `;
-
 const CartBtn = styled(Link)`
   position: relative;
   text-decoration: none;
@@ -108,7 +104,6 @@ const CartBtn = styled(Link)`
     top: 4px;
   }
 `;
-
 const CartBadge = styled.span`
   position: absolute;
   right: -6px;
@@ -134,7 +129,6 @@ export default function HeaderCart() {
   // carrito
   const { count, clear } = useCart();
 
-  // Carga estado sesión + admin (revalida al cambiar de ruta)
   useEffect(() => {
     let alive = true;
     (async () => {
@@ -162,19 +156,15 @@ export default function HeaderCart() {
     };
   }, [pathname]);
 
-  // marcar montado (para no mostrar badge desactualizado)
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // 2) si vengo de /admin/import → voy a /  => forzar refresh
+  // si vengo de /admin/import → voy a /  => forzar refresh
   useEffect(() => {
     const prev = prevPathRef.current;
     const current = pathname;
-    // si antes estaba en /admin/import y ahora estoy en /
     if (prev === "/admin/import" && current === "/") {
-      // forzá recarga total para que tome el JSON nuevo
-      // (no usamos router.refresh() porque a veces queda el fetch cacheado por otro componente)
       window.location.reload();
     }
     prevPathRef.current = current;
@@ -188,7 +178,6 @@ export default function HeaderCart() {
     setMe(null);
     setIsAdminWhoami(false);
     setLoading(false);
-    // limpiar carrito local para que el icono no quede con número viejo
     clear?.();
 
     try {
@@ -197,10 +186,9 @@ export default function HeaderCart() {
         fetch("/api/admin/logout", { method: "POST", cache: "no-store" }),
       ]);
     } catch {
-      // no nos importa, ya limpiamos UI
+      // noop
     }
 
-    // mandamos al login
     router.replace("/login");
   };
 
@@ -210,10 +198,12 @@ export default function HeaderCart() {
     </StyledLink>
   );
 
+  const displayName = me?.name?.trim() || me?.email || "Cliente";
+
   return (
     <Topbar>
       <TopbarInner>
-        {/* Marca + logo (esto ya es "Catálogo") */}
+        {/* Marca + logo */}
         <BrandWrap>
           <Link href="/" prefetch>
             <Logo src="/imagenes/logo.png" alt="Ferreluc" />
@@ -225,10 +215,10 @@ export default function HeaderCart() {
 
         {/* Navegación principal */}
         <NavLeft>
-          {/* NO repetimos "Catálogo" porque el brand ya lo hace */}
           {isLogged && isAdmin && <NavLink href="/orders">Mis órdenes</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/users">Cuentas</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/import">Importar Excel</NavLink>}
+          {isLogged && isAdmin && <NavLink href="/admin/pipeline">Pipeline</NavLink>}
         </NavLeft>
 
         {/* Derecha */}
@@ -249,7 +239,9 @@ export default function HeaderCart() {
 
           {!loading && isLogged && (
             <>
-              <UserPill title={me.email}>{me.name?.trim() || me.email}</UserPill>
+              <UserPillLink href="/cliente" prefetch title={displayName}>
+                {displayName}
+              </UserPillLink>
               <Btn onClick={handleLogout}>Cerrar sesión</Btn>
             </>
           )}
@@ -258,3 +250,5 @@ export default function HeaderCart() {
     </Topbar>
   );
 }
+
+/* fin */

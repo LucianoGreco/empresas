@@ -4,20 +4,22 @@
 // - normaliza nombres de columnas
 // - casting de números
 // - manejo de imágenes (FS + fuzzy)
-// - helpers de excel
+// - helpers de excel (mejorados)
+// - helpers genéricos para mapeos de columnas entre workbooks
 
 const fs = require("fs");
 const path = require("path");
-const { HEADERS_JSON_CANDIDATES, RUTAS } = require("./config.cjs");
+const { HEADERS_JSON_CANDIDATES, RUTAS, PARAMS } = require("./config.cjs");
 
 // === Fuente única de headers (JSON) con fallback ===
 function loadHeadersJson() {
-  const candidates = HEADERS_JSON_CANDIDATES;
+  const candidates = Array.from(new Set(HEADERS_JSON_CANDIDATES || []));
   for (const p of candidates) {
     try {
       if (p && fs.existsSync(p)) {
         const raw = fs.readFileSync(p, "utf-8");
-        return JSON.parse(raw);
+        const parsed = JSON.parse(raw);
+        return parsed && typeof parsed === "object" ? parsed : null;
       }
     } catch (err) {
       // no rompas toda la importación por un JSON roto
@@ -40,7 +42,7 @@ function normalizeHeader(s) {
 }
 
 // Si no hay JSON, usamos fallback estático mínimo
-const FALLBACK_HEADER_ALIASES = {
+const FALLBACK_HEADER_ALIASES = Object.freeze({
   "codigo flexxus": "codigo_flexxus",
   "codigo_flexxus": "codigo_flexxus",
   "nombre descripcion": "nombre_descripcion",
@@ -49,17 +51,17 @@ const FALLBACK_HEADER_ALIASES = {
   venta: "venta",
   mayorista: "mayorista",
   inventario: "inventario",
-  "inv_minimo": "inv_minimo",
+  inv_minimo: "inv_minimo",
   "inv minimo": "inv_minimo",
-  "inv_maximo": "inv_maximo",
+  inv_maximo: "inv_maximo",
   "inv maximo": "inv_maximo",
   "inv_máximo": "inv_maximo",
   "inv máximo": "inv_maximo",
   proveedor: "proveedor",
   "descripcion flexxus": "descripcion_flexxus",
-  "descripcion_flexxus": "descripcion_flexxus",
+  descripcion_flexxus: "descripcion_flexxus",
   "precio venta": "precio_venta",
-  "precio_venta": "precio_venta",
+  precio_venta: "precio_venta",
   caja: "caja",
   iva: "iva",
   ganancia: "ganancia",
@@ -67,7 +69,7 @@ const FALLBACK_HEADER_ALIASES = {
   marca: "marca",
   categoria: "categoria",
   moneda: "moneda",
-};
+});
 
 const HEADER_MAP = (() => {
   if (HEADERS_JSON?.aliases) {
@@ -175,6 +177,40 @@ function toKey(s) {
     .toLowerCase();
 }
 
+/** Convierte letra de columna Excel ("E") a índice 1-based (5) */
+function colLetterToIndex(letter) {
+  if (!letter) return null;
+  const s = String(letter).trim().toUpperCase();
+  let idx = 0;
+  for (let i = 0; i < s.length; i++) {
+    idx = idx * 26 + (s.charCodeAt(i) - 64);
+  }
+  return idx || null;
+}
+
+/** Convierte índice 1-based (5) a letra ("E") */
+function colIndexToLetter(index) {
+  let n = Number(index) | 0;
+  if (n < 1) return null;
+  let s = "";
+  while (n > 0) {
+    const r = (n - 1) % 26;
+    s = String.fromCharCode(65 + r) + s;
+    n = Math.floor((n - 1) / 26);
+  }
+  return s;
+}
+
+/** Devuelve el worksheet por nombre (si existe) o el primero */
+function getWorksheetByNameOrFirst(workbook, name) {
+  if (!workbook) return null;
+  if (name && workbook.getWorksheet && workbook.getWorksheet(name)) {
+    return workbook.getWorksheet(name);
+  }
+  // exceljs: worksheet 1 es la primera hoja
+  return workbook.worksheets?.[0] || workbook.getWorksheet(1) || null;
+}
+
 function buildHeaderIndex(worksheet) {
   const headerRow = worksheet.getRow(1);
   const map = new Map();
@@ -185,17 +221,53 @@ function buildHeaderIndex(worksheet) {
   return map;
 }
 
+/** Igual que buildHeaderIndex, pero devuelve claves canónicas usando HEADER_MAP */
+function buildHeaderIndexCanon(worksheet) {
+  const headerRow = worksheet.getRow(1);
+  const map = new Map();
+  for (let c = 1; c <= worksheet.columnCount; c++) {
+    const raw = headerRow.getCell(c).value;
+    const key = normalizeHeader(raw);
+    if (!key) continue;
+    const canon = HEADER_MAP[key] || toSnakeCase(key);
+    map.set(canon, c);
+  }
+  return map;
+}
+
 function readCellText(cell) {
   if (!cell) return "";
   if (cell.text && String(cell.text).trim()) return String(cell.text).trim();
+
   const v = cell.value;
-  if (v && typeof v === "object" && "result" in v && v.result)
+
+  // Fórmulas con resultado calculado
+  if (v && typeof v === "object" && "result" in v && v.result != null) {
     return String(v.result).trim();
+  }
+
+  // RichText
   if (v && typeof v === "object" && "richText" in v && Array.isArray(v.richText)) {
     return v.richText.map((t) => t.text).join("");
   }
+
+  // Fechas/números/strings
+  if (v instanceof Date) return v.toISOString();
+  if (typeof v === "number") return String(v);
+  if (typeof v === "string") return v.trim();
   if (v != null) return String(v).trim();
+
   return "";
+}
+
+// mapea una fila de excel a un objeto con claves canónicas
+function mapHeadersFromRow(row, headerIndex) {
+  const out = {};
+  for (const [rawKey, colIdx] of headerIndex.entries()) {
+    const canon = HEADER_MAP[rawKey] || toSnakeCase(rawKey);
+    out[canon] = readCellText(row.getCell(colIdx));
+  }
+  return sortKeys(out);
 }
 
 // ---------- Imágenes ----------
@@ -214,7 +286,8 @@ function normalizeImagenPath(val) {
     ? String(RUTAS.IMAGES_DIR).replace(/\\/g, "/")
     : "D:/empresas/ferreluc/gestion/imagenes";
 
-  if (s.toLowerCase().startsWith(gestionImgPrefix.toLowerCase())) {
+  const lowerPrefix = gestionImgPrefix.toLowerCase();
+  if (s.toLowerCase().startsWith(lowerPrefix)) {
     s = s.slice(gestionImgPrefix.length);
   }
 
@@ -224,7 +297,10 @@ function normalizeImagenPath(val) {
   // 6) si es url absoluta, la dejamos
   if (/^https?:\/\//i.test(s)) return s;
 
-  // 7) caso final: la dejamos bajo /imagenes/...
+  // 7) evitar doble prefijo /imagenes/imagenes/...
+  s = s.replace(/^imagenes\/+/i, "");
+
+  // 8) caso final: la dejamos bajo /imagenes/...
   return `/imagenes/${s}`;
 }
 
@@ -258,6 +334,7 @@ function tokenOverlapScore(a, b) {
 function scanImages(dir) {
   if (!fs.existsSync(dir)) return { byKey: new Map(), list: [] };
   const files = fs.readdirSync(dir);
+
   // preferencia por extensión
   const pref = { ".png": 5, ".jpg": 4, ".jpeg": 4, ".webp": 3, ".gif": 2, "": 1 };
 
@@ -290,20 +367,26 @@ function scanImages(dir) {
   return { byKey, list };
 }
 
-function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
+function bestFuzzyMatch(query, imageEntries, threshold) {
+  const realThreshold =
+    typeof threshold === "number" ? threshold : PARAMS.IMAGE_FUZZY_THRESHOLD;
   const qn = normName(query);
   if (!qn) return null;
 
   let best = null;
   let bestScore = 0;
 
+  const qTokens = tokensOf(qn);
+  const qLen = qTokens.length || 1;
+
   for (const entry of imageEntries) {
-    const includeBoost = entry.key.includes(qn) || qn.includes(entry.key) ? 0.15 : 0;
+    const includeBoost =
+      entry.key.includes(qn) || qn.includes(entry.key) ? 0.15 : 0;
+
     const baseScore = tokenOverlapScore(qn, entry.key);
-    const sizeSimBoost =
-      (Math.min(tokensOf(qn).length, tokensOf(entry.key).length) /
-        Math.max(tokensOf(qn).length, tokensOf(entry.key).length)) *
-      0.05;
+
+    const entryTokensLen = tokensOf(entry.key).length || 1;
+    const sizeSimBoost = (Math.min(qLen, entryTokensLen) / Math.max(qLen, entryTokensLen)) * 0.05;
 
     const score = baseScore + includeBoost + sizeSimBoost;
     const tiebreak = entry.pref / 100;
@@ -313,7 +396,59 @@ function bestFuzzyMatch(query, imageEntries, threshold = 0.6) {
       best = entry;
     }
   }
-  return best && bestScore >= threshold ? best.full : null;
+
+  return best && bestScore >= realThreshold ? best.full : null;
+}
+
+/**
+ * === Helper genérico para mapeos entre hojas ===
+ * Copia valores de una columna origen a una columna destino matcheando por clave(s).
+ * No escribe en disco: retorna una función que aplica sobre worksheets, para usarla en scripts específicos.
+ *
+ * @param {object} opts
+ *  - fromCol: letra o índice 1-based (p.ej "E" o 5)
+ *  - toCol:   letra o índice 1-based (p.ej "K" o 11)
+ *  - keySelectorFrom(row) -> string : cómo construimos la clave en la hoja origen
+ *  - keySelectorTo(row) -> string   : cómo construimos la clave en la hoja destino
+ *  - transform(value) -> any        : opcional, para parsear (ej: parsePrecio)
+ */
+function makeColumnMapper(opts = {}) {
+  const fromColIdx = typeof opts.fromCol === "string" ? colLetterToIndex(opts.fromCol) : Number(opts.fromCol);
+  const toColIdx = typeof opts.toCol === "string" ? colLetterToIndex(opts.toCol) : Number(opts.toCol);
+  if (!fromColIdx || !toColIdx) throw new Error("[makeColumnMapper] fromCol/toCol inválidos");
+
+  const transform = typeof opts.transform === "function" ? opts.transform : (v) => v;
+
+  return function applyMapColumn(worksheetFrom, worksheetTo) {
+    if (!worksheetFrom || !worksheetTo) throw new Error("[makeColumnMapper] worksheets inválidos");
+
+    // construir índice en memoria desde hoja origen
+    const index = new Map();
+    for (let r = 2; r <= worksheetFrom.rowCount; r++) {
+      const row = worksheetFrom.getRow(r);
+      const key = String(opts.keySelectorFrom(row) || "").trim();
+      if (!key) continue;
+      const cellVal = readCellText(row.getCell(fromColIdx));
+      index.set(key, cellVal);
+    }
+
+    // aplicar sobre hoja destino
+    let applied = 0;
+    for (let r = 2; r <= worksheetTo.rowCount; r++) {
+      const row = worksheetTo.getRow(r);
+      const key = String(opts.keySelectorTo(row) || "").trim();
+      if (!key) continue;
+      if (index.has(key)) {
+        const raw = index.get(key);
+        const val = transform(raw);
+        if (val != null && val !== "") {
+          row.getCell(toColIdx).value = val;
+          applied++;
+        }
+      }
+    }
+    return { applied, total: worksheetTo.rowCount - 1 };
+  };
 }
 
 module.exports = {
@@ -324,6 +459,7 @@ module.exports = {
   PREFERRED_ORDER,
   toSnakeCase,
   sortKeys,
+  mapHeadersFromRow,
 
   // números
   parsePrecio,
@@ -336,7 +472,12 @@ module.exports = {
   // excel
   toKey,
   buildHeaderIndex,
+  buildHeaderIndexCanon,
   readCellText,
+  colLetterToIndex,
+  colIndexToLetter,
+  getWorksheetByNameOrFirst,
+  makeColumnMapper,
 
   // imágenes
   normalizeImagenPath,
@@ -346,3 +487,5 @@ module.exports = {
   tokensOf,
   tokenOverlapScore,
 };
+
+/* fin */

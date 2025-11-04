@@ -1,24 +1,28 @@
+// exportar_json.cjs
 // D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs
-// Lee el XLSX destino y lo vuelca a un JSON ordenado que usa el catálogo.
-// Requisitos: npm i xlsx chokidar
+// Lee el XLSX destino (ya normalizado) y lo vuelca a un JSON ordenado que usa el catálogo.
+// Además genera un META con info útil para el Next.
+// Requisitos: npm i chokidar exceljs
 
 const fs = require("fs");
-const path = require("path");
-const XLSX = require("xlsx");
 const chokidar = require("chokidar");
-const { RUTAS } = require("./config.cjs");
+const crypto = require("crypto");
+const { RUTAS, ROOT } = require("./config.cjs");
 const {
-  normalizeHeader,
-  HEADER_MAP,
-  toSnakeCase,
-  castValue,
-  sortKeys,
-  normalizeImagenPath,
-} = require("./common.cjs");
+  loadDestinoWorkbook,
+  worksheetToObjects,
+  exportToJson,
+  ensureImagenField,
+} = require("./pipeline-core.cjs");
 
 const XLSX_PATH = RUTAS.DESTINO_XLSX;
 const OUTPUT_DIR = RUTAS.OUTPUT_DIR;
 const OUTPUT_PATH = RUTAS.OUTPUT_PATH;
+const META_PATH = `${OUTPUT_DIR}/producto_grais.meta.json`;
+
+function makeHash(data) {
+  return crypto.createHash("md5").update(data).digest("hex");
+}
 
 async function exportOnce() {
   try {
@@ -27,42 +31,41 @@ async function exportOnce() {
       return;
     }
 
-    const wb = XLSX.readFile(XLSX_PATH, { cellDates: false });
-    const firstSheetName = wb.SheetNames[0];
-    if (!firstSheetName) {
-      console.error("[exportar_json] El archivo no tiene hojas.");
-      return;
-    }
+    const { ws } = await loadDestinoWorkbook();
+    let rows = worksheetToObjects(ws);
 
-    const sheet = wb.Sheets[firstSheetName];
-    const rows = XLSX.utils.sheet_to_json(sheet, {
-      defval: null,
-      raw: false,
-    });
+    // asegurar imagen normalizada para el Next
+    rows = rows.map((r) => ensureImagenField(r));
 
-    const out = rows.map((row) => {
-      const outRow = {};
-      for (const [rawHeader, rawValue] of Object.entries(row)) {
-        const norm = normalizeHeader(rawHeader);
-        const destKey = HEADER_MAP[norm] || toSnakeCase(norm);
-        outRow[destKey] = castValue(rawValue);
-      }
-
-      // asegurar imagen normalizada para el Next
-      outRow.imagen = normalizeImagenPath(outRow.imagen);
-
-      return sortKeys(outRow);
-    });
-
+    // escribir JSON principal
     await fs.promises.mkdir(OUTPUT_DIR, { recursive: true });
+    const jsonString = JSON.stringify(rows, null, 2);
+    await fs.promises.writeFile(OUTPUT_PATH, jsonString, "utf-8");
+
+    // armar META para el catálogo
+    const meta = {
+      source_excel: XLSX_PATH,
+      generated_at: new Date().toISOString(),
+      root: ROOT,
+      total: rows.length,
+      hash_md5: makeHash(jsonString),
+      files: {
+        data: OUTPUT_PATH,
+      },
+      pipeline: {
+        // el catálogo puede mostrar esto
+        ran: ["importar_precios", "descripcion_flexxus", "colocar_imagenes", "exportar_json"],
+      },
+    };
+
     await fs.promises.writeFile(
-      OUTPUT_PATH,
-      JSON.stringify(out, null, 2),
-      "utf8"
+      META_PATH,
+      JSON.stringify(meta, null, 2),
+      "utf-8"
     );
 
     console.log(
-      `[exportar_json] Exportado ${out.length} registros → ${OUTPUT_PATH}`
+      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta)`
     );
   } catch (err) {
     console.error("[exportar_json] Error exportando:", err.message);

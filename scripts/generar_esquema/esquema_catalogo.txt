@@ -52,89 +52,95 @@
 │    │   │   │   │   ├── 22. redirect.js
 │    │   │   │   │   └── 23. stripe.js
 │    │   │   │   └── 24. route.js
+│    │   │   ├── 📁 cliente
+│    │   │   │   └── 25. route.js
 │    │   │   ├── 📁 orders
 │    │   │   │   ├── 📁 [code]
-│    │   │   │   │   └── 25. route.js
-│    │   │   │   └── 26. route.js
+│    │   │   │   │   └── 26. route.js
+│    │   │   │   └── 27. route.js
 │    │   │   ├── 📁 productos
 │    │   │   │   ├── 📁 admin
 │    │   │   │   │   ├── 📁 import
-│    │   │   │   │   │   └── 27. route.js
-│    │   │   │   │   ├── 28. page.jsx
-│    │   │   │   │   └── 29. route.js
-│    │   │   │   └── 30. route.js
+│    │   │   │   │   │   └── 28. route.js
+│    │   │   │   │   ├── 29. page.jsx
+│    │   │   │   │   └── 30. route.js
+│    │   │   │   └── 31. route.js
 │    │   │   └── 📁 webhooks
 │    │   │       ├── 📁 mercadopago
-│    │   │       │   └── 31. route.js
+│    │   │       │   └── 32. route.js
 │    │   │       └── 📁 stripe
-│    │   │           └── 32. route.js
+│    │   │           └── 33. route.js
 │    │   ├── 📁 carrito
-│    │   │   └── 33. page.jsx
+│    │   │   └── 34. page.jsx
 │    │   ├── 📁 checkout
 │    │   │   ├── 📁 cancel
-│    │   │   │   └── 34. page.jsx
-│    │   │   ├── 📁 success
 │    │   │   │   └── 35. page.jsx
-│    │   │   └── 36. page.jsx
+│    │   │   ├── 📁 success
+│    │   │   │   └── 36. page.jsx
+│    │   │   └── 37. page.jsx
+│    │   ├── 📁 cliente
+│    │   │   └── 38. page.jsx
 │    │   ├── 📁 imagenes
 │    │   │   └── 📁 [...path]
-│    │   │       └── 37. route.js
+│    │   │       └── 39. route.js
 │    │   ├── 📁 login
-│    │   │   └── 38. page.jsx
+│    │   │   └── 40. page.jsx
 │    │   ├── 📁 orders
 │    │   │   ├── 📁 [code]
-│    │   │   │   └── 39. page.jsx
-│    │   │   └── 40. page.jsx
+│    │   │   │   └── 41. page.jsx
+│    │   │   └── 42. page.jsx
 │    │   ├── 📁 register
-│    │   │   └── 41. page.jsx
-│    │   ├── 42. layout.js
-│    │   └── 43. page.js
+│    │   │   └── 43. page.jsx
+│    │   ├── 44. layout.js
+│    │   └── 45. page.js
 │    ├── 📁 components
-│    │   ├── 44. CartContext.jsx
-│    │   ├── 45. Catalog.jsx
-│    │   ├── 46. HeaderCart.jsx
-│    │   └── 47. ProductCard.jsx
+│    │   ├── 46. CartContext.jsx
+│    │   ├── 47. Catalog.jsx
+│    │   ├── 48. HeaderCart.jsx
+│    │   └── 49. ProductCard.jsx
 │    ├── 📁 lib
-│    │   ├── 48. admin.js
-│    │   ├── 49. auth.js
-│    │   ├── 50. catalog.js
-│    │   ├── 51. config.js
-│    │   ├── 52. csrf.js
-│    │   ├── 53. db.js
-│    │   ├── 54. etl-grais-shared.js
-│    │   ├── 55. headers.json
-│    │   ├── 56. import-constants.js
-│    │   ├── 57. import-service.js
-│    │   ├── 58. pipeline-grais.js
-│    │   └── 59. validate.js
+│    │   ├── 50. admin.js
+│    │   ├── 51. auth.js
+│    │   ├── 52. catalog.js
+│    │   ├── 53. client-profile.js
+│    │   ├── 54. config.js
+│    │   ├── 55. csrf.js
+│    │   ├── 56. db.js
+│    │   ├── 57. etl-grais-shared.js
+│    │   ├── 58. headers.json
+│    │   ├── 59. import-constants.js
+│    │   ├── 60. import-service.js
+│    │   ├── 61. pipeline-grais.js
+│    │   └── 62. validate.js
 │    ├── 📁 prisma
 │    │   ├── 📁 data
-│    │   │   ├── 60. catalogo.db
-│    │   │   ├── 61. dev.db
-│    │   │   └── 62. dev.db-journal
+│    │   │   ├── 63. catalogo.db
+│    │   │   ├── 64. dev.db
+│    │   │   └── 65. dev.db-journal
 │    │   ├── 📁 migrations
 │    │   │   ├── 📁 20251013204830_init
-│    │   │   │   └── 63. migration.sql
+│    │   │   │   ├── 66. asa.mwb
+│    │   │   │   └── 67. migration.sql
 │    │   │   ├── 📁 20251013210917_users_auth
-│    │   │   │   └── 64. migration.sql
-│    │   │   └── 65. migration_lock.toml
+│    │   │   │   └── 68. migration.sql
+│    │   │   └── 69. migration_lock.toml
 │    │   ├── 📁 prisma
-│    │   │   └── 📁 data
-│    │   │       └── 66. dev.db
-│    │   ├── 67. schema.prisma
-│    │   └── 68. seed.mjs
+│    │   │   ├── 📁 data
+│    │   │   │   └── 70. dev.db
+│    │   │   └── 71. schema.prisma
+│    │   └── 72. seed.mjs
 │    ├── 📁 public
 │    │   └── 📁 imagenes
-│    │       └── 69. logo.png
+│    │       └── 73. logo.png
 │    ├── 📁 styles
-│    │   └── 70. globals.css
-│    ├── 71. .env
-│    ├── 72. .env.example
-│    ├── 73. .env.local
-│    ├── 74. jsconfig.json
-│    ├── 75. middleware.js
-│    ├── 76. next.config.mjs
-│    └── 77. package.json
+│    │   └── 74. globals.css
+│    ├── 75. .env
+│    ├── 76. .env.example
+│    ├── 77. .env.local
+│    ├── 78. jsconfig.json
+│    ├── 79. middleware.js
+│    ├── 80. next.config.mjs
+│    └── 81. package.json
 
 --------------------------------------------
 
@@ -2509,7 +2515,56 @@ export async function POST(req) {
 
 --------------------------------------------
 
-25. D:\empresas\catalogo\app\api\orders\[code]\route.js
+25. D:\empresas\catalogo\app\api\cliente\route.js
+
+// app/api/cliente/route.js
+
+// app/api/cliente/route.js
+import { NextResponse } from "next/server";
+import { getUserFromSession } from "@/lib/auth";
+import { getClienteByUserId, upsertClienteByUserId } from "@/lib/client-profile";
+
+export async function GET() {
+  const user = await getUserFromSession();
+  if (!user) {
+    return NextResponse.json({ __anonymous: true }, { status: 200 });
+  }
+
+  const cliente = await getClienteByUserId(user.id);
+  return NextResponse.json(cliente || {}, { status: 200 });
+}
+
+export async function PUT(req) {
+  const body = await req.json();
+
+  if (!body.email || !body.nombreCompleto) {
+    return NextResponse.json(
+      { error: "Faltan campos obligatorios: nombreCompleto, email" },
+      { status: 400 }
+    );
+  }
+
+  const user = await getUserFromSession();
+
+  if (!user) {
+    return NextResponse.json(
+      {
+        ok: true,
+        anonymous: true,
+        ...body, // ← FIX: antes decía ".body," y rompía la respuesta
+      },
+      { status: 200 }
+    );
+  }
+
+  const saved = await upsertClienteByUserId(user.id, body);
+  return NextResponse.json(saved, { status: 200 });
+}
+
+
+--------------------------------------------
+
+26. D:\empresas\catalogo\app\api\orders\[code]\route.js
 
 // app/api/orders/[code]/route.js
 
@@ -2552,7 +2607,7 @@ export async function GET(_req, { params }) {
 
 --------------------------------------------
 
-26. D:\empresas\catalogo\app\api\orders\route.js
+27. D:\empresas\catalogo\app\api\orders\route.js
 
 // app/api/orders/route.js
 
@@ -2755,7 +2810,7 @@ export async function POST(req) {
 
 --------------------------------------------
 
-27. D:\empresas\catalogo\app\api\productos\admin\import\route.js
+28. D:\empresas\catalogo\app\api\productos\admin\import\route.js
 
 // app/api/productos/admin/import/route.js
 
@@ -2782,7 +2837,7 @@ export const DELETE = POST;
 
 --------------------------------------------
 
-28. D:\empresas\catalogo\app\api\productos\admin\page.jsx
+29. D:\empresas\catalogo\app\api\productos\admin\page.jsx
 
 // app/api/productos/admin/page.jsx
 
@@ -2869,7 +2924,7 @@ export default function AdminPage() {
 
 --------------------------------------------
 
-29. D:\empresas\catalogo\app\api\productos\admin\route.js
+30. D:\empresas\catalogo\app\api\productos\admin\route.js
 
 // app/api/productos/admin/route.js
 
@@ -2901,7 +2956,7 @@ export async function GET(req) {
 
 --------------------------------------------
 
-30. D:\empresas\catalogo\app\api\productos\route.js
+31. D:\empresas\catalogo\app\api\productos\route.js
 
 // app/api/productos/route.js
 
@@ -3087,7 +3142,7 @@ export async function POST(req) {
 
 --------------------------------------------
 
-31. D:\empresas\catalogo\app\api\webhooks\mercadopago\route.js
+32. D:\empresas\catalogo\app\api\webhooks\mercadopago\route.js
 
 // app/api/webhooks/mercadopago/route.js
 
@@ -3247,7 +3302,7 @@ export const GET = async () => new Response("ok");
 
 --------------------------------------------
 
-32. D:\empresas\catalogo\app\api\webhooks\stripe\route.js
+33. D:\empresas\catalogo\app\api\webhooks\stripe\route.js
 
 // app/api/webhooks/stripe/route.js
 
@@ -3393,7 +3448,7 @@ export const GET = async () => new Response("ok");
 
 --------------------------------------------
 
-33. D:\empresas\catalogo\app\carrito\page.jsx
+34. D:\empresas\catalogo\app\carrito\page.jsx
 
 // app/carrito/page.jsx
 
@@ -3669,7 +3724,7 @@ export default function CarritoPage() {
 
 --------------------------------------------
 
-34. D:\empresas\catalogo\app\checkout\cancel\page.jsx
+35. D:\empresas\catalogo\app\checkout\cancel\page.jsx
 
 // app/checkout/cancel/page.jsx
 
@@ -3686,7 +3741,7 @@ export default function CancelPage(){
 
 --------------------------------------------
 
-35. D:\empresas\catalogo\app\checkout\success\page.jsx
+36. D:\empresas\catalogo\app\checkout\success\page.jsx
 
 // app/checkout/success/page.jsx
 
@@ -3804,7 +3859,7 @@ export default function SuccessPage(){
 
 --------------------------------------------
 
-36. D:\empresas\catalogo\app\checkout\page.jsx
+37. D:\empresas\catalogo\app\checkout\page.jsx
 
 // app/checkout/page.jsx
 
@@ -4008,7 +4063,600 @@ export default function CheckoutPage() {
 
 --------------------------------------------
 
-37. D:\empresas\catalogo\app\imagenes\[...path]\route.js
+38. D:\empresas\catalogo\app\cliente\page.jsx
+
+// app/cliente/page.jsx
+
+"use client";
+
+import { useEffect, useState } from "react";
+import styled from "styled-components";
+
+const STORAGE_KEY = "cliente-form-v1";
+const FROZEN_FIELDS = ["nombreCompleto", "email", "telefono", "documento"];
+
+const EMPTY = {
+  nombreCompleto: "",
+  email: "",
+  telefono: "",
+  documento: "",
+
+  calle: "",
+  numero: "",
+  piso: "",
+  referencia: "",
+  codigoPostal: "",
+  ciudad: "",
+  provincia: "",
+  pais: "",
+  tipoEnvio: "",
+  comentariosEnvio: "",
+
+  metodoPago: "",
+  titularTarjeta: "",
+  numeroTarjeta: "",
+  vencimientoTarjeta: "",
+  cvvTarjeta: "",
+  direccionFacturacion: "",
+  comprobanteTransferencia: "",
+
+  tipoFactura: "",
+  razonSocial: "",
+  cuit: "",
+  direccionFiscal: "",
+
+  aceptaTerminos: false,
+  aceptaPromos: false,
+};
+
+/* ===== styled ===== */
+
+const Page = styled.div`
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 16px 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+`;
+
+const HeadRow = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+`;
+
+const Title = styled.h1`
+  font-size: 1.6rem;
+  font-weight: 600;
+`;
+
+const Status = styled.span`
+  background: rgba(22, 163, 74, 0.1);
+  border: 1px solid rgba(22, 163, 74, 0.35);
+  color: #166534;
+  border-radius: 999px;
+  padding: 3px 10px;
+  font-size: 0.7rem;
+`;
+
+const EditBtn = styled.button`
+  background: rgba(148, 163, 184, 0.1);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 999px;
+  padding: 3px 9px;
+  font-size: 0.7rem;
+  cursor: pointer;
+`;
+
+const ErrorBox = styled.div`
+  background: rgba(248, 113, 113, 0.12);
+  border: 1px solid rgba(248, 113, 113, 0.35);
+  color: #b91c1c;
+  padding: 8px 12px;
+  border-radius: 14px;
+  font-size: 0.8rem;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+`;
+
+const Card = styled.section`
+  background: #fff;
+  border: 1px solid rgba(226, 232, 240, 0.7);
+  border-radius: 16px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+`;
+
+const CardTitle = styled.h2`
+  font-size: 0.9rem;
+  font-weight: 600;
+`;
+
+const Grid = styled.div`
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(${(p) => p.$cols || 2}, minmax(0, 1fr));
+
+  @media (max-width: 720px) {
+    grid-template-columns: 1fr;
+  }
+`;
+
+const Field = styled.label`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 0.72rem;
+`;
+
+const Input = styled.input`
+  border: 1px solid
+    ${(p) => (p.$locked ? "rgba(148, 163, 184, 0.35)" : "rgba(148, 163, 184, 0.5)")};
+  background: ${(p) => (p.$locked ? "rgba(248, 250, 252, 0.6)" : "#fff")};
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+`;
+
+const Select = styled.select`
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+`;
+
+const Textarea = styled.textarea`
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 10px;
+  padding: 7px 9px;
+  font-size: 0.78rem;
+  min-height: 80px;
+`;
+
+const CheckRow = styled.label`
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.75rem;
+`;
+
+const SaveBar = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const Button = styled.button`
+  background: #0f172a;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 7px 14px;
+  font-size: 0.78rem;
+  cursor: pointer;
+
+  &:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+`;
+
+// función helper para normalizar lo que vuelve del backend
+function normalizeFromApi(j = {}) {
+  return {
+    ...EMPTY,
+    ...j,
+    aceptaTerminos: !!j.aceptaTerminos,
+    aceptaPromos: !!j.aceptaPromos,
+  };
+}
+
+export default function ClientePage() {
+  const [data, setData] = useState(EMPTY);
+  const [loading, setLoading] = useState(true);
+  const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
+  const [lockedFields, setLockedFields] = useState([]);
+
+  const isLocked = (name) => lockedFields.includes(name);
+
+  // cargar primero de localStorage, luego de API
+  useEffect(() => {
+    let cancelled = false;
+
+    // 1) localStorage
+    let local = null;
+    if (typeof window !== "undefined") {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (raw) {
+        try {
+          local = JSON.parse(raw);
+        } catch {
+          local = null;
+        }
+      }
+    }
+
+    // mostrar lo local primero
+    if (local && !cancelled) {
+      const localNorm = normalizeFromApi(local);
+      setData(localNorm);
+      const frozen = FROZEN_FIELDS.filter((f) => localNorm[f]);
+      setLockedFields(frozen);
+    }
+
+    // 2) API
+    (async () => {
+      try {
+        const r = await fetch("/api/cliente", { cache: "no-store" });
+        // si tira 401/500 → no rompas el form
+        if (!r.ok) throw new Error(await r.text());
+
+        const j = await r.json();
+        if (cancelled) return;
+
+        // si la API devolvió datos reales (no __anonymous) los usamos
+        if (j && !j.__anonymous && Object.keys(j).length > 0) {
+          const fromApi = normalizeFromApi(j);
+          setData(fromApi);
+          const frozen = FROZEN_FIELDS.filter((f) => fromApi[f]);
+          setLockedFields(frozen);
+          if (typeof window !== "undefined") {
+            window.localStorage.setItem(STORAGE_KEY, JSON.stringify(fromApi));
+          }
+        } else if (!local) {
+          // no había local y API no tiene nada → mostramos vacío
+          setData(EMPTY);
+        }
+      } catch (e) {
+        // si hay local, no muestres error
+        if (!cancelled && !local) {
+          setError(typeof e === "string" ? e : e?.message || "No se pudo cargar el cliente");
+        }
+      } finally {
+        if (!cancelled) setLoading(false);
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // guardar en localStorage cada cambio
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
+  }, [data]);
+
+  const onChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    // si es un campo básico congelado → no lo toques
+    if (isLocked(name)) return;
+    setData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    setSaving(true);
+    setError("");
+    try {
+      const r = await fetch("/api/cliente", {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+
+      const text = await r.text(); // leemos SIEMPRE
+      if (!r.ok) {
+        // si el backend devolvió JSON con error, tratá de mostrarlo
+        let msg = "No se pudo guardar";
+        try {
+          const parsed = JSON.parse(text);
+          msg = parsed?.error || msg;
+        } catch {
+          msg = text || msg;
+        }
+        throw new Error(msg);
+      }
+
+      // si llegó acá, el backend devolvió algo (JSON o lo que sea)
+      let saved = null;
+      try {
+        saved = JSON.parse(text);
+      } catch {
+        saved = null;
+      }
+
+      // congelo básicos
+      const frozen = FROZEN_FIELDS.filter((f) => data[f]);
+      setLockedFields(frozen);
+
+      // si el backend devolvió info real, la guardo en local
+      const newData = saved ? normalizeFromApi(saved) : data;
+      setData(newData);
+      if (typeof window !== "undefined") {
+        window.localStorage.setItem(STORAGE_KEY, JSON.stringify(newData));
+      }
+    } catch (e) {
+      setError(e.message);
+    } finally {
+      setSaving(false);
+    }
+  };
+
+  const handleEditBasics = () => {
+    setLockedFields([]);
+  };
+
+  if (loading) {
+    return <Page>Cargando ficha de cliente…</Page>;
+  }
+
+  return (
+    <Page>
+      <HeadRow>
+        <Title>Ficha del cliente</Title>
+        <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+          {lockedFields.length > 0 ? <Status>Datos básicos fijados</Status> : null}
+          {lockedFields.length > 0 ? (
+            <EditBtn onClick={handleEditBasics} type="button">
+              Editar básicos
+            </EditBtn>
+          ) : null}
+        </div>
+      </HeadRow>
+
+      {error ? <ErrorBox>{error}</ErrorBox> : null}
+
+      <Form onSubmit={onSubmit}>
+        <Card>
+          <CardTitle>🧍 Datos del cliente</CardTitle>
+          <Grid>
+            <Field>
+              Nombre completo
+              <Input
+                name="nombreCompleto"
+                value={data.nombreCompleto}
+                onChange={onChange}
+                $locked={isLocked("nombreCompleto")}
+                disabled={isLocked("nombreCompleto")}
+                required
+              />
+            </Field>
+            <Field>
+              Email
+              <Input
+                name="email"
+                type="email"
+                value={data.email}
+                onChange={onChange}
+                $locked={isLocked("email")}
+                disabled={isLocked("email")}
+                required
+              />
+            </Field>
+            <Field>
+              Teléfono
+              <Input
+                name="telefono"
+                value={data.telefono}
+                onChange={onChange}
+                $locked={isLocked("telefono")}
+                disabled={isLocked("telefono")}
+              />
+            </Field>
+            <Field>
+              DNI / CUIT
+              <Input
+                name="documento"
+                value={data.documento}
+                onChange={onChange}
+                $locked={isLocked("documento")}
+                disabled={isLocked("documento")}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>🏠 Dirección de envío</CardTitle>
+          <Grid $cols={3}>
+            <Field style={{ gridColumn: "span 2" }}>
+              Calle
+              <Input name="calle" value={data.calle} onChange={onChange} />
+            </Field>
+            <Field>
+              Número
+              <Input name="numero" value={data.numero} onChange={onChange} />
+            </Field>
+            <Field>
+              Piso / Dpto / Ref.
+              <Input name="piso" value={data.piso} onChange={onChange} />
+            </Field>
+            <Field>
+              Código postal
+              <Input
+                name="codigoPostal"
+                value={data.codigoPostal}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Ciudad
+              <Input name="ciudad" value={data.ciudad} onChange={onChange} />
+            </Field>
+            <Field>
+              Provincia / Estado
+              <Input name="provincia" value={data.provincia} onChange={onChange} />
+            </Field>
+            <Field>
+              País
+              <Input name="pais" value={data.pais} onChange={onChange} />
+            </Field>
+            <Field>
+              Tipo de envío
+              <Select name="tipoEnvio" value={data.tipoEnvio} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="domicilio">Domicilio</option>
+                <option value="sucursal">Retiro en sucursal</option>
+                <option value="tienda">Retiro en tienda</option>
+              </Select>
+            </Field>
+          </Grid>
+          <Field>
+            Comentarios adicionales
+            <Textarea
+              name="comentariosEnvio"
+              value={data.comentariosEnvio}
+              onChange={onChange}
+            />
+          </Field>
+        </Card>
+
+        <Card>
+          <CardTitle>💳 Información de pago</CardTitle>
+          <Grid>
+            <Field>
+              Método de pago
+              <Select name="metodoPago" value={data.metodoPago} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="tarjeta">Tarjeta</option>
+                <option value="transferencia">Transferencia</option>
+                <option value="efectivo">Efectivo</option>
+                <option value="mercado_pago">Mercado Pago</option>
+              </Select>
+            </Field>
+            <Field>
+              Dirección de facturación
+              <Input
+                name="direccionFacturacion"
+                value={data.direccionFacturacion}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Titular de la tarjeta
+              <Input
+                name="titularTarjeta"
+                value={data.titularTarjeta}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              Número de tarjeta
+              <Input
+                name="numeroTarjeta"
+                value={data.numeroTarjeta}
+                onChange={onChange}
+                inputMode="numeric"
+              />
+            </Field>
+            <Field>
+              Vencimiento (MM/AA)
+              <Input
+                name="vencimientoTarjeta"
+                value={data.vencimientoTarjeta}
+                onChange={onChange}
+              />
+            </Field>
+            <Field>
+              CVV
+              <Input
+                name="cvvTarjeta"
+                value={data.cvvTarjeta}
+                onChange={onChange}
+                inputMode="numeric"
+              />
+            </Field>
+            <Field>
+              Comprobante de transferencia
+              <Input
+                name="comprobanteTransferencia"
+                value={data.comprobanteTransferencia}
+                onChange={onChange}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>🧾 Facturación</CardTitle>
+          <Grid>
+            <Field>
+              Tipo de factura
+              <Select name="tipoFactura" value={data.tipoFactura} onChange={onChange}>
+                <option value="">-- seleccionar --</option>
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="CF">Consumidor final</option>
+              </Select>
+            </Field>
+            <Field>
+              Razón social
+              <Input name="razonSocial" value={data.razonSocial} onChange={onChange} />
+            </Field>
+            <Field>
+              CUIT / CUIL
+              <Input name="cuit" value={data.cuit} onChange={onChange} />
+            </Field>
+            <Field>
+              Dirección fiscal
+              <Input
+                name="direccionFiscal"
+                value={data.direccionFiscal}
+                onChange={onChange}
+              />
+            </Field>
+          </Grid>
+        </Card>
+
+        <Card>
+          <CardTitle>✅ Confirmación</CardTitle>
+          <CheckRow>
+            <input
+              type="checkbox"
+              name="aceptaTerminos"
+              checked={data.aceptaTerminos}
+              onChange={onChange}
+            />
+            Acepto los términos y condiciones
+          </CheckRow>
+          <CheckRow>
+            <input
+              type="checkbox"
+              name="aceptaPromos"
+              checked={data.aceptaPromos}
+              onChange={onChange}
+            />
+            Deseo recibir novedades y promociones
+          </CheckRow>
+        </Card>
+
+        <SaveBar>
+          <Button type="submit" disabled={saving}>
+            {saving ? "Guardando…" : "Confirmar y guardar"}
+          </Button>
+        </SaveBar>
+      </Form>
+    </Page>
+  );
+}
+
+
+--------------------------------------------
+
+39. D:\empresas\catalogo\app\imagenes\[...path]\route.js
 
 // app/imagenes/[...path]/route.js
 
@@ -4180,7 +4828,7 @@ export async function HEAD(req, ctx) {
 
 --------------------------------------------
 
-38. D:\empresas\catalogo\app\login\page.jsx
+40. D:\empresas\catalogo\app\login\page.jsx
 
 // app/login/page.jsx
 
@@ -4260,7 +4908,7 @@ export default function LoginPage() {
 
 --------------------------------------------
 
-39. D:\empresas\catalogo\app\orders\[code]\page.jsx
+41. D:\empresas\catalogo\app\orders\[code]\page.jsx
 
 // app/orders/[code]/page.jsx
 
@@ -4313,7 +4961,7 @@ export default async function OrderDetailPage({ params }) {
 
 --------------------------------------------
 
-40. D:\empresas\catalogo\app\orders\page.jsx
+42. D:\empresas\catalogo\app\orders\page.jsx
 
 // app/orders/page.jsx
 
@@ -4525,7 +5173,7 @@ export default function OrdersPage() {
 
 --------------------------------------------
 
-41. D:\empresas\catalogo\app\register\page.jsx
+43. D:\empresas\catalogo\app\register\page.jsx
 
 // app/register/page.jsx
 
@@ -4606,7 +5254,7 @@ export default function RegisterPage() {
 
 --------------------------------------------
 
-42. D:\empresas\catalogo\app\layout.js
+44. D:\empresas\catalogo\app\layout.js
 
 // app/layout.js
 
@@ -4635,7 +5283,7 @@ export default function RootLayout({ children }) {
 
 --------------------------------------------
 
-43. D:\empresas\catalogo\app\page.js
+45. D:\empresas\catalogo\app\page.js
 
 // app/page.js
 
@@ -4735,7 +5383,7 @@ export default async function Page() {
 
 --------------------------------------------
 
-44. D:\empresas\catalogo\components\CartContext.jsx
+46. D:\empresas\catalogo\components\CartContext.jsx
 
 // components/CartContext.jsx
 
@@ -4906,7 +5554,7 @@ export function useCart() {
 
 --------------------------------------------
 
-45. D:\empresas\catalogo\components\Catalog.jsx
+47. D:\empresas\catalogo\components\Catalog.jsx
 
 // components/Catalog.jsx
 
@@ -5204,11 +5852,11 @@ export default function Catalog({ products, userRole = "user" }) {
           <ViewToggle role="tablist" aria-label="Cambiar vista">
             {view === "grid" ? (
               <BtnPrimary onClick={() => setView("grid")} role="tab" aria-selected title="Vista cuadriculada">
-                ⬛⬛
+                ⬛
               </BtnPrimary>
             ) : (
               <BtnGhost onClick={() => setView("grid")} role="tab" aria-selected={false} title="Vista cuadriculada">
-                ⬛⬛
+                ⬛
               </BtnGhost>
             )}
             {view === "list" ? (
@@ -5221,6 +5869,7 @@ export default function Catalog({ products, userRole = "user" }) {
               </BtnGhost>
             )}
           </ViewToggle>
+          
         </Toolbar>
       </Head>
 
@@ -5258,7 +5907,7 @@ export default function Catalog({ products, userRole = "user" }) {
 
 --------------------------------------------
 
-46. D:\empresas\catalogo\components\HeaderCart.jsx
+48. D:\empresas\catalogo\components\HeaderCart.jsx
 
 // components/HeaderCart.jsx
 
@@ -5330,7 +5979,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const UserPill = styled.span`
+const UserPillLink = styled(Link)`
   padding: 5px 10px;
   border: 1px dashed #e5e7eb;
   border-radius: 999px;
@@ -5340,6 +5989,11 @@ const UserPill = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 12.5px;
+  text-decoration: none;
+
+  &:hover {
+    background: #f8fafc;
+  }
 `;
 
 const Btn = styled.button`
@@ -5435,10 +6089,7 @@ export default function HeaderCart() {
   useEffect(() => {
     const prev = prevPathRef.current;
     const current = pathname;
-    // si antes estaba en /admin/import y ahora estoy en /
     if (prev === "/admin/import" && current === "/") {
-      // forzá recarga total para que tome el JSON nuevo
-      // (no usamos router.refresh() porque a veces queda el fetch cacheado por otro componente)
       window.location.reload();
     }
     prevPathRef.current = current;
@@ -5452,7 +6103,6 @@ export default function HeaderCart() {
     setMe(null);
     setIsAdminWhoami(false);
     setLoading(false);
-    // limpiar carrito local para que el icono no quede con número viejo
     clear?.();
 
     try {
@@ -5461,10 +6111,9 @@ export default function HeaderCart() {
         fetch("/api/admin/logout", { method: "POST", cache: "no-store" }),
       ]);
     } catch {
-      // no nos importa, ya limpiamos UI
+      // no nos importa
     }
 
-    // mandamos al login
     router.replace("/login");
   };
 
@@ -5474,10 +6123,12 @@ export default function HeaderCart() {
     </StyledLink>
   );
 
+  const displayName = me?.name?.trim() || me?.email || "Cliente";
+
   return (
     <Topbar>
       <TopbarInner>
-        {/* Marca + logo (esto ya es "Catálogo") */}
+        {/* Marca + logo */}
         <BrandWrap>
           <Link href="/" prefetch>
             <Logo src="/imagenes/logo.png" alt="Ferreluc" />
@@ -5489,7 +6140,6 @@ export default function HeaderCart() {
 
         {/* Navegación principal */}
         <NavLeft>
-          {/* NO repetimos "Catálogo" porque el brand ya lo hace */}
           {isLogged && isAdmin && <NavLink href="/orders">Mis órdenes</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/users">Cuentas</NavLink>}
           {isLogged && isAdmin && <NavLink href="/admin/import">Importar Excel</NavLink>}
@@ -5513,7 +6163,10 @@ export default function HeaderCart() {
 
           {!loading && isLogged && (
             <>
-              <UserPill title={me.email}>{me.name?.trim() || me.email}</UserPill>
+              {/* ← ahora es clickeable y te lleva a la ficha */}
+              <UserPillLink href="/cliente" prefetch title={displayName}>
+                {displayName}
+              </UserPillLink>
               <Btn onClick={handleLogout}>Cerrar sesión</Btn>
             </>
           )}
@@ -5526,7 +6179,7 @@ export default function HeaderCart() {
 
 --------------------------------------------
 
-47. D:\empresas\catalogo\components\ProductCard.jsx
+49. D:\empresas\catalogo\components\ProductCard.jsx
 
 // components/ProductCard.jsx
 
@@ -6489,7 +7142,7 @@ export default function ProductCard({ product, viewMode = "grid" }) {
 
 --------------------------------------------
 
-48. D:\empresas\catalogo\lib\admin.js
+50. D:\empresas\catalogo\lib\admin.js
 
 // lib/admin.js
 
@@ -6504,6 +7157,8 @@ function getCookieFromHeader(cookieHeader = "", name) {
     .split(";")
     .map((s) => s.trim())
     .filter(Boolean);
+
+
   for (const p of parts) {
     const [k, ...rest] = p.split("=");
     if (k === name) return rest.join("=");
@@ -6571,12 +7226,13 @@ export async function isAdminApi(req) {
 
 --------------------------------------------
 
-49. D:\empresas\catalogo\lib\auth.js
+51. D:\empresas\catalogo\lib\auth.js
 
 // lib/auth.js
 
 // lib/auth.js
 import { prisma } from "@/lib/db";
+
 import bcrypt from "bcryptjs";
 import crypto from "crypto";
 import { cookies } from "next/headers";
@@ -6687,7 +7343,7 @@ export async function getUserFromSession() {
 
 --------------------------------------------
 
-50. D:\empresas\catalogo\lib\catalog.js
+52. D:\empresas\catalogo\lib\catalog.js
 
 // lib/catalog.js
 
@@ -6787,7 +7443,67 @@ export function projectPublic(row) {
 
 --------------------------------------------
 
-51. D:\empresas\catalogo\lib\config.js
+53. D:\empresas\catalogo\lib\client-profile.js
+
+// lib/client-profile.js
+
+// lib/client-profile.js
+import { prisma } from "@/lib/db";
+
+const SELECT = {
+  id: true,
+  userId: true,
+  nombreCompleto: true,
+  email: true,
+  telefono: true,
+  documento: true,
+  calle: true,
+  numero: true,
+  piso: true,
+  referencia: true,
+  codigoPostal: true,
+  ciudad: true,
+  provincia: true,
+  pais: true,
+  tipoEnvio: true,
+  comentariosEnvio: true,
+  metodoPago: true,
+  titularTarjeta: true,
+  numeroTarjeta: true,
+  vencimientoTarjeta: true,
+  cvvTarjeta: true,
+  direccionFacturacion: true,
+  comprobanteTransferencia: true,
+  tipoFactura: true,
+  razonSocial: true,
+  cuit: true,
+  direccionFiscal: true,
+  aceptaTerminos: true,
+  aceptaPromos: true,
+  createdAt: true,
+  updatedAt: true,
+};
+
+export async function getClienteByUserId(userId) {
+  return prisma.clientePerfil.findUnique({
+    where: { userId },
+    select: SELECT,
+  });
+}
+
+export async function upsertClienteByUserId(userId, data) {
+  return prisma.clientePerfil.upsert({
+    where: { userId },
+    update: data,
+    create: { userId, ...data },
+    select: SELECT,
+  });
+}
+
+
+--------------------------------------------
+
+54. D:\empresas\catalogo\lib\config.js
 
 // lib/config.js
 
@@ -6913,7 +7629,7 @@ export function sanitizeImage(val, imgsDir = CFG.imgsDir) {
 
 --------------------------------------------
 
-52. D:\empresas\catalogo\lib\csrf.js
+55. D:\empresas\catalogo\lib\csrf.js
 
 // lib/csrf.js
 
@@ -6981,7 +7697,7 @@ export function assertCsrf(req) {
 
 --------------------------------------------
 
-53. D:\empresas\catalogo\lib\db.js
+56. D:\empresas\catalogo\lib\db.js
 
 // lib/db.js
 
@@ -7074,7 +7790,7 @@ if (process.env.NODE_ENV !== "production") g.__prisma__ = prisma;
 
 --------------------------------------------
 
-54. D:\empresas\catalogo\lib\etl-grais-shared.js
+57. D:\empresas\catalogo\lib\etl-grais-shared.js
 
 // lib/etl-grais-shared.js
 
@@ -7429,7 +8145,7 @@ export function runAll() {
 
 --------------------------------------------
 
-55. D:\empresas\catalogo\lib\headers.json
+58. D:\empresas\catalogo\lib\headers.json
 
 // lib/headers.json
 
@@ -7568,7 +8284,7 @@ export function runAll() {
 
 --------------------------------------------
 
-56. D:\empresas\catalogo\lib\import-constants.js
+59. D:\empresas\catalogo\lib\import-constants.js
 
 // lib/import-constants.js
 
@@ -7616,7 +8332,7 @@ export const CANONICAL_FIELDS = Object.freeze(
 
 --------------------------------------------
 
-57. D:\empresas\catalogo\lib\import-service.js
+60. D:\empresas\catalogo\lib\import-service.js
 
 // lib/import-service.js
 
@@ -7856,7 +8572,7 @@ export async function runImportPipeline({
 
 --------------------------------------------
 
-58. D:\empresas\catalogo\lib\pipeline-grais.js
+61. D:\empresas\catalogo\lib\pipeline-grais.js
 
 // lib/pipeline-grais.js
 
@@ -7879,7 +8595,7 @@ export {
 
 --------------------------------------------
 
-59. D:\empresas\catalogo\lib\validate.js
+62. D:\empresas\catalogo\lib\validate.js
 
 // lib/validate.js
 
@@ -8020,7 +8736,7 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-60. D:\empresas\catalogo\prisma\data\catalogo.db
+63. D:\empresas\catalogo\prisma\data\catalogo.db
 
 // prisma/data/catalogo.db
 
@@ -8028,7 +8744,7 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-61. D:\empresas\catalogo\prisma\data\dev.db
+64. D:\empresas\catalogo\prisma\data\dev.db
 
 // prisma/data/dev.db
 
@@ -8036,7 +8752,7 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-62. D:\empresas\catalogo\prisma\data\dev.db-journal
+65. D:\empresas\catalogo\prisma\data\dev.db-journal
 
 // prisma/data/dev.db-journal
 
@@ -8044,7 +8760,15 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-63. D:\empresas\catalogo\prisma\migrations\20251013204830_init\migration.sql
+66. D:\empresas\catalogo\prisma\migrations\20251013204830_init\asa.mwb
+
+// prisma/migrations/20251013204830_init/asa.mwb
+
+[archivo binario/no textual]
+
+--------------------------------------------
+
+67. D:\empresas\catalogo\prisma\migrations\20251013204830_init\migration.sql
 
 // prisma/migrations/20251013204830_init/migration.sql
 
@@ -8052,7 +8776,7 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-64. D:\empresas\catalogo\prisma\migrations\20251013210917_users_auth\migration.sql
+68. D:\empresas\catalogo\prisma\migrations\20251013210917_users_auth\migration.sql
 
 // prisma/migrations/20251013210917_users_auth/migration.sql
 
@@ -8060,7 +8784,7 @@ export function validateRow(raw) {
 
 --------------------------------------------
 
-65. D:\empresas\catalogo\prisma\migrations\migration_lock.toml
+69. D:\empresas\catalogo\prisma\migrations\migration_lock.toml
 
 // prisma/migrations/migration_lock.toml
 
@@ -8068,9 +8792,12 @@ export function validateRow(raw) {
 # It should be added in your version-control system (i.e. Git)
 provider = "sqlite"
 
+
+
+
 --------------------------------------------
 
-66. D:\empresas\catalogo\prisma\prisma\data\dev.db
+70. D:\empresas\catalogo\prisma\prisma\data\dev.db
 
 // prisma/prisma/data/dev.db
 
@@ -8078,11 +8805,9 @@ provider = "sqlite"
 
 --------------------------------------------
 
-67. D:\empresas\catalogo\prisma\schema.prisma
+71. D:\empresas\catalogo\prisma\prisma\schema.prisma
 
-// prisma/schema.prisma
-
-// prisma/schema.prisma
+// prisma/prisma/schema.prisma
 
 generator client {
   provider = "prisma-client-js"
@@ -8171,7 +8896,7 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([tenantId, code]) // evita colisiones por tenant
+  @@unique([tenantId, code])
   @@index([tenantId])
   @@index([idempotencyKey])
   @@index([createdAt])
@@ -8279,15 +9004,56 @@ model UserSession {
 
   @@index([userId])
   @@index([token])
-  @@index([expiresAt]) // para limpieza eficiente
+  @@index([expiresAt])
 }
 
-/* fin */
+// =====================
+// PERFIL DE CLIENTE (NUEVO)
+// =====================
+
+model ClientePerfil {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  nombreCompleto           String?
+  email                    String?
+  telefono                 String?
+  documento                String?  // DNI / CUIT
+
+  calle                    String?
+  numero                   String?
+  piso                     String?
+  referencia               String?
+  codigoPostal             String?
+  ciudad                   String?
+  provincia                String?
+  pais                     String?
+  tipoEnvio                String?
+  comentariosEnvio         String?
+
+  metodoPago               String?
+  titularTarjeta           String?
+  numeroTarjeta            String?
+  vencimientoTarjeta       String?
+  cvvTarjeta               String?
+  direccionFacturacion     String?
+  comprobanteTransferencia String?
+
+  tipoFactura              String?
+  razonSocial              String?
+  cuit                     String?
+  direccionFiscal          String?
+
+  aceptaTerminos           Boolean  @default(false)
+  aceptaPromos             Boolean  @default(false)
+
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}
 
 
 --------------------------------------------
 
-68. D:\empresas\catalogo\prisma\seed.mjs
+72. D:\empresas\catalogo\prisma\seed.mjs
 
 // prisma/seed.mjs
 
@@ -8389,7 +9155,7 @@ main()
 
 --------------------------------------------
 
-69. D:\empresas\catalogo\public\imagenes\logo.png
+73. D:\empresas\catalogo\public\imagenes\logo.png
 
 // public/imagenes/logo.png
 
@@ -8397,7 +9163,7 @@ main()
 
 --------------------------------------------
 
-70. D:\empresas\catalogo\styles\globals.css
+74. D:\empresas\catalogo\styles\globals.css
 
 // styles/globals.css
 
@@ -8462,7 +9228,7 @@ html,body{
 
 --------------------------------------------
 
-71. D:\empresas\catalogo\.env
+75. D:\empresas\catalogo\.env
 
 // .env
 
@@ -8516,7 +9282,7 @@ GESTION_IMGS_DIR=D:\empresas\ferreluc\gestion\imagenes
 
 --------------------------------------------
 
-72. D:\empresas\catalogo\.env.example
+76. D:\empresas\catalogo\.env.example
 
 // .env.example
 
@@ -8574,7 +9340,7 @@ GESTION_IMGS_DIR=D:\empresas\ferreluc\gestion\imagenes
 
 --------------------------------------------
 
-73. D:\empresas\catalogo\.env.local
+77. D:\empresas\catalogo\.env.local
 
 // .env.local
 
@@ -8609,7 +9375,7 @@ GESTION_IMGS_DIR=D:\empresas\ferreluc\gestion\imagenes
 
 --------------------------------------------
 
-74. D:\empresas\catalogo\jsconfig.json
+78. D:\empresas\catalogo\jsconfig.json
 
 // jsconfig.json
 
@@ -8626,7 +9392,7 @@ GESTION_IMGS_DIR=D:\empresas\ferreluc\gestion\imagenes
 
 --------------------------------------------
 
-75. D:\empresas\catalogo\middleware.js
+79. D:\empresas\catalogo\middleware.js
 
 // middleware.js
 
@@ -8771,7 +9537,7 @@ export const config = {
 
 --------------------------------------------
 
-76. D:\empresas\catalogo\next.config.mjs
+80. D:\empresas\catalogo\next.config.mjs
 
 // next.config.mjs
 
@@ -8798,7 +9564,7 @@ export default nextConfig;
 
 --------------------------------------------
 
-77. D:\empresas\catalogo\package.json
+81. D:\empresas\catalogo\package.json
 
 // package.json
 

@@ -1,5 +1,3 @@
-// prisma/schema.prisma
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -87,7 +85,7 @@ model Order {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([tenantId, code]) // evita colisiones por tenant
+  @@unique([tenantId, code])
   @@index([tenantId])
   @@index([idempotencyKey])
   @@index([createdAt])
@@ -195,7 +193,48 @@ model UserSession {
 
   @@index([userId])
   @@index([token])
-  @@index([expiresAt]) // para limpieza eficiente
+  @@index([expiresAt])
 }
 
-/* fin */
+// =====================
+// PERFIL DE CLIENTE (NUEVO)
+// =====================
+
+model ClientePerfil {
+  id                       String   @id @default(cuid())
+  userId                   String   @unique
+  nombreCompleto           String?
+  email                    String?
+  telefono                 String?
+  documento                String?  // DNI / CUIT
+
+  calle                    String?
+  numero                   String?
+  piso                     String?
+  referencia               String?
+  codigoPostal             String?
+  ciudad                   String?
+  provincia                String?
+  pais                     String?
+  tipoEnvio                String?
+  comentariosEnvio         String?
+
+  metodoPago               String?
+  titularTarjeta           String?
+  numeroTarjeta            String?
+  vencimientoTarjeta       String?
+  cvvTarjeta               String?
+  direccionFacturacion     String?
+  comprobanteTransferencia String?
+
+  tipoFactura              String?
+  razonSocial              String?
+  cuit                     String?
+  direccionFiscal          String?
+
+  aceptaTerminos           Boolean  @default(false)
+  aceptaPromos             Boolean  @default(false)
+
+  createdAt                DateTime @default(now())
+  updatedAt                DateTime @updatedAt
+}

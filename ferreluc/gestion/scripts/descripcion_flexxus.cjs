@@ -1,3 +1,4 @@
+// descripcion_flexxus.cjs
 // D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
 // Copia "Descripcion Flexxus" desde ORIGEN → DESTINO por "CODIGO FLEXXUS"
 // Requisitos: npm i exceljs
@@ -9,6 +10,7 @@ const {
   readCellText,
   toKey,
 } = require("./common.cjs");
+const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
@@ -19,34 +21,46 @@ async function cargarOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  // columnas esperadas en ORIGEN
-  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor") || 1;
-  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo") || 2;
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus") || 3;
-  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus") || 4;
+  // columnas esperadas en ORIGEN (pero con tolerancia)
+  const colProv =
+    idx.get(toKey("PROVEEDOR")) ||
+    idx.get("proveedor") ||
+    1;
+  const colCod =
+    idx.get(toKey("CODIGO")) ||
+    idx.get("codigo") ||
+    2;
+  const colFlex =
+    idx.get(toKey("CODIGO FLEXXUS")) ||
+    idx.get("codigo flexxus") ||
+    idx.get("codigo_flexxus") ||
+    3;
+  const colDesc =
+    idx.get(toKey("Descripcion Flexxus")) ||
+    idx.get("descripcion flexxus") ||
+    idx.get("descripcion_flexxus") ||
+    4;
 
   const map = new Map();
 
   ws.eachRow((row, r) => {
     if (r === 1) return;
 
-    let codigoFlex = readCellText(row.getCell(colFlex));
-
-    if (!codigoFlex) {
-      // mismo criterio que en importar_precios.cjs
-      const proveedor = readCellText(row.getCell(colProv));
-      const codigo = readCellText(row.getCell(colCod));
-      if (proveedor || codigo) {
-        codigoFlex = `${proveedor}-${codigo}`.trim();
-      }
-    }
-
+    const proveedor = readCellText(row.getCell(colProv));
+    const codigo = readCellText(row.getCell(colCod));
+    const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descripcion = readCellText(row.getCell(colDesc));
 
-    if (codigoFlex) {
-      // si hay filas duplicadas en origen, la última gana
-      map.set(codigoFlex, descripcion);
-    }
+    const key = buildFlexxusKey({
+      codigoFlexxus,
+      proveedor,
+      codigo,
+    });
+
+    if (!key) return;
+
+    // si hay filas duplicadas en origen, la última gana
+    map.set(key, descripcion);
   });
 
   return map;
@@ -61,11 +75,13 @@ async function escribirDestino(rutaDestino, origenMap) {
   const colFlexDst =
     idx.get(toKey("codigo flexxus")) ||
     idx.get("codigo flexxus") ||
+    idx.get("codigo_flexxus") ||
     1;
 
   const colDescDst =
     idx.get(toKey("descripcion flexxus")) ||
     idx.get("descripcion flexxus") ||
+    idx.get("descripcion_flexxus") ||
     10;
 
   let actualizados = 0;
