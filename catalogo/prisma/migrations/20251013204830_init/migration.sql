@@ -1,3 +1,4 @@
+-- D:\empresas\catalogo\prisma\migrations\20251013204830_init\migration.sql
 -- CreateTable
 CREATE TABLE "Customer" (
     "id" TEXT NOT NULL PRIMARY KEY,

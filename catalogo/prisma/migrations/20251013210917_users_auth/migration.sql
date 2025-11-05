@@ -1,3 +1,4 @@
+-- D:\empresas\catalogo\prisma\migrations\20251013210917_users_auth\migration.sql
 -- CreateTable
 CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,

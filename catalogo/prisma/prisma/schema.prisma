@@ -1,3 +1,7 @@
+// =====================
+// D:\empresas\catalogo\prisma\prisma\schema.prisma
+// =====================
+
 generator client {
   provider = "prisma-client-js"
 }

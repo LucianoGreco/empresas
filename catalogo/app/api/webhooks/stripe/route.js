@@ -1,6 +1,24 @@
 // Webhook Stripe: valida firma, persiste evento, actualiza orden/pago con idempotencia
+// D:\empresas\catalogo\app\api\webhooks\stripe\route.js
 import Stripe from "stripe";
 import { prisma } from "@/lib/db";
+import { notify } from "@/lib/notify";
+
+async function updateOrderPaymentState(order) {
+  if (!order) return;
+  const { _sum } = await prisma.payment.aggregate({
+    where: { orderId: order.id, status: "approved" },
+    _sum: { amount: true },
+  });
+  const approved = _sum.amount || 0;
+  const shouldBePaid = approved >= (order.total || 0);
+  if (shouldBePaid && order.status !== "paid") {
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { status: "paid", paidAt: order.paidAt || new Date(), updatedAt: new Date() },
+    });
+  }
+}
 
 export async function POST(req) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -10,7 +28,7 @@ export async function POST(req) {
   const stripe = new Stripe(sk, { apiVersion: "2024-06-20" });
 
   let event = null;
-  let payloadText = await req.text();
+  const payloadText = await req.text();
   try {
     if (secret) {
       const sig = req.headers.get("stripe-signature") || "";
@@ -18,7 +36,7 @@ export async function POST(req) {
     } else {
       event = JSON.parse(payloadText);
     }
-  } catch (err) {
+  } catch {
     return new Response("invalid", { status: 400 });
   }
 
@@ -51,6 +69,7 @@ export async function POST(req) {
     let currency = "ARS";
     let providerRef = null;
     let status = "pending";
+    let buyerEmail = null;
 
     if (type === "checkout.session.completed") {
       const sess = event.data.object;
@@ -59,6 +78,7 @@ export async function POST(req) {
       providerRef = String(sess?.payment_intent || sess?.id || "");
       orderId = sess?.metadata?.orderId || null;
       orderCode = sess?.metadata?.orderCode || null;
+      buyerEmail = sess?.customer_details?.email || sess?.customer_email || null;
       status = "approved";
     } else if (type === "payment_intent.succeeded") {
       const pi = event.data.object;
@@ -67,6 +87,7 @@ export async function POST(req) {
       providerRef = String(pi?.id || "");
       orderId = pi?.metadata?.orderId || null;
       orderCode = pi?.metadata?.orderCode || null;
+      buyerEmail = pi?.receipt_email || null;
       status = "approved";
     } else if (type === "payment_intent.payment_failed") {
       const pi = event.data.object;
@@ -75,6 +96,7 @@ export async function POST(req) {
       providerRef = String(pi?.id || "");
       orderId = pi?.metadata?.orderId || null;
       orderCode = pi?.metadata?.orderCode || null;
+      buyerEmail = pi?.receipt_email || null;
       status = "rejected";
     }
 
@@ -94,6 +116,7 @@ export async function POST(req) {
         status,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
+        buyerEmail: buyerEmail || null,
         rawPayload: event ? JSON.stringify(event) : null,
         errorMessage: null,
         orderId: orderRow?.id || null,
@@ -106,6 +129,7 @@ export async function POST(req) {
         status,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
+        buyerEmail: buyerEmail || null,
         rawPayload: event ? JSON.stringify(event) : null,
         errorMessage: null,
         orderId: orderRow?.id || null,
@@ -118,10 +142,15 @@ export async function POST(req) {
       data: { processedOk: true, paymentId: payRow.id, orderId: orderRow?.id || null, errorMessage: null },
     });
 
-    if (orderRow && status === "approved") {
-      await prisma.order.update({
-        where: { id: orderRow.id },
-        data: { status: "paid", paidAt: new Date() },
+    if (orderRow) await updateOrderPaymentState(orderRow);
+
+    if (payRow.status === "approved") {
+      await notify({
+        type: "payment_approved",
+        to: payRow.buyerEmail || orderRow?.customerEmail || null,
+        subject: `Pago aprobado (Stripe) - Orden ${orderRow?.code || "-"}`,
+        text: `Tu pago fue aprobado.\nOrden: ${orderRow?.code || "-"}\nImporte: ${(payRow.amount / 100).toFixed(2)} ${payRow.currency}\nRef: ${payRow.providerRef}`,
+        meta: { provider: "stripe", paymentId: payRow.id, orderId: orderRow?.id || null },
       });
     }
 
@@ -136,3 +165,5 @@ export async function POST(req) {
 }
 
 export const GET = async () => new Response("ok");
+
+/* FIN */

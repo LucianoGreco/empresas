@@ -1,6 +1,5 @@
 // pipeline-manifest.cjs
-// (NUEVO) mini utilidad para generar un manifest de lo que hay en /json
-// Lo puede leer el catálogo para saber qué colecciones tiene.
+// Mini utilidad para generar un manifest de lo que hay en /json
 
 const fs = require("fs");
 const { RUTAS } = require("./config.cjs");
@@ -22,11 +21,9 @@ async function writeManifest() {
   };
 
   await fs.promises.mkdir(outDir, { recursive: true });
-  await fs.promises.writeFile(
-    manifestPath,
-    JSON.stringify(manifest, null, 2),
-    "utf-8"
-  );
+  const tmp = `${manifestPath}.tmp.${Date.now()}`;
+  await fs.promises.writeFile(tmp, JSON.stringify(manifest, null, 2), "utf-8");
+  await fs.promises.rename(tmp, manifestPath);
 
   return manifestPath;
 }

@@ -8,10 +8,9 @@ const XLSX = require('xlsx'); // 👈 importante: npm install xlsx
 
 // ====== Config ======
 const ROOTS = [
-  'D:\\empresas\\ferreluc\\gestion\\scripts',
-  // 'D:\\empresas\\catalogo\\lib',
-  // 'D:\\empresas\\catalogo\\prisma',
-  // 'D:\\empresas\\catalogo\\components',
+
+  'D:\\empresas\\catalogo',
+
 ];
 
 const ROOT_LABEL = 'D:\\empresas';
@@ -43,7 +42,7 @@ const TEXT_EXTS = new Set([
   '.txt', '.md', '.cjs', '.mjs', '.js', '.ts', '.tsx', '.jsx', '.json',
   '.yml', '.yaml', '.css', '.scss', '.less', '.html', '.htm', '.csv',
   '.env', '.toml', '.ini', '.conf', '.config', '.log',
-  '.prisma' // 👈 aseguramos schema.prisma como texto
+  '.prisma', '.sql' // 👈 aseguramos schema.prisma como texto
 ]);
 
 const MAX_PREVIEW_BYTES = 512 * 1024;

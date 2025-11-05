@@ -1,5 +1,4 @@
 // importar_precios.cjs
-// D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
 // Actualiza precios y recalcula IVA, costo, ganancia y venta.
 // Genera reporte de origenes que NO están en el destino.
 // Requisitos: npm i exceljs
@@ -21,6 +20,15 @@ const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const REPORTE_XLSX = RUTAS.REPORTE_XLSX;
 
+function getIdxSafe(idx, names) {
+  for (const n of names) {
+    const k = typeof n === "string" ? toKey(n) : n;
+    const v = idx.get(k);
+    if (v) return v;
+  }
+  return null;
+}
+
 // Lee el Excel origen y devuelve un Map por codigoFlexxus
 async function leerOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
@@ -28,16 +36,14 @@ async function leerOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor");
-  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo");
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus");
-  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus");
-  const colPrecio = idx.get(toKey("PRECIO VENTA")) || idx.get("precio venta");
+  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"]);
+  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"]);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus"]);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus"]);
+  const colPrecio = getIdxSafe(idx, ["PRECIO VENTA", "precio venta"]);
 
   if (!colProv || !colCod || !colDesc || !colPrecio) {
-    throw new Error(
-      "[importar_precios] El archivo ORIGEN no tiene los encabezados esperados."
-    );
+    throw new Error("[importar_precios] ORIGEN sin encabezados esperados.");
   }
 
   const map = new Map();
@@ -51,12 +57,7 @@ async function leerOrigen(ruta) {
     const descFlexxus = readCellText(row.getCell(colDesc));
     const precioRaw = row.getCell(colPrecio).value;
 
-    const key = buildFlexxusKey({
-      codigoFlexxus,
-      proveedor,
-      codigo,
-    });
-
+    const key = buildFlexxusKey({ codigoFlexxus, proveedor, codigo });
     if (!key) return;
 
     const precio = parsePrecio(precioRaw);
@@ -80,23 +81,15 @@ async function procesarDestino(rutaDestino, origenMap) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colFlex = idx.get(toKey("codigo flexxus")) || idx.get("codigo flexxus");
-  const colPrecioVenta = idx.get(toKey("precio venta")) || idx.get("precio venta");
-  const colCaja = idx.get(toKey("caja")) || idx.get("caja");
-  const colIva = idx.get(toKey("iva")) || idx.get("iva");
-  const colCosto = idx.get(toKey("costo")) || idx.get("costo");
-  const colGan = idx.get(toKey("ganancia")) || idx.get("ganancia");
-  const colVenta = idx.get(toKey("venta")) || idx.get("venta");
+  const colFlex = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"]);
+  const colPrecioVenta = getIdxSafe(idx, ["precio venta", "precio_venta"]);
+  const colCaja = getIdxSafe(idx, ["caja"]);
+  const colIva = getIdxSafe(idx, ["iva"]);
+  const colCosto = getIdxSafe(idx, ["costo"]);
+  const colGan = getIdxSafe(idx, ["ganancia"]);
+  const colVenta = getIdxSafe(idx, ["venta"]);
 
-  const required = [
-    colFlex,
-    colPrecioVenta,
-    colCaja,
-    colIva,
-    colCosto,
-    colGan,
-    colVenta,
-  ];
+  const required = [colFlex, colPrecioVenta, colCaja, colIva, colCosto, colGan, colVenta];
   if (required.some((c) => !c)) {
     throw new Error(
       "[importar_precios] DESTINO sin encabezados mínimos (codigo flexxus, precio venta, caja, iva, costo, ganancia, venta)."
@@ -130,7 +123,7 @@ async function procesarDestino(rutaDestino, origenMap) {
     const precioUnidad = precioOrigen / caja;
     row.getCell(colPrecioVenta).value = round2(precioOrigen);
 
-    // M — IVA
+    // M — IVA (monto)
     const iva = precioUnidad * CALC.IVA;
     row.getCell(colIva).value = round2(iva);
 
@@ -138,7 +131,7 @@ async function procesarDestino(rutaDestino, origenMap) {
     const costo = precioUnidad + iva;
     row.getCell(colCosto).value = round2(costo);
 
-    // N — ganancia
+    // N — ganancia (monto)
     const ganancia = costo * CALC.GANANCIA;
     row.getCell(colGan).value = round2(ganancia);
 

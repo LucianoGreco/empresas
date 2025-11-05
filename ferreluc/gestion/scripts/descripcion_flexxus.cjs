@@ -1,19 +1,23 @@
 // descripcion_flexxus.cjs
-// D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
 // Copia "Descripcion Flexxus" desde ORIGEN → DESTINO por "CODIGO FLEXXUS"
 // Requisitos: npm i exceljs
 
 const ExcelJS = require("exceljs");
 const { RUTAS } = require("./config.cjs");
-const {
-  buildHeaderIndex,
-  readCellText,
-  toKey,
-} = require("./common.cjs");
+const { buildHeaderIndex, readCellText, toKey } = require("./common.cjs");
 const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
+
+function getIdxSafe(idx, candidates, fallback) {
+  for (const c of candidates) {
+    const k = typeof c === "string" ? toKey(c) : c;
+    const v = idx.get(k);
+    if (v) return v;
+  }
+  return fallback;
+}
 
 async function cargarOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
@@ -21,25 +25,11 @@ async function cargarOrigen(ruta) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  // columnas esperadas en ORIGEN (pero con tolerancia)
-  const colProv =
-    idx.get(toKey("PROVEEDOR")) ||
-    idx.get("proveedor") ||
-    1;
-  const colCod =
-    idx.get(toKey("CODIGO")) ||
-    idx.get("codigo") ||
-    2;
-  const colFlex =
-    idx.get(toKey("CODIGO FLEXXUS")) ||
-    idx.get("codigo flexxus") ||
-    idx.get("codigo_flexxus") ||
-    3;
-  const colDesc =
-    idx.get(toKey("Descripcion Flexxus")) ||
-    idx.get("descripcion flexxus") ||
-    idx.get("descripcion_flexxus") ||
-    4;
+  // columnas esperadas en ORIGEN (tolerantes)
+  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"], 1);
+  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"], 2);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"], 3);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"], 4);
 
   const map = new Map();
 
@@ -51,16 +41,11 @@ async function cargarOrigen(ruta) {
     const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descripcion = readCellText(row.getCell(colDesc));
 
-    const key = buildFlexxusKey({
-      codigoFlexxus,
-      proveedor,
-      codigo,
-    });
-
+    const key = buildFlexxusKey({ codigoFlexxus, proveedor, codigo });
     if (!key) return;
 
-    // si hay filas duplicadas en origen, la última gana
-    map.set(key, descripcion);
+    // última aparición gana
+    map.set(key, descripcion || "");
   });
 
   return map;
@@ -72,17 +57,8 @@ async function escribirDestino(rutaDestino, origenMap) {
   const ws = wb.worksheets[0];
   const idx = buildHeaderIndex(ws);
 
-  const colFlexDst =
-    idx.get(toKey("codigo flexxus")) ||
-    idx.get("codigo flexxus") ||
-    idx.get("codigo_flexxus") ||
-    1;
-
-  const colDescDst =
-    idx.get(toKey("descripcion flexxus")) ||
-    idx.get("descripcion flexxus") ||
-    idx.get("descripcion_flexxus") ||
-    10;
+  const colFlexDst = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"], 1);
+  const colDescDst = getIdxSafe(idx, ["descripcion flexxus", "descripcion_flexxus"], 10);
 
   let actualizados = 0;
   let sinMatch = 0;
@@ -114,10 +90,7 @@ async function main() {
   console.time("descripcion_flexxus");
   try {
     const origenMap = await cargarOrigen(ORIGEN_XLSX);
-    const { actualizados, sinMatch } = await escribirDestino(
-      DESTINO_XLSX,
-      origenMap
-    );
+    const { actualizados, sinMatch } = await escribirDestino(DESTINO_XLSX, origenMap);
     console.log(
       `[descripcion_flexxus] Actualizados: ${actualizados} | Sin coincidencia/desc vacía: ${sinMatch}`
     );

@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\lib\config.js
 import fs from "fs";
 import path from "path";
 

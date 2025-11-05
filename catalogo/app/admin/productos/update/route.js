@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\app\admin\productos\update\route.js
 // PATCH { codigo_flexxus, changes: { venta, mayorista, inventario, marca, imagen, moneda, nombre_descripcion, categoria } }
 import fs from "fs";
 import { NextResponse } from "next/server";

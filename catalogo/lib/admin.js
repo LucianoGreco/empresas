@@ -60,4 +60,25 @@ export async function isAdminPage() {
   }
 }
 
+// Nuevos helpers que lanzan error (para endpoints que esperan throw)
+export async function assertAdminApi(req) {
+  const ok = await isAdminApi(req);
+  if (!ok) {
+    const err = new Error("Unauthorized");
+    err.name = "Unauthorized";
+    throw err;
+  }
+  return true;
+}
+
+export async function assertAdminPage() {
+  const ok = await isAdminPage();
+  if (!ok) {
+    const err = new Error("Unauthorized");
+    err.name = "Unauthorized";
+    throw err;
+  }
+  return true;
+}
+
 /* fin */

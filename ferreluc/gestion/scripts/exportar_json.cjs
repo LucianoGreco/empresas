@@ -1,7 +1,5 @@
 // exportar_json.cjs
-// D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs
-// Lee el XLSX destino (ya normalizado) y lo vuelca a un JSON ordenado que usa el catálogo.
-// Además genera un META con info útil para el Next.
+// Lee el XLSX destino (normalizado) → JSON + META (+ manifest)
 // Requisitos: npm i chokidar exceljs
 
 const fs = require("fs");
@@ -11,14 +9,20 @@ const { RUTAS, ROOT } = require("./config.cjs");
 const {
   loadDestinoWorkbook,
   worksheetToObjects,
-  exportToJson,
   ensureImagenField,
 } = require("./pipeline-core.cjs");
+const { writeManifest } = require("./pipeline-manifest.cjs");
 
 const XLSX_PATH = RUTAS.DESTINO_XLSX;
 const OUTPUT_DIR = RUTAS.OUTPUT_DIR;
 const OUTPUT_PATH = RUTAS.OUTPUT_PATH;
 const META_PATH = `${OUTPUT_DIR}/producto_grais.meta.json`;
+
+function atomicWrite(path, data) {
+  const tmp = `${path}.tmp.${Date.now()}`;
+  fs.writeFileSync(tmp, data, "utf-8");
+  fs.renameSync(tmp, path);
+}
 
 function makeHash(data) {
   return crypto.createHash("md5").update(data).digest("hex");
@@ -37,10 +41,10 @@ async function exportOnce() {
     // asegurar imagen normalizada para el Next
     rows = rows.map((r) => ensureImagenField(r));
 
-    // escribir JSON principal
+    // escribir JSON principal (atómico)
     await fs.promises.mkdir(OUTPUT_DIR, { recursive: true });
     const jsonString = JSON.stringify(rows, null, 2);
-    await fs.promises.writeFile(OUTPUT_PATH, jsonString, "utf-8");
+    atomicWrite(OUTPUT_PATH, jsonString);
 
     // armar META para el catálogo
     const meta = {
@@ -49,23 +53,18 @@ async function exportOnce() {
       root: ROOT,
       total: rows.length,
       hash_md5: makeHash(jsonString),
-      files: {
-        data: OUTPUT_PATH,
-      },
+      files: { data: OUTPUT_PATH },
       pipeline: {
-        // el catálogo puede mostrar esto
         ran: ["importar_precios", "descripcion_flexxus", "colocar_imagenes", "exportar_json"],
       },
     };
+    atomicWrite(META_PATH, JSON.stringify(meta, null, 2));
 
-    await fs.promises.writeFile(
-      META_PATH,
-      JSON.stringify(meta, null, 2),
-      "utf-8"
-    );
+    // manifest global (para que el catálogo descubra datasets)
+    await writeManifest();
 
     console.log(
-      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta)`
+      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta + manifest)`
     );
   } catch (err) {
     console.error("[exportar_json] Error exportando:", err.message);
@@ -83,15 +82,13 @@ function startWatcher() {
 
   const watcher = chokidar.watch(XLSX_PATH, {
     ignoreInitial: false,
-    awaitWriteFinish: { stabilityThreshold: 500, pollInterval: 100 },
+    awaitWriteFinish: { stabilityThreshold: 700, pollInterval: 150 },
   });
 
   watcher
     .on("add", trigger)
     .on("change", trigger)
-    .on("error", (e) =>
-      console.error("[exportar_json] Watcher error:", e.message)
-    );
+    .on("error", (e) => console.error("[exportar_json] Watcher error:", e.message));
 }
 
 if (require.main === module) {
