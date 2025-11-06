@@ -1,24 +1,151 @@
 {
   "aliases": {
-    "codigo_flexxus": ["codigo_flexxus", "codigo flexxus", "código flexxus", "codigo", "cod_flexxus", "cod"],
-    "nombre_descripcion": ["nombre_descripcion", "nombre descripcion", "descripcion", "descripción", "descripcion_flexxus", "descripcion flexxus", "nombre", "detalle"],
-    "costo": ["costo", "costo_iva_no_incluido", "costo_sin_iva"],
-    "venta": ["venta", "precio", "precio_venta_final", "pvp"],
-    "mayorista": ["mayorista", "precio_mayorista"],
-    "inventario": ["inventario", "stock", "existencia"],
-    "inv_minimo": ["inv_minimo", "stock_minimo", "minimo"],
-    "inv_maximo": ["inv_maximo", "stock_maximo", "maximo", "inv_máximo"],
-    "proveedor": ["proveedor"],
-    "descripcion_flexxus": ["descripcion_flexxus", "descripcion flexxus"],
-    "precio_venta": ["precio_venta", "precio venta", "precio_base", "precio_lista"],
-    "caja": ["caja", "pack", "unidad_por_caja"],
-    "iva": ["iva"],
-    "ganancia": ["ganancia", "margen", "utilidad"],
-    "imagen": ["imagen", "foto", "img"],
-    "marca": ["marca"],
-    "categoria": ["categoria", "categoría", "rubro"],
-    "moneda": ["moneda", "currency"],
-    "sku": ["sku", "codigo_sku", "id_sku"]
+    "codigo_flexxus": [
+      "codigo_flexxus",
+      "codigo flexxus",
+      "código flexxus",
+      "codigo",
+      "cod_flexxus",
+      "cod",
+      "codigo_articulo",
+      "article_code",
+      "item_code"
+    ],
+    "nombre_descripcion": [
+      "nombre_descripcion",
+      "nombre descripcion",
+      "descripcion",
+      "descripción",
+      "descripcion_flexxus",
+      "descripcion flexxus",
+      "nombre",
+      "detalle",
+      "nombre_producto",
+      "product_name",
+      "titulo",
+      "title"
+    ],
+    "costo": [
+      "costo",
+      "costo_iva_no_incluido",
+      "costo_sin_iva",
+      "cost",
+      "precio_costo"
+    ],
+    "venta": [
+      "venta",
+      "precio",
+      "precio_venta_final",
+      "pvp",
+      "price",
+      "precio_final",
+      "valor_venta"
+    ],
+    "mayorista": [
+      "mayorista",
+      "precio_mayorista",
+      "wholesale_price",
+      "mayoreo"
+    ],
+    "inventario": [
+      "inventario",
+      "stock",
+      "existencia",
+      "cantidad",
+      "disponible",
+      "available_stock"
+    ],
+    "inv_minimo": [
+      "inv_minimo",
+      "stock_minimo",
+      "minimo",
+      "min",
+      "min_stock"
+    ],
+    "inv_maximo": [
+      "inv_maximo",
+      "stock_maximo",
+      "maximo",
+      "inv_máximo",
+      "max",
+      "max_stock"
+    ],
+    "proveedor": [
+      "proveedor",
+      "vendor",
+      "supplier",
+      "fabricante"
+    ],
+    "descripcion_flexxus": [
+      "descripcion_flexxus",
+      "descripcion flexxus",
+      "desc_flexxus"
+    ],
+    "precio_venta": [
+      "precio_venta",
+      "precio venta",
+      "precio_base",
+      "precio_lista",
+      "unit_price",
+      "punit"
+    ],
+    "caja": [
+      "caja",
+      "pack",
+      "unidad_por_caja",
+      "unidades_por_caja",
+      "units_per_box",
+      "presentation"
+    ],
+    "iva": [
+      "iva",
+      "impuesto",
+      "tax",
+      "vat"
+    ],
+    "ganancia": [
+      "ganancia",
+      "margen",
+      "utilidad",
+      "profit",
+      "markup"
+    ],
+    "imagen": [
+      "imagen",
+      "foto",
+      "img",
+      "imagen_url",
+      "image",
+      "image_url",
+      "foto_url"
+    ],
+    "marca": [
+      "marca",
+      "brand"
+    ],
+    "categoria": [
+      "categoria",
+      "categoría",
+      "rubro",
+      "familia",
+      "subrubro",
+      "grupo",
+      "category"
+    ],
+    "moneda": [
+      "moneda",
+      "currency",
+      "divisa"
+    ],
+    "sku": [
+      "sku",
+      "codigo_sku",
+      "id_sku",
+      "ean",
+      "upc",
+      "gtin",
+      "barcode"
+    ]
   },
   "defaultAllowed": [
     "nombre_descripcion",

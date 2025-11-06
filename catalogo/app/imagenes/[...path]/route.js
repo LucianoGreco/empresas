@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\app\imagenes\[...path]\route.js
 // Sirve imágenes físicas desde CFG.imgsDir con tolerancia de nombre.
 // Protecciones: path traversal, extensión permitida, ETag/304.
 
@@ -21,6 +22,11 @@ function normalizeRequestedPath(parts) {
   const joined = parts.join("/");
   const s = toPosix(joined).replace(/^\/+/, "");
   return s.startsWith("imagenes/") ? s.slice("imagenes/".length) : s;
+}
+
+function segmentsAreSafe(parts) {
+  // bloquear traversal y segmentos vacíos sospechosos
+  return parts.every(p => p && p !== "." && p !== ".." && !p.includes("\0"));
 }
 
 function safeJoin(baseDir, relPath) {
@@ -84,6 +90,7 @@ export async function GET(req, { params }) {
   try {
     const parts = Array.isArray(params?.path) ? params.path : [];
     if (!parts.length) return new NextResponse("Not Found", { status: 404 });
+    if (!segmentsAreSafe(parts)) return new NextResponse("Forbidden", { status: 403 });
 
     const decoded = parts.map((p) => {
       try { return decodeURIComponent(p); } catch { return p; }

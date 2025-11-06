@@ -1,5 +1,7 @@
-// pipeline-core.cjs
+// D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs
 // Núcleo reutilizable para los scripts de ETL (grais)
+
+"use strict";
 
 const ExcelJS = require("exceljs");
 const { RUTAS } = require("./config.cjs");
@@ -7,13 +9,15 @@ const {
   buildHeaderIndex,
   mapHeadersFromRow,
   normalizeImagenPath,
+  getWorksheetByNameOrFirst,
 } = require("./common.cjs");
 
 // carga el excel destino ya normalizado
 async function loadDestinoWorkbook() {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(RUTAS.DESTINO_XLSX);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[pipeline-core] DESTINO sin worksheet");
   return { wb, ws };
 }
 

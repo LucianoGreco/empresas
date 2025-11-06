@@ -1,4 +1,4 @@
-// lib/etl-grais-shared.js
+// D:\empresas\catalogo\lib\etl-grais-shared.js
 import fs from "fs";
 import path from "path";
 import * as XLSX from "xlsx";
@@ -110,8 +110,7 @@ function writeJsonAtomic(finalPath, data) {
   fs.renameSync(tmp, finalPath);
 }
 
-/* ===== números (coma/pto) robusto =====
-   Acepta "$ 12.640,69", "12,640.69", "12640,69", etc. */
+/* ===== números (coma/pto) robusto ===== */
 function toNumber(x) {
   if (x == null) return 0;
   if (typeof x === "number") return isFinite(x) ? x : 0;
@@ -125,18 +124,18 @@ function toNumber(x) {
   const hasComma = s.includes(",");
   const hasDot = s.includes(".");
   if (hasComma && hasDot) {
-    // Caso típico es-AR: "12.640,69"  -> quitar miles ".", decimal ","
+    // Caso típico es-AR: "12.640,69" → "." miles, "," decimal
     if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
       s = s.replace(/\./g, "").replace(/,/g, ".");
     } else {
-      // Caso en-US con miles comma: "12,640.69"
+      // Caso en-US con miles coma: "12,640.69"
       s = s.replace(/,/g, "");
     }
   } else if (hasComma && !hasDot) {
-    // Solo coma => usar coma como decimal
+    // Solo coma => decimal
     s = s.replace(/\./g, "").replace(/,/g, ".");
   } else {
-    // Solo punto o ninguno => quitar separadores de miles (coma) si quedaron
+    // Solo punto o ninguno => quitar comas de miles
     s = s.replace(/,(?=\d{3}\b)/g, "");
   }
 
@@ -187,9 +186,15 @@ function resolvePaths(overrides = {}) {
    ========================= */
 function listImages(dir) {
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
+  return fs
+    .readdirSync(dir)
     .filter((f) => ALLOWED_IMAGE_EXTS.includes(path.extname(f).toLowerCase()))
-    .map((f) => ({ name: f, base: path.basename(f, path.extname(f)), ext: path.extname(f).toLowerCase(), abs: path.join(dir, f) }));
+    .map((f) => ({
+      name: f,
+      base: path.basename(f, path.extname(f)),
+      ext: path.extname(f).toLowerCase(),
+      abs: path.join(dir, f),
+    }));
 }
 function stripAccents(s) {
   return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -205,7 +210,15 @@ function toKey(s) {
       .replace(/[^a-z0-9 ]+/g, " ")
   );
 }
-const EXT_SCORE = new Map([[".png",5],[".jpg",4],[".jpeg",4],[".webp",3],[".gif",2],[".bmp",1],[".ico",1]]);
+const EXT_SCORE = new Map([
+  [".png", 5],
+  [".jpg", 4],
+  [".jpeg", 4],
+  [".webp", 3],
+  [".gif", 2],
+  [".bmp", 1],
+  [".ico", 1],
+]);
 function jaccard(aSet, bSet) {
   let inter = 0;
   for (const t of aSet) if (bSet.has(t)) inter++;
@@ -218,13 +231,24 @@ function* categoryCandidates(category) {
   const noAcc = stripAccents(raw).toLowerCase();
   const coll = normSpaces(low);
   const collNoAcc = normSpaces(noAcc);
-  const v = new Set([raw,low,noAcc,coll,collNoAcc,coll.replace(/ /g,"_"),coll.replace(/ /g,"-"),collNoAcc.replace(/ /g,"_"),collNoAcc.replace(/ /g,"-")]);
+  const v = new Set([
+    raw,
+    low,
+    noAcc,
+    coll,
+    collNoAcc,
+    coll.replace(/ /g, "_"),
+    coll.replace(/ /g, "-"),
+    collNoAcc.replace(/ /g, "_"),
+    collNoAcc.replace(/ /g, "-"),
+  ]);
   for (const s of v) yield s;
 }
 function findImagePathForCategory(category, imgsDir) {
   const files = listImages(imgsDir);
   if (files.length === 0) return null;
 
+  // 1) exactos
   for (const cand of categoryCandidates(category)) {
     for (const f of files) {
       if (f.base.toLowerCase() === cand.toLowerCase()) return f.abs;
@@ -235,24 +259,53 @@ function findImagePathForCategory(category, imgsDir) {
     }
   }
 
+  // 2) fuzzy (Jaccard de tokens) + desempate por extensión
   const catKey = toKey(category);
   const toksCat = new Set(catKey.split(" ").filter(Boolean));
-  let best = null, bestScore = 0;
+  let best = null,
+    bestScore = 0;
   for (const f of files) {
     const toks = new Set(toKey(f.base).split(" ").filter(Boolean));
-    const score = jaccard(toksCat, toks) + ((EXT_SCORE.get(f.ext)||0)/100);
-    if (score > bestScore) { best = f; bestScore = score; }
+    const score = jaccard(toksCat, toks) + ((EXT_SCORE.get(f.ext) || 0) / 100);
+    if (score > bestScore) {
+      best = f;
+      bestScore = score;
+    }
   }
   return best && bestScore >= 0.35 ? best.abs : null;
+}
+
+/** Export explícito para usar desde import-service.js */
+export function findImageForCategory(category, preferExt = ".png") {
+  const abs = findImagePathForCategory(category, CFG.imgsDir);
+  if (abs) return abs;
+  // pequeño fallback por extensión preferida
+  const cand = path.join(CFG.imgsDir, `${toKey(category).replace(/ /g, "-")}${preferExt}`);
+  return fs.existsSync(cand) ? cand : null;
 }
 
 /* =========================
    Grais I/O
    ========================= */
 const HEADERS_NORMAL = [
-  "codigo flexxus","nombre descripcion","costo","venta","mayorista","inventario",
-  "inv_minimo","inv_máximo","proveedor","descripcion flexxus","precio venta","caja",
-  "iva","ganancia","imagen","marca","categoria","moneda",
+  "codigo flexxus",
+  "nombre descripcion",
+  "costo",
+  "venta",
+  "mayorista",
+  "inventario",
+  "inv_minimo",
+  "inv_maximo",
+  "proveedor",
+  "descripcion flexxus",
+  "precio venta",
+  "caja",
+  "iva",
+  "ganancia",
+  "imagen",
+  "marca",
+  "categoria",
+  "moneda",
 ];
 
 export function leerOrigen(overrides = {}) {
@@ -280,11 +333,13 @@ export function escribirNormalizada(rows, overrides = {}) {
   });
   const sheet = jsonToSheet(out);
   // Forzar formato 0.00 a columnas monetarias
-  applyMoneyFormatToSheet(
-    sheet,
-    HEADERS_NORMAL,
-    ["costo","venta","precio venta","iva","ganancia"]
-  );
+  applyMoneyFormatToSheet(sheet, HEADERS_NORMAL, [
+    "costo",
+    "venta",
+    "precio venta",
+    "iva",
+    "ganancia",
+  ]);
   wb.Sheets[name] = sheet;
   writeWorkbookAtomic(wb, destino, "Excel DESTINO (normalizada)");
 }
@@ -296,7 +351,8 @@ export function escribirNoEncontrados(rows, overrides = {}) {
     PROVEEDOR: r["PROVEEDOR"] ?? "",
     CODIGO: r["CODIGO"] ?? "",
     "CODIGO FLEXXUS": r["CODIGO FLEXXUS"] ?? "",
-    "DESCRIPCION FLEXXUS": r["DESCRIPCION FLEXXUS"] ?? r["Descripcion Flexxus"] ?? "",
+    "DESCRIPCION FLEXXUS":
+      r["DESCRIPCION FLEXXUS"] ?? r["Descripcion Flexxus"] ?? "",
     "PRECIO VENTA": toNumber(r["PRECIO VENTA"] ?? 0),
   }));
   const wb = { SheetNames: ["no_encontrados"], Sheets: {} };
@@ -334,37 +390,42 @@ export function aplicarPrecios(overrides = {}) {
   }
 
   // Reporte: filas del ORIGEN sin "CODIGO FLEXXUS" o vacío
-  const noVinculadosOrigen = origenRows.filter((r) => !String(r["CODIGO FLEXXUS"] ?? "").trim());
-  const rep = escribirNoEncontrados(noVinculadosOrigen, { reportePath: reporte });
+  const noVinculadosOrigen = origenRows.filter(
+    (r) => !String(r["CODIGO FLEXXUS"] ?? "").trim()
+  );
+  const rep = escribirNoEncontrados(noVinculadosOrigen, {
+    reportePath: reporte,
+  });
 
   const normRows = leerNormalizada({ destinoPath: destino });
-  let applied = 0, missingInOrigen = 0;
+  let applied = 0,
+    missingInOrigen = 0;
 
   const out = normRows.map((r) => {
     const codigo = String(r["codigo flexxus"] ?? "").trim();
     const caja = Math.max(1, toNumber(r["caja"] ?? 1)); // evita /0
-    let k = toNumber(r["precio venta"]);                // K actual como número
+    let k = toNumber(r["precio venta"]); // K actual
 
     if (codigo && mapOrigen.has(codigo)) {
-      k = toNumber(mapOrigen.get(codigo));              // K desde ORIGEN
+      k = toNumber(mapOrigen.get(codigo)); // K desde ORIGEN
       applied += 1;
     } else if (codigo) {
       missingInOrigen += 1;
     }
 
     const precioUnidad = k / caja;
-    const costo = round2(precioUnidad * 1.21);          // C
-    const venta = round2(costo * 1.40);                 // D
-    const ivaMonto = round2(precioUnidad * 0.21);       // Monto de IVA
-    const gananciaMonto = round2(costo * 0.40);         // Monto de ganancia
+    const costo = round2(precioUnidad * 1.21); // C
+    const venta = round2(costo * 1.4); // D
+    const ivaMonto = round2(precioUnidad * 0.21);
+    const gananciaMonto = round2(costo * 0.4);
 
     return {
       ...r,
-      "precio venta": round2(k),         // K (2 dec)
-      "costo": costo,                    // C
-      "venta": venta,                    // D
-      "iva": ivaMonto,                   // M (monto, no %)
-      "ganancia": gananciaMonto,         // N (monto)
+      "precio venta": round2(k), // K (2 dec)
+      costo,
+      venta,
+      iva: ivaMonto,
+      ganancia: gananciaMonto,
     };
   });
 
@@ -417,7 +478,7 @@ export function exportarJson(overrides = {}) {
     mayorista: toNumber(r["mayorista"]),
     inventario: toNumber(r["inventario"]),
     inv_minimo: toNumber(r["inv_minimo"]),
-    inv_maximo: toNumber(r["inv_máximo"]),
+    inv_maximo: toNumber(r["inv_maximo"]),
     proveedor: String(r["proveedor"] ?? "").trim(),
     descripcion_flexxus: String(r["descripcion flexxus"] ?? "").trim(),
     precio_venta: toNumber(r["precio venta"]),
@@ -455,5 +516,3 @@ export function runAll(overrides = {}) {
   const p3 = exportarJson(overrides);
   return { precios: p1, imagenes: p2, json: p3 };
 }
-
-/* fin */

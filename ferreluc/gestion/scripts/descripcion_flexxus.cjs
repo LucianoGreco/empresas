@@ -1,10 +1,17 @@
-// descripcion_flexxus.cjs
+// D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
 // Copia "Descripcion Flexxus" desde ORIGEN → DESTINO por "CODIGO FLEXXUS"
 // Requisitos: npm i exceljs
 
+"use strict";
+
 const ExcelJS = require("exceljs");
 const { RUTAS } = require("./config.cjs");
-const { buildHeaderIndex, readCellText, toKey } = require("./common.cjs");
+const {
+  buildHeaderIndex,
+  readCellText,
+  toKey,
+  getWorksheetByNameOrFirst,
+} = require("./common.cjs");
 const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
@@ -16,34 +23,36 @@ function getIdxSafe(idx, candidates, fallback) {
     const v = idx.get(k);
     if (v) return v;
   }
-  return fallback;
+  return fallback || null;
 }
 
 async function cargarOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(ruta);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[descripcion_flexxus] ORIGEN sin worksheet");
   const idx = buildHeaderIndex(ws);
 
   // columnas esperadas en ORIGEN (tolerantes)
-  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"], 1);
-  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"], 2);
-  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"], 3);
-  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"], 4);
+  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"]);
+  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"]);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"]);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"]);
+
+  if (!colProv || !colCod || !colFlex || !colDesc) {
+    throw new Error("[descripcion_flexxus] ORIGEN sin encabezados esperados (proveedor, codigo, codigo flexxus, descripcion).");
+  }
 
   const map = new Map();
 
   ws.eachRow((row, r) => {
     if (r === 1) return;
-
     const proveedor = readCellText(row.getCell(colProv));
     const codigo = readCellText(row.getCell(colCod));
     const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descripcion = readCellText(row.getCell(colDesc));
-
     const key = buildFlexxusKey({ codigoFlexxus, proveedor, codigo });
     if (!key) return;
-
     // última aparición gana
     map.set(key, descripcion || "");
   });
@@ -54,11 +63,16 @@ async function cargarOrigen(ruta) {
 async function escribirDestino(rutaDestino, origenMap) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(rutaDestino);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[descripcion_flexxus] DESTINO sin worksheet");
   const idx = buildHeaderIndex(ws);
 
-  const colFlexDst = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"], 1);
-  const colDescDst = getIdxSafe(idx, ["descripcion flexxus", "descripcion_flexxus"], 10);
+  const colFlexDst = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"]);
+  const colDescDst = getIdxSafe(idx, ["descripcion flexxus", "descripcion_flexxus"]);
+
+  if (!colFlexDst || !colDescDst) {
+    throw new Error("[descripcion_flexxus] DESTINO sin columnas requeridas (codigo_flexxus, descripcion_flexxus).");
+  }
 
   let actualizados = 0;
   let sinMatch = 0;
@@ -70,16 +84,17 @@ async function escribirDestino(rutaDestino, origenMap) {
       sinMatch++;
       continue;
     }
-
     const desc = origenMap.get(key);
-    if (desc == null || desc === "") {
+    if (!desc) {
       sinMatch++;
       continue;
     }
-
-    row.getCell(colDescDst).value = desc;
-    row.commit();
-    actualizados++;
+    // asignar solo si cambia para evitar “touch” innecesario
+    if (readCellText(row.getCell(colDescDst)) !== desc) {
+      row.getCell(colDescDst).value = desc;
+      row.commit();
+      actualizados++;
+    }
   }
 
   await wb.xlsx.writeFile(rutaDestino);

@@ -1,8 +1,16 @@
-// pipeline-manifest.cjs
+// D:\empresas\ferreluc\gestion\scripts\pipeline-manifest.cjs
 // Mini utilidad para generar un manifest de lo que hay en /json
+
+"use strict";
 
 const fs = require("fs");
 const { RUTAS } = require("./config.cjs");
+
+function atomicWrite(path, data) {
+  const tmp = `${path}.tmp.${process.pid}.${Date.now()}`;
+  fs.writeFileSync(tmp, data, "utf-8");
+  fs.renameSync(tmp, path);
+}
 
 async function writeManifest() {
   const outDir = RUTAS.OUTPUT_DIR;
@@ -21,9 +29,7 @@ async function writeManifest() {
   };
 
   await fs.promises.mkdir(outDir, { recursive: true });
-  const tmp = `${manifestPath}.tmp.${Date.now()}`;
-  await fs.promises.writeFile(tmp, JSON.stringify(manifest, null, 2), "utf-8");
-  await fs.promises.rename(tmp, manifestPath);
+  atomicWrite(manifestPath, JSON.stringify(manifest, null, 2));
 
   return manifestPath;
 }

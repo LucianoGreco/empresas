@@ -1,12 +1,13 @@
-// orquestador.cjs
+// D:\empresas\ferreluc\gestion\scripts\orquestador.cjs
 // Orquesta el pipeline completo:
-//
 // 1) si cambia ORIGEN → importar_precios → descripcion_flexxus
 // 2) si cambia DESTINO (externo) → descripcion_flexxus
 // 3) si cambian IMÁGENES → colocar_imagenes
 // 4) siempre al final → exportar_json
 //
 // Evita loops ignorando cambios en DESTINO escritos por este proceso.
+
+"use strict";
 
 const chokidar = require("chokidar");
 const { RUTAS } = require("./config.cjs");
@@ -19,7 +20,6 @@ const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const IMAGES_DIR = RUTAS.IMAGES_DIR;
 
-// ventana para considerar "lo escribí yo"
 const SELF_WRITE_WINDOW_MS = 2000;
 
 let timer = null;
@@ -38,8 +38,9 @@ function markDestinoWritten() {
   lastDestinoWriteTs = Date.now();
 }
 
-function isSelfWrite(ts) {
-  return Date.now() - ts < SELF_WRITE_WINDOW_MS;
+function isSelfWrite() {
+  // si ocurrió un cambio dentro de la ventana luego de que escribimos, lo ignoramos
+  return Date.now() - lastDestinoWriteTs < SELF_WRITE_WINDOW_MS;
 }
 
 function schedulePipeline() {
@@ -123,11 +124,11 @@ chokidar
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
   .on("add", () => {
-    if (isSelfWrite(lastDestinoWriteTs)) return;
+    if (isSelfWrite()) return;
     destinoChanged = true; schedulePipeline();
   })
   .on("change", () => {
-    if (isSelfWrite(lastDestinoWriteTs)) return;
+    if (isSelfWrite()) return;
     destinoChanged = true; schedulePipeline();
   })
   .on("error", (e) => console.error("[orquestador] watcher destino:", e.message));

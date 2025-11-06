@@ -7,9 +7,19 @@
 // - helpers de excel (mejorados)
 // - helpers genéricos para mapeos de columnas entre workbooks
 
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 const { HEADERS_JSON_CANDIDATES, RUTAS, PARAMS } = require("./config.cjs");
+
+// ───────────────────────── util ─────────────────────────
+function normalizeFsPath(p) {
+  return String(p || "").replace(/\\/g, "/");
+}
+function escapeRegExp(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 // === Fuente única de headers (JSON) con fallback ===
 function loadHeadersJson() {
@@ -31,7 +41,7 @@ function loadHeadersJson() {
 
 const HEADERS_JSON = loadHeadersJson();
 
-// ---------- Strings / Headers ----------
+// ───────────────────────── Strings / Headers ─────────────────────────
 function normalizeHeader(s) {
   return String(s || "")
     .normalize("NFD")
@@ -132,12 +142,14 @@ function sortKeys(obj) {
   return out;
 }
 
-// ---------- Números / Casting ----------
+// ───────────────────────── Números / Casting ─────────────────────────
 function parsePrecio(val) {
   if (val == null) return null;
   if (typeof val === "number") return Number.isFinite(val) ? val : null;
-  const s = String(val).trim();
+  let s = String(val).trim();
   if (!s) return null;
+  // remover símbolos y espacios comunes
+  s = s.replace(/[$€£%]/g, "").replace(/\s+/g, "");
   // "12.345,67" -> 12345.67  || "12345.67" -> 12345.67
   const normalized = s.replace(/\./g, "").replace(/,/g, ".");
   const num = Number(normalized);
@@ -162,12 +174,12 @@ function castValue(v) {
   return s;
 }
 
-// ---------- Archivos / FS ----------
+// ───────────────────────── Archivos / FS ─────────────────────────
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
 }
 
-// ---------- Excel helpers (exceljs) ----------
+// ───────────────────────── Excel helpers (exceljs) ─────────────────────────
 function toKey(s) {
   return String(s ?? "")
     .trim()
@@ -192,13 +204,13 @@ function colLetterToIndex(letter) {
 function colIndexToLetter(index) {
   let n = Number(index) | 0;
   if (n < 1) return null;
-  let s = "";
+  let out = "";
   while (n > 0) {
     const r = (n - 1) % 26;
-    s = String.fromCharCode(65 + r) + s;
+    out = String.fromCharCode(65 + r) + out;
     n = Math.floor((n - 1) / 26);
   }
-  return s;
+  return out;
 }
 
 /** Devuelve el worksheet por nombre (si existe) o el primero */
@@ -208,7 +220,7 @@ function getWorksheetByNameOrFirst(workbook, name) {
     return workbook.getWorksheet(name);
   }
   // exceljs: worksheet 1 es la primera hoja
-  return workbook.worksheets?.[0] || workbook.getWorksheet(1) || null;
+  return workbook.worksheets?.[0] || workbook.getWorksheet?.(1) || null;
 }
 
 function buildHeaderIndex(worksheet) {
@@ -270,37 +282,35 @@ function mapHeadersFromRow(row, headerIndex) {
   return sortKeys(out);
 }
 
-// ---------- Imágenes ----------
+// ───────────────────────── Imágenes ─────────────────────────
 function normalizeImagenPath(val) {
-  // 1) nada -> fallback
+  // 1) nada -> fallback web
   if (val == null || val === "") return "/imagenes/sin_imagen.png";
 
-  // 2) limpiar slash de windows
-  let s = String(val).trim().replace(/\\/g, "/");
+  // 2) normalizar slash de windows
+  let s = normalizeFsPath(val).trim();
 
-  // 3) si ya es el fallback (con o sin slash)
-  if (/^\/?sin_imagen\.png$/i.test(s)) return "/imagenes/sin_imagen.png";
-
-  // 4) si viene con ruta física del gestion -> mapearla
-  const gestionImgPrefix = RUTAS?.IMAGES_DIR
-    ? String(RUTAS.IMAGES_DIR).replace(/\\/g, "/")
-    : "D:/empresas/ferreluc/gestion/imagenes";
-
-  const lowerPrefix = gestionImgPrefix.toLowerCase();
-  if (s.toLowerCase().startsWith(lowerPrefix)) {
-    s = s.slice(gestionImgPrefix.length);
+  // 3) si ya es el fallback
+  if (/^\/?imagenes\/sin_imagen\.png$/i.test(s) || /^\/?sin_imagen\.png$/i.test(s)) {
+    return "/imagenes/sin_imagen.png";
   }
 
-  // 5) si empieza con / o \, sacamos
-  s = s.replace(/^\/+/, "");
-
-  // 6) si es url absoluta, la dejamos
+  // 4) si es url absoluta, la dejamos
   if (/^https?:\/\//i.test(s)) return s;
 
-  // 7) evitar doble prefijo /imagenes/imagenes/...
-  s = s.replace(/^imagenes\/+/i, "");
+  // 5) si viene con ruta física del gestion -> remover prefijo de IMAGES_DIR (case-insensitive)
+  const dir = normalizeFsPath(RUTAS?.IMAGES_DIR || "D:/empresas/ferreluc/gestion/imagenes");
+  const rx = new RegExp("^" + escapeRegExp(dir) + "/?", "i");
+  s = s.replace(rx, "");
 
-  // 8) caso final: la dejamos bajo /imagenes/...
+  // 6) limpiar encabezados comunes
+  s = s.replace(/^\/+/, "");       // quita slashes iniciales
+  s = s.replace(/^imagenes\/+/i, ""); // evita /imagenes/imagenes/...
+
+  // 7) bloquear path traversal en representación web
+  s = s.replace(/\.\.(\/|\\)/g, "");
+
+  // 8) caso final: bajo /imagenes/...
   return `/imagenes/${s}`;
 }
 
@@ -332,6 +342,7 @@ function tokenOverlapScore(a, b) {
 }
 
 function scanImages(dir) {
+  dir = normalizeFsPath(dir);
   if (!fs.existsSync(dir)) return { byKey: new Map(), list: [] };
   const files = fs.readdirSync(dir);
 
@@ -342,7 +353,7 @@ function scanImages(dir) {
   const list = [];
 
   for (const f of files) {
-    const full = path.join(dir, f);
+    const full = normalizeFsPath(path.join(dir, f));
     const stat = fs.statSync(full);
     if (!stat.isFile()) continue;
     const parsed = path.parse(full);
@@ -367,6 +378,9 @@ function scanImages(dir) {
   return { byKey, list };
 }
 
+/**
+ * @returns {null | {path: string, score: number}}  full path y score si supera umbral
+ */
 function bestFuzzyMatch(query, imageEntries, threshold) {
   const realThreshold =
     typeof threshold === "number" ? threshold : PARAMS.IMAGE_FUZZY_THRESHOLD;
@@ -391,13 +405,18 @@ function bestFuzzyMatch(query, imageEntries, threshold) {
     const score = baseScore + includeBoost + sizeSimBoost;
     const tiebreak = entry.pref / 100;
 
-    if (score + tiebreak > bestScore) {
-      bestScore = score + tiebreak;
+    const total = score + tiebreak;
+
+    if (total > bestScore) {
+      bestScore = total;
       best = entry;
     }
   }
 
-  return best && bestScore >= realThreshold ? best.full : null;
+  if (best && bestScore >= realThreshold) {
+    return { path: best.full, score: Number(bestScore.toFixed(4)) };
+  }
+  return null;
 }
 
 /**
@@ -447,7 +466,7 @@ function makeColumnMapper(opts = {}) {
         }
       }
     }
-    return { applied, total: worksheetTo.rowCount - 1 };
+    return { applied, total: Math.max(worksheetTo.rowCount - 1, 0) };
   };
 }
 
@@ -486,6 +505,8 @@ module.exports = {
   normName,
   tokensOf,
   tokenOverlapScore,
-};
 
-/* fin */
+  // util extra
+  escapeRegExp,
+  normalizeFsPath,
+};

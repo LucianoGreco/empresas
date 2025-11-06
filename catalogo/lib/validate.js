@@ -1,11 +1,34 @@
 // D:\empresas\catalogo\lib\validate.js (SIN zod)
 
-// ---- helpers de coerción ----
+/* ===== Parser numérico robusto (coma/punto, símbolos) =====
+   Admite "$ 12.640,69", "12,640.69", "12640,69", "1 234,56", etc. */
 export function toNumberSafe(v) {
   if (v === null || v === undefined) return undefined;
   if (typeof v === "number") return Number.isFinite(v) ? v : undefined;
-  // admite "1.234,56" o "1234,56" -> 1234.56
-  const s = String(v).trim().replace(/\./g, "").replace(",", ".");
+  let s = String(v).trim();
+  if (!s) return undefined;
+
+  // quitar todo lo que no sea dígito, separadores o signo
+  s = s.replace(/[^\d.,\-]/g, "");
+
+  const hasComma = s.includes(",");
+  const hasDot = s.includes(".");
+  if (hasComma && hasDot) {
+    // es-AR: "12.640,69"  -> "." miles, "," decimal
+    if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
+      s = s.replace(/\./g, "").replace(/,/g, ".");
+    } else {
+      // en-US: "12,640.69" -> quitar comas de miles
+      s = s.replace(/,/g, "");
+    }
+  } else if (hasComma && !hasDot) {
+    // Solo coma => decimal
+    s = s.replace(/\./g, "").replace(/,/g, ".");
+  } else {
+    // Solo punto o ninguno => quitar comas de miles si quedaron
+    s = s.replace(/,(?=\d{3}\b)/g, "");
+  }
+
   const n = Number(s);
   return Number.isFinite(n) ? n : undefined;
 }
@@ -17,7 +40,6 @@ export function toStringSafe(v) {
 }
 
 // ---- validación mínima: tipos y no-negativos donde aplica ----
-// Reglas por campo (simples; ampliables si hace falta)
 const rules = {
   // strings opcionales
   sku: { type: "string", min: 1, optional: true },
@@ -129,5 +151,3 @@ export function validateRow(raw) {
   if (errors.length) return { ok: false, data: null, errors };
   return { ok: true, data, errors: [] };
 }
-
-/* fin */

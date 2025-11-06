@@ -1,13 +1,33 @@
-// shared-keys.cjs
+// D:\empresas\ferreluc\gestion\scripts\shared-keys.cjs
 // Construcción consistente de la key "codigo flexxus"
-// Preferencia: explicito > proveedor+codigo > null
+// Preferencia: explícito > proveedor+codigo > null
 
+"use strict";
+
+/**
+ * Normaliza un segmento de clave:
+ * - trim
+ * - colapsa espacios a uno
+ * - mayúsculas (case-insensitive consistente)
+ */
+function normalizeKeyPart(s) {
+  return String(s || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toUpperCase();
+}
+
+/**
+ * Construye la clave canónica usada en ORIGEN y DESTINO.
+ * Si viene codigoFlexxus explícito, se usa tal cual (trim + normalizado mínimo).
+ * Si no, se arma PROVEEDOR-CODIGO (ambos normalizados).
+ */
 function buildFlexxusKey({ codigoFlexxus, proveedor, codigo }) {
-  const flex = (codigoFlexxus || "").trim();
+  const flex = normalizeKeyPart(codigoFlexxus);
   if (flex) return flex;
 
-  const prov = (proveedor || "").trim();
-  const cod = (codigo || "").trim();
+  const prov = normalizeKeyPart(proveedor);
+  const cod = normalizeKeyPart(codigo);
 
   if (prov && cod) return `${prov}-${cod}`;
 
@@ -16,4 +36,5 @@ function buildFlexxusKey({ codigoFlexxus, proveedor, codigo }) {
 
 module.exports = {
   buildFlexxusKey,
+  normalizeKeyPart,
 };

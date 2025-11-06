@@ -148,19 +148,20 @@
 ││       │   └── 📁 originales
 ││       │       └── 📁 grais
 ││       │           └── data.xlsx
-││       └── 📁 scripts
-││           ├── cleanup-sessions.mjs
-││           ├── colocar_imagenes.cjs
-││           ├── common.cjs
-││           ├── config.cjs
-││           ├── descripcion_flexxus.cjs
-││           ├── exportar_json.cjs
-││           ├── importar_precios.cjs
-││           ├── orquestador.cjs
-││           ├── package.json
-││           ├── pipeline-core.cjs
-││           ├── pipeline-manifest.cjs
-││           └── shared-keys.cjs
+││       ├── 📁 scripts
+││       │   ├── cleanup-sessions.mjs
+││       │   ├── colocar_imagenes.cjs
+││       │   ├── common.cjs
+││       │   ├── config.cjs
+││       │   ├── descripcion_flexxus.cjs
+││       │   ├── exportar_json.cjs
+││       │   ├── importar_precios.cjs
+││       │   ├── orquestador.cjs
+││       │   ├── package.json
+││       │   ├── pipeline-core.cjs
+││       │   ├── pipeline-manifest.cjs
+││       │   └── shared-keys.cjs
+││       └── .env
 │└── 📁 catalogo
 │    ├── 📁 app
 │    │   ├── 📁 admin
@@ -229,12 +230,18 @@
 │    │   │   │   ├── 📁 [code]
 │    │   │   │   │   └── route.js
 │    │   │   │   └── route.js
+│    │   │   ├── 📁 payments
+│    │   │   │   ├── 📁 reconcile
+│    │   │   │   │   └── route.js
+│    │   │   │   └── route.js
 │    │   │   ├── 📁 productos
 │    │   │   │   ├── 📁 admin
 │    │   │   │   │   ├── 📁 import
 │    │   │   │   │   │   └── route.js
 │    │   │   │   │   ├── page.jsx
 │    │   │   │   │   └── route.js
+│    │   │   │   └── route.js
+│    │   │   ├── 📁 shipments
 │    │   │   │   └── route.js
 │    │   │   └── 📁 webhooks
 │    │   │       ├── 📁 mercadopago
@@ -246,19 +253,27 @@
 │    │   ├── 📁 checkout
 │    │   │   ├── 📁 cancel
 │    │   │   │   └── page.jsx
+│    │   │   ├── 📁 pending
+│    │   │   │   └── page.jsx
 │    │   │   ├── 📁 success
 │    │   │   │   └── page.jsx
 │    │   │   └── page.jsx
 │    │   ├── 📁 cliente
 │    │   │   └── page.jsx
+│    │   ├── 📁 envios
+│    │   │   └── page.jsx
 │    │   ├── 📁 imagenes
 │    │   │   └── 📁 [...path]
 │    │   │       └── route.js
+│    │   ├── 📁 informes
+│    │   │   └── page.jsx
 │    │   ├── 📁 login
 │    │   │   └── page.jsx
 │    │   ├── 📁 orders
 │    │   │   ├── 📁 [code]
 │    │   │   │   └── page.jsx
+│    │   │   └── page.jsx
+│    │   ├── 📁 pagos
 │    │   │   └── page.jsx
 │    │   ├── 📁 register
 │    │   │   └── page.jsx
@@ -281,7 +296,9 @@
 │    │   ├── headers.json
 │    │   ├── import-constants.js
 │    │   ├── import-service.js
+│    │   ├── notify.js
 │    │   ├── pipeline-grais.js
+│    │   ├── shipments-store.js
 │    │   └── validate.js
 │    ├── 📁 prisma
 │    │   ├── 📁 data
@@ -988,9 +1005,24 @@ D:\empresas\ferreluc\gestion\imagenes\tel dry t1 aguja.png:
 
 D:\empresas\ferreluc\gestion\json\producto_grais.json:
 {
-  "codigo_flexxus": "1",
-  "inventario": 1,
-  "caja": ""
+  "codigo_flexxus": "31-92110",
+  "nombre_descripcion": "barra redonda grilon polietileno 10 mm x 1000 mm a.p.m nth",
+  "costo": 15295.25,
+  "venta": 21413.35,
+  "mayorista": 0,
+  "inventario": 0,
+  "inv_minimo": 0,
+  "inv_maximo": 0,
+  "proveedor": "",
+  "descripcion_flexxus": "A.P.M. Barra Redonda NTH    10mm",
+  "precio_venta": 12640.7,
+  "caja": "1",
+  "iva": 2654.55,
+  "ganancia": 6118.1,
+  "imagen": "D:\\empresas\\ferreluc\\gestion\\imagenes\\barra redonda grilon polietileno.png",
+  "marca": "NTH",
+  "categoria": "barra redonda grilon polietileno",
+  "moneda": "ars"
 }
 
 --------------------------------------------
@@ -1000,7 +1032,7 @@ D:\empresas\ferreluc\gestion\listas\normalizadas\grais\reportes\no_encontrados.b
 	├── Columna B: CODIGO	: 
 	├── Columna C: CODIGO FLEXXUS	: 
 	├── Columna D: DESCRIPCION FLEXXUS	: 
-	└── Columna E: PRECIO VENTA	: 133,316,547.45
+	└── Columna E: PRECIO VENTA	: 133316547.45
 
 --------------------------------------------
 
@@ -1021,7 +1053,7 @@ D:\empresas\ferreluc\gestion\listas\normalizadas\grais\data.bak.xlsx:
 	├── Columna E: mayorista	: 
 	├── Columna F: inventario	: 
 	├── Columna G: inv_minimo	: 
-	├── Columna H: inv_máximo	: 
+	├── Columna H: inv_maximo	: 
 	├── Columna I: proveedor	: 
 	├── Columna J: descripcion flexxus	: A.P.M. Barra Redonda NTH    10mm
 	├── Columna K: precio venta	: 12640.7
@@ -1043,7 +1075,7 @@ D:\empresas\ferreluc\gestion\listas\normalizadas\grais\data.xlsx:
 	├── Columna E: mayorista	: 
 	├── Columna F: inventario	: 
 	├── Columna G: inv_minimo	: 
-	├── Columna H: inv_máximo	: 
+	├── Columna H: inv_maximo	: 
 	├── Columna I: proveedor	: 
 	├── Columna J: descripcion flexxus	: A.P.M. Barra Redonda NTH    10mm
 	├── Columna K: precio venta	: 12640.7
@@ -1129,6 +1161,8 @@ D:\empresas\ferreluc\gestion\scripts\colocar_imagenes.cjs:
 // Requisitos: npm i exceljs
 // Usa helpers compartidos de common.cjs para NO duplicar fuzzy ni normalización.
 
+"use strict";
+
 const ExcelJS = require("exceljs");
 const { RUTAS, PARAMS } = require("./config.cjs");
 const {
@@ -1137,11 +1171,14 @@ const {
   scanImages,
   bestFuzzyMatch,
   normalizeImagenPath,
+  ensureDir,
 } = require("./common.cjs");
 
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const IMAGES_DIR = RUTAS.IMAGES_DIR;
 const FALLBACK_IMG = RUTAS.FALLBACK_IMG;
+const REPORTE_DIR = RUTAS.REPORTE_DIR; // p.ej .../listas/normalizadas/grais/reportes
+const REPORTE_IMG_MATCHES = `${REPORTE_DIR}/imagenes_coincidencias.xlsx`;
 
 async function main() {
   console.time("colocar_imagenes");
@@ -1150,30 +1187,63 @@ async function main() {
   const fuzzyThreshold = PARAMS.IMAGE_FUZZY_THRESHOLD;
 
   try {
+    // 0. Preparar salida de reportes
+    ensureDir(REPORTE_DIR);
+
     // 1. Cargar workbook destino
     const wb = new ExcelJS.Workbook();
     await wb.xlsx.readFile(DESTINO_XLSX);
-    const ws = wb.worksheets[0];
+    const ws = wb.worksheets?.[0];
+    if (!ws) throw new Error("No se encontró la hoja destino (worksheets[0])");
 
     // 2. Index de headers
     const idx = buildHeaderIndex(ws);
 
-    // nombre normalizado de header → índice de columna
+    // Resolver columnas por nombre (case-insensitive) o fallar con error explícito
     const colImg =
-      idx.get(colNames.IMAGEN.toLowerCase()) ||
-      idx.get("imagen") ||
-      15; // O por compatibilidad
+      idx.get(String(colNames.IMAGEN || "imagen").toLowerCase()) ||
+      idx.get("imagen");
     const colCat =
-      idx.get(colNames.CATEGORIA.toLowerCase()) ||
-      idx.get("categoria") ||
-      17; // Q por compatibilidad
+      idx.get(String(colNames.CATEGORIA || "categoria").toLowerCase()) ||
+      idx.get("categoria");
+
+    if (!colImg) {
+      throw new Error(
+        `No se encontró la columna de IMAGEN ('${colNames.IMAGEN}') en el header.`
+      );
+    }
+    if (!colCat) {
+      throw new Error(
+        `No se encontró la columna de CATEGORIA ('${colNames.CATEGORIA}') en el header.`
+      );
+    }
 
     // 3. Indexar imágenes del FS UNA SOLA VEZ
     const { list: imageEntries } = scanImages(IMAGES_DIR);
+    if (!imageEntries.length) {
+      console.warn(
+        `[colocar_imagenes] Advertencia: no se hallaron imágenes en '${IMAGES_DIR}'. Se usará solo fallback.`
+      );
+    }
 
     let actualizados = 0;
     let completados = 0;
     let sinCategoria = 0;
+    let omitidosPorNoVacio = 0;
+    let reemplazos = 0;
+    let aFallback = 0;
+
+    // Datos para reporte
+    const reportRows = [];
+    // Encabezados del reporte
+    reportRows.push([
+      "fila",
+      "categoria",
+      "accion", // asignada|fallback|omitida_por_onlyEmpty
+      "imagen_final",
+      "score",
+      "motivo", // no_match | baja_confianza | reemplazo | existente_no_vacio
+    ]);
 
     // 4. Recorrer filas
     for (let r = 2; r <= ws.rowCount; r++) {
@@ -1184,37 +1254,112 @@ async function main() {
       if (!categoria) {
         // no hay categoría, no sabemos qué buscar
         if (!onlyEmpty) {
-          // igual ponemos fallback
           row.getCell(colImg).value = normalizeImagenPath(FALLBACK_IMG);
           row.commit();
           actualizados++;
+          aFallback++;
+          reportRows.push([
+            r,
+            "",
+            "fallback",
+            "/imagenes/sin_imagen.png",
+            "",
+            "sin_categoria",
+          ]);
+        } else {
+          reportRows.push([
+            r,
+            "",
+            "omitida_por_onlyEmpty",
+            currentImg || "",
+            "",
+            "sin_categoria",
+          ]);
         }
         sinCategoria++;
         continue;
       }
 
-      // si el modo es "solo completar vacíos" y ya hay imagen, seguimos
+      // si el modo es "solo completar vacíos" y ya hay imagen, omitimos
       if (onlyEmpty && currentImg) {
+        omitidosPorNoVacio++;
+        reportRows.push([
+          r,
+          categoria,
+          "omitida_por_onlyEmpty",
+          currentImg,
+          "",
+          "existente_no_vacio",
+        ]);
         continue;
       }
 
-      // fuzzy sobre las imágenes reales que hay en el disco
-      let imgAbs = bestFuzzyMatch(categoria, imageEntries, fuzzyThreshold);
+      // fuzzy sobre las imágenes locales
+      const match = bestFuzzyMatch(categoria, imageEntries, fuzzyThreshold);
+      const imgAbs = match?.path || null;
+      const score = typeof match?.score === "number" ? match.score : null;
 
       // si no hubo match, fallback físico → y después lo pasamos a /imagenes/...
-      const finalPath = imgAbs != null ? imgAbs : FALLBACK_IMG;
+      const finalFsPath = imgAbs != null ? imgAbs : FALLBACK_IMG;
 
       // esto deja la ruta lista para el Next: /imagenes/loquesea.png
-      row.getCell(colImg).value = normalizeImagenPath(finalPath);
+      const finalWebPath = normalizeImagenPath(finalFsPath);
+
+      // ¿reemplazo vs completado?
+      const habiaImagen = Boolean(currentImg);
+      if (habiaImagen && finalWebPath !== currentImg) reemplazos++;
+
+      row.getCell(colImg).value = finalWebPath;
       row.commit();
       actualizados++;
-      if (!currentImg) completados++;
+      if (!habiaImagen) completados++;
+      if (finalFsPath === FALLBACK_IMG) aFallback++;
+
+      // armar línea de reporte
+      let accion = finalFsPath === FALLBACK_IMG ? "fallback" : "asignada";
+      let motivo = !imgAbs
+        ? "no_match"
+        : score < fuzzyThreshold
+        ? "baja_confianza"
+        : habiaImagen
+        ? "reemplazo"
+        : "";
+
+      reportRows.push([
+        r,
+        categoria,
+        accion,
+        finalWebPath,
+        score != null ? score : "",
+        motivo,
+      ]);
     }
 
-    // 5. Guardar
+    // 5. Guardar destino
     await wb.xlsx.writeFile(DESTINO_XLSX);
+
+    // 6. Generar reporte de coincidencias
+    const repWb = new ExcelJS.Workbook();
+    const repWs = repWb.addWorksheet("reporte");
+    repWs.addRows(reportRows);
+    // ancho columnas básico
+    repWs.columns = [
+      { header: "fila", width: 8 },
+      { header: "categoria", width: 40 },
+      { header: "accion", width: 22 },
+      { header: "imagen_final", width: 50 },
+      { header: "score", width: 10 },
+      { header: "motivo", width: 20 },
+    ];
+    await repWb.xlsx.writeFile(REPORTE_IMG_MATCHES);
+
     console.log(
-      `[colocar_imagenes] OK. Filas: ${ws.rowCount - 1}. Actualizadas: ${actualizados}. Completadas (vacías): ${completados}. Sin categoría: ${sinCategoria}. Modo solo vacíos: ${onlyEmpty}`
+      `[colocar_imagenes] OK. Filas: ${ws.rowCount - 1}. ` +
+        `Actualizadas: ${actualizados}. Completadas (vacías): ${completados}. ` +
+        `Reemplazos: ${reemplazos}. Fallback: ${aFallback}. ` +
+        `Sin categoría: ${sinCategoria}. Omitidas (solo vacíos): ${omitidosPorNoVacio}. ` +
+        `Umbral fuzzy: ${fuzzyThreshold}. ` +
+        `Reporte: ${REPORTE_IMG_MATCHES}`
     );
   } catch (err) {
     console.error("[colocar_imagenes] ERROR:", err.message);
@@ -1240,9 +1385,19 @@ D:\empresas\ferreluc\gestion\scripts\common.cjs:
 // - helpers de excel (mejorados)
 // - helpers genéricos para mapeos de columnas entre workbooks
 
+"use strict";
+
 const fs = require("fs");
 const path = require("path");
 const { HEADERS_JSON_CANDIDATES, RUTAS, PARAMS } = require("./config.cjs");
+
+// ───────────────────────── util ─────────────────────────
+function normalizeFsPath(p) {
+  return String(p || "").replace(/\\/g, "/");
+}
+function escapeRegExp(s) {
+  return String(s).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+}
 
 // === Fuente única de headers (JSON) con fallback ===
 function loadHeadersJson() {
@@ -1264,7 +1419,7 @@ function loadHeadersJson() {
 
 const HEADERS_JSON = loadHeadersJson();
 
-// ---------- Strings / Headers ----------
+// ───────────────────────── Strings / Headers ─────────────────────────
 function normalizeHeader(s) {
   return String(s || "")
     .normalize("NFD")
@@ -1365,12 +1520,14 @@ function sortKeys(obj) {
   return out;
 }
 
-// ---------- Números / Casting ----------
+// ───────────────────────── Números / Casting ─────────────────────────
 function parsePrecio(val) {
   if (val == null) return null;
   if (typeof val === "number") return Number.isFinite(val) ? val : null;
-  const s = String(val).trim();
+  let s = String(val).trim();
   if (!s) return null;
+  // remover símbolos y espacios comunes
+  s = s.replace(/[$€£%]/g, "").replace(/\s+/g, "");
   // "12.345,67" -> 12345.67  || "12345.67" -> 12345.67
   const normalized = s.replace(/\./g, "").replace(/,/g, ".");
   const num = Number(normalized);
@@ -1395,12 +1552,12 @@ function castValue(v) {
   return s;
 }
 
-// ---------- Archivos / FS ----------
+// ───────────────────────── Archivos / FS ─────────────────────────
 function ensureDir(p) {
   if (!fs.existsSync(p)) fs.mkdirSync(p, { recursive: true });
 }
 
-// ---------- Excel helpers (exceljs) ----------
+// ───────────────────────── Excel helpers (exceljs) ─────────────────────────
 function toKey(s) {
   return String(s ?? "")
     .trim()
@@ -1425,13 +1582,13 @@ function colLetterToIndex(letter) {
 function colIndexToLetter(index) {
   let n = Number(index) | 0;
   if (n < 1) return null;
-  let s = "";
+  let out = "";
   while (n > 0) {
     const r = (n - 1) % 26;
-    s = String.fromCharCode(65 + r) + s;
+    out = String.fromCharCode(65 + r) + out;
     n = Math.floor((n - 1) / 26);
   }
-  return s;
+  return out;
 }
 
 /** Devuelve el worksheet por nombre (si existe) o el primero */
@@ -1441,7 +1598,7 @@ function getWorksheetByNameOrFirst(workbook, name) {
     return workbook.getWorksheet(name);
   }
   // exceljs: worksheet 1 es la primera hoja
-  return workbook.worksheets?.[0] || workbook.getWorksheet(1) || null;
+  return workbook.worksheets?.[0] || workbook.getWorksheet?.(1) || null;
 }
 
 function buildHeaderIndex(worksheet) {
@@ -1503,37 +1660,35 @@ function mapHeadersFromRow(row, headerIndex) {
   return sortKeys(out);
 }
 
-// ---------- Imágenes ----------
+// ───────────────────────── Imágenes ─────────────────────────
 function normalizeImagenPath(val) {
-  // 1) nada -> fallback
+  // 1) nada -> fallback web
   if (val == null || val === "") return "/imagenes/sin_imagen.png";
 
-  // 2) limpiar slash de windows
-  let s = String(val).trim().replace(/\\/g, "/");
+  // 2) normalizar slash de windows
+  let s = normalizeFsPath(val).trim();
 
-  // 3) si ya es el fallback (con o sin slash)
-  if (/^\/?sin_imagen\.png$/i.test(s)) return "/imagenes/sin_imagen.png";
-
-  // 4) si viene con ruta física del gestion -> mapearla
-  const gestionImgPrefix = RUTAS?.IMAGES_DIR
-    ? String(RUTAS.IMAGES_DIR).replace(/\\/g, "/")
-    : "D:/empresas/ferreluc/gestion/imagenes";
-
-  const lowerPrefix = gestionImgPrefix.toLowerCase();
-  if (s.toLowerCase().startsWith(lowerPrefix)) {
-    s = s.slice(gestionImgPrefix.length);
+  // 3) si ya es el fallback
+  if (/^\/?imagenes\/sin_imagen\.png$/i.test(s) || /^\/?sin_imagen\.png$/i.test(s)) {
+    return "/imagenes/sin_imagen.png";
   }
 
-  // 5) si empieza con / o \, sacamos
-  s = s.replace(/^\/+/, "");
-
-  // 6) si es url absoluta, la dejamos
+  // 4) si es url absoluta, la dejamos
   if (/^https?:\/\//i.test(s)) return s;
 
-  // 7) evitar doble prefijo /imagenes/imagenes/...
-  s = s.replace(/^imagenes\/+/i, "");
+  // 5) si viene con ruta física del gestion -> remover prefijo de IMAGES_DIR (case-insensitive)
+  const dir = normalizeFsPath(RUTAS?.IMAGES_DIR || "D:/empresas/ferreluc/gestion/imagenes");
+  const rx = new RegExp("^" + escapeRegExp(dir) + "/?", "i");
+  s = s.replace(rx, "");
 
-  // 8) caso final: la dejamos bajo /imagenes/...
+  // 6) limpiar encabezados comunes
+  s = s.replace(/^\/+/, "");       // quita slashes iniciales
+  s = s.replace(/^imagenes\/+/i, ""); // evita /imagenes/imagenes/...
+
+  // 7) bloquear path traversal en representación web
+  s = s.replace(/\.\.(\/|\\)/g, "");
+
+  // 8) caso final: bajo /imagenes/...
   return `/imagenes/${s}`;
 }
 
@@ -1565,6 +1720,7 @@ function tokenOverlapScore(a, b) {
 }
 
 function scanImages(dir) {
+  dir = normalizeFsPath(dir);
   if (!fs.existsSync(dir)) return { byKey: new Map(), list: [] };
   const files = fs.readdirSync(dir);
 
@@ -1575,7 +1731,7 @@ function scanImages(dir) {
   const list = [];
 
   for (const f of files) {
-    const full = path.join(dir, f);
+    const full = normalizeFsPath(path.join(dir, f));
     const stat = fs.statSync(full);
     if (!stat.isFile()) continue;
     const parsed = path.parse(full);
@@ -1600,6 +1756,9 @@ function scanImages(dir) {
   return { byKey, list };
 }
 
+/**
+ * @returns {null | {path: string, score: number}}  full path y score si supera umbral
+ */
 function bestFuzzyMatch(query, imageEntries, threshold) {
   const realThreshold =
     typeof threshold === "number" ? threshold : PARAMS.IMAGE_FUZZY_THRESHOLD;
@@ -1624,13 +1783,18 @@ function bestFuzzyMatch(query, imageEntries, threshold) {
     const score = baseScore + includeBoost + sizeSimBoost;
     const tiebreak = entry.pref / 100;
 
-    if (score + tiebreak > bestScore) {
-      bestScore = score + tiebreak;
+    const total = score + tiebreak;
+
+    if (total > bestScore) {
+      bestScore = total;
       best = entry;
     }
   }
 
-  return best && bestScore >= realThreshold ? best.full : null;
+  if (best && bestScore >= realThreshold) {
+    return { path: best.full, score: Number(bestScore.toFixed(4)) };
+  }
+  return null;
 }
 
 /**
@@ -1680,7 +1844,7 @@ function makeColumnMapper(opts = {}) {
         }
       }
     }
-    return { applied, total: worksheetTo.rowCount - 1 };
+    return { applied, total: Math.max(worksheetTo.rowCount - 1, 0) };
   };
 }
 
@@ -1719,9 +1883,11 @@ module.exports = {
   normName,
   tokensOf,
   tokenOverlapScore,
-};
 
-/* fin */
+  // util extra
+  escapeRegExp,
+  normalizeFsPath,
+};
 
 
 --------------------------------------------
@@ -1731,13 +1897,46 @@ D:\empresas\ferreluc\gestion\scripts\config.cjs:
 // Centraliza rutas, políticas de cálculo y parámetros de normalización
 // para TODOS los .cjs. Si mañana movés el proyecto de disco, solo tocás acá.
 
+"use strict";
+
+const fs = require("fs");
 const path = require("path");
 
-// Podés sobreescribir el root por ENV si corrés en otra máquina
-const ROOT =
-  process.env.GESTION_ROOT?.replace(/\\/g, "/") ||
-  "D:/empresas/ferreluc/gestion";
+// ───────────────────────── helpers internas ─────────────────────────
+function normalizeFsPath(p) {
+  return String(p || "").replace(/\\/g, "/");
+}
 
+// intenta cargar dotenv si existe algún .env cercano
+(function loadDotenvIfPresent() {
+  try {
+    const dotenv = require("dotenv");
+    // busca .env en gestion/ y en gestion/scripts/
+    const candidates = [
+      path.resolve(__dirname, "../.env"),
+      path.resolve(__dirname, ".env"),
+    ];
+    for (const p of candidates) {
+      if (fs.existsSync(p)) {
+        dotenv.config({ path: p });
+        break;
+      }
+    }
+  } catch {
+    // opcional, no obligatorio
+  }
+})();
+
+// ───────────────────────── ROOT ─────────────────────────
+// Preferí ENV. Si no, usa la carpeta padre de /scripts como raíz.
+// Mantengo el hardcode como último fallback por compatibilidad.
+const ROOT = normalizeFsPath(
+  process.env.GESTION_ROOT ||
+    path.resolve(__dirname, "..") ||
+    "D:/empresas/ferreluc/gestion"
+);
+
+// ───────────────────────── Rutas derivadas ─────────────────────────
 const LISTAS = `${ROOT}/listas`;
 const NORMALIZADAS_GRAIS = `${LISTAS}/normalizadas/grais`;
 const ORIGINALES_GRAIS = `${LISTAS}/originales/grais`;
@@ -1745,13 +1944,12 @@ const IMG_DIR = `${ROOT}/imagenes`;
 const JSON_DIR = `${ROOT}/json`;
 const REPORTES_DIR = `${NORMALIZADAS_GRAIS}/reportes`;
 
-// helper chiquito para rutas relativas al ROOT
+// helper para rutas relativas al ROOT
 function fromRoot(...segs) {
-  return path
-    .resolve(ROOT, ...segs)
-    .replace(/\\/g, "/");
+  return normalizeFsPath(path.resolve(ROOT, ...segs));
 }
 
+// ───────────────────────── Config de rutas ─────────────────────────
 const RUTAS = {
   // Excel origen (crudo del proveedor)
   ORIGEN_XLSX: `${ORIGINALES_GRAIS}/data.xlsx`,
@@ -1763,9 +1961,9 @@ const RUTAS = {
   REPORTE_DIR: REPORTES_DIR,
   REPORTE_XLSX: `${REPORTES_DIR}/no_encontrados.xlsx`,
 
-  // Imágenes
+  // Imágenes (ruta física en disco)
   IMAGES_DIR: IMG_DIR,
-  // Esto es ruta física; los scripts de imagen la van a mapear a /imagenes/...
+  // Los scripts mapean esto a /imagenes/sin_imagen.png para la web
   FALLBACK_IMG: `${IMG_DIR}/sin_imagen.png`,
 
   // JSON de salida (para el catálogo)
@@ -1773,30 +1971,31 @@ const RUTAS = {
   OUTPUT_PATH: `${JSON_DIR}/producto_grais.json`,
 };
 
-// Política de cálculos (por si cambia IVA/markup)
+// ───────────────────────── Política de cálculo ─────────────────────────
+// NOTA: usar decimales con punto en ENV (ej: 0.21, 0.4)
 const CALC = {
-  // IVA del proveedor / país
   IVA: Number(process.env.CALC_IVA ?? 0.21),
-  // Margen que querés sobre costo (40% por defecto)
   GANANCIA: Number(process.env.CALC_GANANCIA ?? 0.4),
 };
 
-// Dónde está el headers.json del otro proyecto (el Next)
-// Esto lo usan los helpers para mapear columnas.
+// ───────────────────────── headers.json de catálogo ─────────────────────────
+// Orden de candidatos:
+// 1) HEADERS_JSON_PATH explícito por ENV
+// 2) repo de catálogo relativo al cwd actual
+// 3) repo de catálogo relativo a la raíz de gestión
+// 4) hardcode histórico (compat)
 const HEADERS_JSON_CANDIDATES = [
-  process.env.HEADERS_JSON_PATH &&
-    path.resolve(process.env.HEADERS_JSON_PATH),
-  // ruta fija que ya usabas
-  "D:/empresas/catalogo/lib/headers.json",
-  // por si estás parado en el repo de catálogo
+  process.env.HEADERS_JSON_PATH && path.resolve(process.env.HEADERS_JSON_PATH),
   path.resolve(process.cwd(), "lib", "headers.json"),
+  fromRoot("../catalogo/lib/headers.json"),
+  "D:/empresas/catalogo/lib/headers.json",
 ]
   .filter(Boolean)
-  .map((p) => String(p).replace(/\\/g, "/"));
+  .map((p) => normalizeFsPath(p));
 
-// Parámetros genéricos reutilizables por los scripts
+// ───────────────────────── Parámetros generales ─────────────────────────
 const PARAMS = {
-  // umbral global para fuzzy de imágenes
+  // umbral global para fuzzy de imágenes [0..1]
   IMAGE_FUZZY_THRESHOLD: Number(process.env.IMAGE_FUZZY_THRESHOLD ?? 0.55),
 
   // columnas por defecto en el Excel destino
@@ -1805,7 +2004,7 @@ const PARAMS = {
     CATEGORIA: process.env.COL_CATEGORIA || "categoria",
   },
 
-  // si está en true, los scripts de imagen SOLO completan celdas vacías
+  // cuando true, los scripts de imagen SOLO completan celdas vacías
   IMAGES_ONLY_EMPTY: /^true$/i.test(process.env.IMAGES_ONLY_EMPTY || ""),
 
   // === Soporte al mapeo "Precio Venta (E) -> (K)" por UI ===
@@ -1818,17 +2017,17 @@ const PARAMS = {
     SHEET_ORIG: process.env.PRECIO_VENTA_SHEET_ORIG || "",
     SHEET_DEST: process.env.PRECIO_VENTA_SHEET_DEST || "",
     /**
-     * Cómo construir la clave para matchear filas entre origen y destino.
-     * Por defecto, se usa el contenido de la columna "codigo_flexxus" si existe,
-     * o la primera columna como fallback.
-     * (La función concreta se implementa en los scripts que llamen a makeColumnMapper).
+     * Clave para matchear filas entre origen y destino.
+     * Por defecto se usa "codigo_flexxus". Los scripts definen la función.
      */
-    KEY_STRATEGY: process.env.PRECIO_VENTA_KEY_STRATEGY || "codigo_flexxus",
-    // Sanear y parsear precios al aplicar (true = usa parsePrecio)
+    KEY_STRATEGY:
+      process.env.PRECIO_VENTA_KEY_STRATEGY || "codigo_flexxus",
+    // Sanear y parsear precios al aplicar
     PARSE_PRECIOS: /^true$/i.test(process.env.PRECIO_VENTA_PARSE || "true"),
   },
 };
 
+// Export
 module.exports = {
   ROOT,
   LISTAS,
@@ -1839,16 +2038,15 @@ module.exports = {
   fromRoot,
 };
 
-/* fin */
-
 
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs:
-// descripcion_flexxus.cjs
 // D:\empresas\ferreluc\gestion\scripts\descripcion_flexxus.cjs
 // Copia "Descripcion Flexxus" desde ORIGEN → DESTINO por "CODIGO FLEXXUS"
 // Requisitos: npm i exceljs
+
+"use strict";
 
 const ExcelJS = require("exceljs");
 const { RUTAS } = require("./config.cjs");
@@ -1856,58 +2054,51 @@ const {
   buildHeaderIndex,
   readCellText,
   toKey,
+  getWorksheetByNameOrFirst,
 } = require("./common.cjs");
 const { buildFlexxusKey } = require("./shared-keys.cjs");
 
 const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 
+function getIdxSafe(idx, candidates, fallback) {
+  for (const c of candidates) {
+    const k = typeof c === "string" ? toKey(c) : c;
+    const v = idx.get(k);
+    if (v) return v;
+  }
+  return fallback || null;
+}
+
 async function cargarOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(ruta);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[descripcion_flexxus] ORIGEN sin worksheet");
   const idx = buildHeaderIndex(ws);
 
-  // columnas esperadas en ORIGEN (pero con tolerancia)
-  const colProv =
-    idx.get(toKey("PROVEEDOR")) ||
-    idx.get("proveedor") ||
-    1;
-  const colCod =
-    idx.get(toKey("CODIGO")) ||
-    idx.get("codigo") ||
-    2;
-  const colFlex =
-    idx.get(toKey("CODIGO FLEXXUS")) ||
-    idx.get("codigo flexxus") ||
-    idx.get("codigo_flexxus") ||
-    3;
-  const colDesc =
-    idx.get(toKey("Descripcion Flexxus")) ||
-    idx.get("descripcion flexxus") ||
-    idx.get("descripcion_flexxus") ||
-    4;
+  // columnas esperadas en ORIGEN (tolerantes)
+  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"]);
+  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"]);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"]);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"]);
+
+  if (!colProv || !colCod || !colFlex || !colDesc) {
+    throw new Error("[descripcion_flexxus] ORIGEN sin encabezados esperados (proveedor, codigo, codigo flexxus, descripcion).");
+  }
 
   const map = new Map();
 
   ws.eachRow((row, r) => {
     if (r === 1) return;
-
     const proveedor = readCellText(row.getCell(colProv));
     const codigo = readCellText(row.getCell(colCod));
     const codigoFlexxus = readCellText(row.getCell(colFlex));
     const descripcion = readCellText(row.getCell(colDesc));
-
-    const key = buildFlexxusKey({
-      codigoFlexxus,
-      proveedor,
-      codigo,
-    });
-
+    const key = buildFlexxusKey({ codigoFlexxus, proveedor, codigo });
     if (!key) return;
-
-    // si hay filas duplicadas en origen, la última gana
-    map.set(key, descripcion);
+    // última aparición gana
+    map.set(key, descripcion || "");
   });
 
   return map;
@@ -1916,20 +2107,16 @@ async function cargarOrigen(ruta) {
 async function escribirDestino(rutaDestino, origenMap) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(rutaDestino);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[descripcion_flexxus] DESTINO sin worksheet");
   const idx = buildHeaderIndex(ws);
 
-  const colFlexDst =
-    idx.get(toKey("codigo flexxus")) ||
-    idx.get("codigo flexxus") ||
-    idx.get("codigo_flexxus") ||
-    1;
+  const colFlexDst = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"]);
+  const colDescDst = getIdxSafe(idx, ["descripcion flexxus", "descripcion_flexxus"]);
 
-  const colDescDst =
-    idx.get(toKey("descripcion flexxus")) ||
-    idx.get("descripcion flexxus") ||
-    idx.get("descripcion_flexxus") ||
-    10;
+  if (!colFlexDst || !colDescDst) {
+    throw new Error("[descripcion_flexxus] DESTINO sin columnas requeridas (codigo_flexxus, descripcion_flexxus).");
+  }
 
   let actualizados = 0;
   let sinMatch = 0;
@@ -1941,16 +2128,17 @@ async function escribirDestino(rutaDestino, origenMap) {
       sinMatch++;
       continue;
     }
-
     const desc = origenMap.get(key);
-    if (desc == null || desc === "") {
+    if (!desc) {
       sinMatch++;
       continue;
     }
-
-    row.getCell(colDescDst).value = desc;
-    row.commit();
-    actualizados++;
+    // asignar solo si cambia para evitar “touch” innecesario
+    if (readCellText(row.getCell(colDescDst)) !== desc) {
+      row.getCell(colDescDst).value = desc;
+      row.commit();
+      actualizados++;
+    }
   }
 
   await wb.xlsx.writeFile(rutaDestino);
@@ -1961,10 +2149,7 @@ async function main() {
   console.time("descripcion_flexxus");
   try {
     const origenMap = await cargarOrigen(ORIGEN_XLSX);
-    const { actualizados, sinMatch } = await escribirDestino(
-      DESTINO_XLSX,
-      origenMap
-    );
+    const { actualizados, sinMatch } = await escribirDestino(DESTINO_XLSX, origenMap);
     console.log(
       `[descripcion_flexxus] Actualizados: ${actualizados} | Sin coincidencia/desc vacía: ${sinMatch}`
     );
@@ -1984,9 +2169,7 @@ module.exports = { main };
 
 D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs:
 // exportar_json.cjs
-// D:\empresas\ferreluc\gestion\scripts\exportar_json.cjs
-// Lee el XLSX destino (ya normalizado) y lo vuelca a un JSON ordenado que usa el catálogo.
-// Además genera un META con info útil para el Next.
+// Lee el XLSX destino (normalizado) → JSON + META (+ manifest)
 // Requisitos: npm i chokidar exceljs
 
 const fs = require("fs");
@@ -1996,14 +2179,20 @@ const { RUTAS, ROOT } = require("./config.cjs");
 const {
   loadDestinoWorkbook,
   worksheetToObjects,
-  exportToJson,
   ensureImagenField,
 } = require("./pipeline-core.cjs");
+const { writeManifest } = require("./pipeline-manifest.cjs");
 
 const XLSX_PATH = RUTAS.DESTINO_XLSX;
 const OUTPUT_DIR = RUTAS.OUTPUT_DIR;
 const OUTPUT_PATH = RUTAS.OUTPUT_PATH;
 const META_PATH = `${OUTPUT_DIR}/producto_grais.meta.json`;
+
+function atomicWrite(path, data) {
+  const tmp = `${path}.tmp.${Date.now()}`;
+  fs.writeFileSync(tmp, data, "utf-8");
+  fs.renameSync(tmp, path);
+}
 
 function makeHash(data) {
   return crypto.createHash("md5").update(data).digest("hex");
@@ -2022,10 +2211,10 @@ async function exportOnce() {
     // asegurar imagen normalizada para el Next
     rows = rows.map((r) => ensureImagenField(r));
 
-    // escribir JSON principal
+    // escribir JSON principal (atómico)
     await fs.promises.mkdir(OUTPUT_DIR, { recursive: true });
     const jsonString = JSON.stringify(rows, null, 2);
-    await fs.promises.writeFile(OUTPUT_PATH, jsonString, "utf-8");
+    atomicWrite(OUTPUT_PATH, jsonString);
 
     // armar META para el catálogo
     const meta = {
@@ -2034,23 +2223,18 @@ async function exportOnce() {
       root: ROOT,
       total: rows.length,
       hash_md5: makeHash(jsonString),
-      files: {
-        data: OUTPUT_PATH,
-      },
+      files: { data: OUTPUT_PATH },
       pipeline: {
-        // el catálogo puede mostrar esto
         ran: ["importar_precios", "descripcion_flexxus", "colocar_imagenes", "exportar_json"],
       },
     };
+    atomicWrite(META_PATH, JSON.stringify(meta, null, 2));
 
-    await fs.promises.writeFile(
-      META_PATH,
-      JSON.stringify(meta, null, 2),
-      "utf-8"
-    );
+    // manifest global (para que el catálogo descubra datasets)
+    await writeManifest();
 
     console.log(
-      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta)`
+      `[exportar_json] Exportado ${rows.length} registros → ${OUTPUT_PATH} (+ meta + manifest)`
     );
   } catch (err) {
     console.error("[exportar_json] Error exportando:", err.message);
@@ -2068,15 +2252,13 @@ function startWatcher() {
 
   const watcher = chokidar.watch(XLSX_PATH, {
     ignoreInitial: false,
-    awaitWriteFinish: { stabilityThreshold: 500, pollInterval: 100 },
+    awaitWriteFinish: { stabilityThreshold: 700, pollInterval: 150 },
   });
 
   watcher
     .on("add", trigger)
     .on("change", trigger)
-    .on("error", (e) =>
-      console.error("[exportar_json] Watcher error:", e.message)
-    );
+    .on("error", (e) => console.error("[exportar_json] Watcher error:", e.message));
 }
 
 if (require.main === module) {
@@ -2089,11 +2271,12 @@ module.exports = { exportOnce, startWatcher };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs:
-// importar_precios.cjs
 // D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
 // Actualiza precios y recalcula IVA, costo, ganancia y venta.
 // Genera reporte de origenes que NO están en el destino.
 // Requisitos: npm i exceljs
+
+"use strict";
 
 const path = require("path");
 const ExcelJS = require("exceljs");
@@ -2105,6 +2288,7 @@ const {
   parsePrecio,
   round2,
   ensureDir,
+  getWorksheetByNameOrFirst,
 } = require("./common.cjs");
 const { buildFlexxusKey } = require("./shared-keys.cjs");
 
@@ -2112,23 +2296,32 @@ const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const REPORTE_XLSX = RUTAS.REPORTE_XLSX;
 
+function getIdxSafe(idx, names) {
+  for (const n of names) {
+    const k = typeof n === "string" ? toKey(n) : n;
+    const v = idx.get(k);
+    if (v) return v;
+  }
+  return null;
+}
+
 // Lee el Excel origen y devuelve un Map por codigoFlexxus
 async function leerOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(ruta);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[importar_precios] ORIGEN sin worksheet");
+
   const idx = buildHeaderIndex(ws);
 
-  const colProv = idx.get(toKey("PROVEEDOR")) || idx.get("proveedor");
-  const colCod = idx.get(toKey("CODIGO")) || idx.get("codigo");
-  const colFlex = idx.get(toKey("CODIGO FLEXXUS")) || idx.get("codigo flexxus");
-  const colDesc = idx.get(toKey("Descripcion Flexxus")) || idx.get("descripcion flexxus");
-  const colPrecio = idx.get(toKey("PRECIO VENTA")) || idx.get("precio venta");
+  const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"]);
+  const colCod = getIdxSafe(idx, ["CODIGO", "codigo"]);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"]);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"]);
+  const colPrecio = getIdxSafe(idx, ["PRECIO VENTA", "precio venta", "precio_venta"]);
 
   if (!colProv || !colCod || !colDesc || !colPrecio) {
-    throw new Error(
-      "[importar_precios] El archivo ORIGEN no tiene los encabezados esperados."
-    );
+    throw new Error("[importar_precios] ORIGEN sin encabezados esperados (proveedor, codigo, descripcion, precio venta).");
   }
 
   const map = new Map();
@@ -2142,12 +2335,7 @@ async function leerOrigen(ruta) {
     const descFlexxus = readCellText(row.getCell(colDesc));
     const precioRaw = row.getCell(colPrecio).value;
 
-    const key = buildFlexxusKey({
-      codigoFlexxus,
-      proveedor,
-      codigo,
-    });
-
+    const key = buildFlexxusKey({ codigoFlexxus, proveedor, codigo });
     if (!key) return;
 
     const precio = parsePrecio(precioRaw);
@@ -2168,26 +2356,20 @@ async function leerOrigen(ruta) {
 async function procesarDestino(rutaDestino, origenMap) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(rutaDestino);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[importar_precios] DESTINO sin worksheet");
+
   const idx = buildHeaderIndex(ws);
 
-  const colFlex = idx.get(toKey("codigo flexxus")) || idx.get("codigo flexxus");
-  const colPrecioVenta = idx.get(toKey("precio venta")) || idx.get("precio venta");
-  const colCaja = idx.get(toKey("caja")) || idx.get("caja");
-  const colIva = idx.get(toKey("iva")) || idx.get("iva");
-  const colCosto = idx.get(toKey("costo")) || idx.get("costo");
-  const colGan = idx.get(toKey("ganancia")) || idx.get("ganancia");
-  const colVenta = idx.get(toKey("venta")) || idx.get("venta");
+  const colFlex = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"]);
+  const colPrecioVenta = getIdxSafe(idx, ["precio venta", "precio_venta"]);
+  const colCaja = getIdxSafe(idx, ["caja"]);
+  const colIva = getIdxSafe(idx, ["iva"]);
+  const colCosto = getIdxSafe(idx, ["costo"]);
+  const colGan = getIdxSafe(idx, ["ganancia"]);
+  const colVenta = getIdxSafe(idx, ["venta"]);
 
-  const required = [
-    colFlex,
-    colPrecioVenta,
-    colCaja,
-    colIva,
-    colCosto,
-    colGan,
-    colVenta,
-  ];
+  const required = [colFlex, colPrecioVenta, colCaja, colIva, colCosto, colGan, colVenta];
   if (required.some((c) => !c)) {
     throw new Error(
       "[importar_precios] DESTINO sin encabezados mínimos (codigo flexxus, precio venta, caja, iva, costo, ganancia, venta)."
@@ -2208,7 +2390,7 @@ async function procesarDestino(rutaDestino, origenMap) {
     if (!src) continue;
 
     const precioOrigen = src.precioOrigen;
-    if (precioOrigen == null) {
+    if (precioOrigen == null || Number.isNaN(precioOrigen) || precioOrigen <= 0) {
       sinPrecio++;
       continue;
     }
@@ -2217,11 +2399,13 @@ async function procesarDestino(rutaDestino, origenMap) {
     let caja = parsePrecio(row.getCell(colCaja).value);
     if (!caja || caja <= 0) caja = 1;
 
-    // K — PRECIO VENTA (del origen)
-    const precioUnidad = precioOrigen / caja;
+    // K — PRECIO VENTA (valor del origen tal como viene)
     row.getCell(colPrecioVenta).value = round2(precioOrigen);
 
-    // M — IVA
+    // Calcular por unidad
+    const precioUnidad = precioOrigen / caja;
+
+    // M — IVA (monto)
     const iva = precioUnidad * CALC.IVA;
     row.getCell(colIva).value = round2(iva);
 
@@ -2229,7 +2413,7 @@ async function procesarDestino(rutaDestino, origenMap) {
     const costo = precioUnidad + iva;
     row.getCell(colCosto).value = round2(costo);
 
-    // N — ganancia
+    // N — ganancia (monto)
     const ganancia = costo * CALC.GANANCIA;
     row.getCell(colGan).value = round2(ganancia);
 
@@ -2293,7 +2477,7 @@ async function main() {
     );
 
     console.log(
-      `[importar_precios] Actualizados: ${actualizados} | Sin precio válido: ${sinPrecio} | No encontrados: ${noEncontrados}`
+      `[importar_precios] Actualizados: ${actualizados} | Sin precio válido: ${sinPrecio} | No encontrados: ${noEncontrados} | IVA: ${CALC.IVA} | GANANCIA: ${CALC.GANANCIA}`
     );
   } catch (err) {
     console.error("[importar_precios] ERROR:", err.message);
@@ -2310,17 +2494,16 @@ module.exports = { main };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\orquestador.cjs:
-// orquestador.cjs
 // D:\empresas\ferreluc\gestion\scripts\orquestador.cjs
 // Orquesta el pipeline completo:
-//
 // 1) si cambia ORIGEN → importar_precios → descripcion_flexxus
 // 2) si cambia DESTINO (externo) → descripcion_flexxus
 // 3) si cambian IMÁGENES → colocar_imagenes
 // 4) siempre al final → exportar_json
 //
-// Además: evita el loop de auto-disparo ignorando los cambios en DESTINO
-// que fueron provocados por ESTE MISMO proceso en los últimos N ms.
+// Evita loops ignorando cambios en DESTINO escritos por este proceso.
+
+"use strict";
 
 const chokidar = require("chokidar");
 const { RUTAS } = require("./config.cjs");
@@ -2333,32 +2516,37 @@ const ORIGEN_XLSX = RUTAS.ORIGEN_XLSX;
 const DESTINO_XLSX = RUTAS.DESTINO_XLSX;
 const IMAGES_DIR = RUTAS.IMAGES_DIR;
 
-// ventana de tiempo para considerar "esto lo escribí yo"
 const SELF_WRITE_WINDOW_MS = 2000;
 
 let timer = null;
 let running = false;
 let pending = false;
 
-// flags para saber qué cambió
+// flags de cambio
 let origenChanged = false;
 let destinoChanged = false;
 let imagesChanged = false;
 
-// timestamps de última escritura hecha por el pipeline
+// timestamp de última escritura hecha por el pipeline
 let lastDestinoWriteTs = 0;
 
 function markDestinoWritten() {
   lastDestinoWriteTs = Date.now();
 }
 
-function isSelfWrite(ts) {
-  return Date.now() - ts < SELF_WRITE_WINDOW_MS;
+function isSelfWrite() {
+  // si ocurrió un cambio dentro de la ventana luego de que escribimos, lo ignoramos
+  return Date.now() - lastDestinoWriteTs < SELF_WRITE_WINDOW_MS;
 }
 
 function schedulePipeline() {
   clearTimeout(timer);
   timer = setTimeout(pipeline, 500);
+}
+
+async function runColocarImagenesSeguro() {
+  await runColocarImagenes();
+  markDestinoWritten(); // también escribe DESTINO
 }
 
 async function pipeline() {
@@ -2369,37 +2557,29 @@ async function pipeline() {
   running = true;
 
   try {
-    // si cambió origen: hay que recalcular todo lo numérico
     if (origenChanged) {
       console.log("[orquestador] ▶ importar_precios (por cambio en ORIGEN)...");
       await runImportarPrecios();
       console.log("[orquestador] ✔ importar_precios OK");
-
-      // importar_precios escribe DESTINO
       markDestinoWritten();
 
       console.log("[orquestador] ▶ descripcion_flexxus (reaplicar)...");
       await runDescripcionFlexxus();
       console.log("[orquestador] ✔ descripcion_flexxus OK");
-
-      // descripcion_flexxus también escribe DESTINO
       markDestinoWritten();
     } else if (destinoChanged) {
       console.log("[orquestador] ▶ descripcion_flexxus (por cambio en DESTINO)...");
       await runDescripcionFlexxus();
       console.log("[orquestador] ✔ descripcion_flexxus OK");
-
       markDestinoWritten();
     }
 
-    // si cambiaron imágenes o cualquier cosa anterior, recolocamos
     if (imagesChanged || origenChanged || destinoChanged) {
       console.log("[orquestador] ▶ colocar_imagenes...");
-      await runColocarImágenesSeguro();
+      await runColocarImagenesSeguro();
       console.log("[orquestador] ✔ colocar_imagenes OK");
     }
 
-    // siempre que llegamos acá exportamos
     console.log("[orquestador] ▶ exportar_json...");
     await exportOnce();
     console.log("[orquestador] ✔ exportar_json OK");
@@ -2407,7 +2587,6 @@ async function pipeline() {
     console.error("[orquestador] ERROR:", e?.message || e);
   } finally {
     running = false;
-    // reseteo flags
     origenChanged = false;
     destinoChanged = false;
     imagesChanged = false;
@@ -2417,13 +2596,6 @@ async function pipeline() {
       schedulePipeline();
     }
   }
-}
-
-// pequeño wrapper para poder marcar que tocamos el destino
-async function runColocarImágenesSeguro() {
-  await runColocarImagenes();
-  // este script también pisa DESTINO
-  markDestinoWritten();
 }
 
 console.log("[orquestador] Observando:");
@@ -2437,14 +2609,8 @@ chokidar
     ignoreInitial: false,
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
-  .on("add", () => {
-    origenChanged = true;
-    schedulePipeline();
-  })
-  .on("change", () => {
-    origenChanged = true;
-    schedulePipeline();
-  })
+  .on("add", () => { origenChanged = true; schedulePipeline(); })
+  .on("change", () => { origenChanged = true; schedulePipeline(); })
   .on("error", (e) => console.error("[orquestador] watcher origen:", e.message));
 
 // watcher de DESTINO
@@ -2454,15 +2620,12 @@ chokidar
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
   .on("add", () => {
-    // si lo acabamos de escribir nosotros, ignorar
-    if (isSelfWrite(lastDestinoWriteTs)) return;
-    destinoChanged = true;
-    schedulePipeline();
+    if (isSelfWrite()) return;
+    destinoChanged = true; schedulePipeline();
   })
   .on("change", () => {
-    if (isSelfWrite(lastDestinoWriteTs)) return;
-    destinoChanged = true;
-    schedulePipeline();
+    if (isSelfWrite()) return;
+    destinoChanged = true; schedulePipeline();
   })
   .on("error", (e) => console.error("[orquestador] watcher destino:", e.message));
 
@@ -2473,10 +2636,7 @@ chokidar
     depth: 1,
     awaitWriteFinish: { stabilityThreshold: 600, pollInterval: 150 },
   })
-  .on("all", () => {
-    imagesChanged = true;
-    schedulePipeline();
-  })
+  .on("all", () => { imagesChanged = true; schedulePipeline(); })
   .on("error", (e) => console.error("[orquestador] watcher img:", e.message));
 
 // correr una vez al inicio
@@ -2506,23 +2666,26 @@ D:\empresas\ferreluc\gestion\scripts\package.json:
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs:
-// (NUEVO) D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs
+// D:\empresas\ferreluc\gestion\scripts\pipeline-core.cjs
 // Núcleo reutilizable para los scripts de ETL (grais)
+
+"use strict";
 
 const ExcelJS = require("exceljs");
 const { RUTAS } = require("./config.cjs");
 const {
   buildHeaderIndex,
-  readCellText,
   mapHeadersFromRow,
   normalizeImagenPath,
+  getWorksheetByNameOrFirst,
 } = require("./common.cjs");
 
 // carga el excel destino ya normalizado
 async function loadDestinoWorkbook() {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(RUTAS.DESTINO_XLSX);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[pipeline-core] DESTINO sin worksheet");
   return { wb, ws };
 }
 
@@ -2538,17 +2701,6 @@ function worksheetToObjects(ws) {
   return rows;
 }
 
-// exporta a json usando la ruta del config
-function exportToJson(objs) {
-  const fs = require("fs");
-  const path = require("path");
-  const outDir = RUTAS.OUTPUT_DIR;
-  const outFile = RUTAS.OUTPUT_PATH;
-  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-  fs.writeFileSync(outFile, JSON.stringify(objs, null, 2), "utf-8");
-  return outFile;
-}
-
 // normaliza campo imagen en un objeto
 function ensureImagenField(o) {
   if (!o) return o;
@@ -2559,7 +2711,6 @@ function ensureImagenField(o) {
 module.exports = {
   loadDestinoWorkbook,
   worksheetToObjects,
-  exportToJson,
   ensureImagenField,
 };
 
@@ -2567,12 +2718,19 @@ module.exports = {
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\pipeline-manifest.cjs:
-// pipeline-manifest.cjs
-// (NUEVO) mini utilidad para generar un manifest de lo que hay en /json
-// Lo puede leer el catálogo para saber qué colecciones tiene.
+// D:\empresas\ferreluc\gestion\scripts\pipeline-manifest.cjs
+// Mini utilidad para generar un manifest de lo que hay en /json
+
+"use strict";
 
 const fs = require("fs");
 const { RUTAS } = require("./config.cjs");
+
+function atomicWrite(path, data) {
+  const tmp = `${path}.tmp.${process.pid}.${Date.now()}`;
+  fs.writeFileSync(tmp, data, "utf-8");
+  fs.renameSync(tmp, path);
+}
 
 async function writeManifest() {
   const outDir = RUTAS.OUTPUT_DIR;
@@ -2591,11 +2749,7 @@ async function writeManifest() {
   };
 
   await fs.promises.mkdir(outDir, { recursive: true });
-  await fs.promises.writeFile(
-    manifestPath,
-    JSON.stringify(manifest, null, 2),
-    "utf-8"
-  );
+  atomicWrite(manifestPath, JSON.stringify(manifest, null, 2));
 
   return manifestPath;
 }
@@ -2610,16 +2764,36 @@ module.exports = { writeManifest };
 --------------------------------------------
 
 D:\empresas\ferreluc\gestion\scripts\shared-keys.cjs:
-// shared-keys.cjs
+// D:\empresas\ferreluc\gestion\scripts\shared-keys.cjs
 // Construcción consistente de la key "codigo flexxus"
-// Preferencia: explicito > proveedor+codigo > null
+// Preferencia: explícito > proveedor+codigo > null
 
+"use strict";
+
+/**
+ * Normaliza un segmento de clave:
+ * - trim
+ * - colapsa espacios a uno
+ * - mayúsculas (case-insensitive consistente)
+ */
+function normalizeKeyPart(s) {
+  return String(s || "")
+    .trim()
+    .replace(/\s+/g, " ")
+    .toUpperCase();
+}
+
+/**
+ * Construye la clave canónica usada en ORIGEN y DESTINO.
+ * Si viene codigoFlexxus explícito, se usa tal cual (trim + normalizado mínimo).
+ * Si no, se arma PROVEEDOR-CODIGO (ambos normalizados).
+ */
 function buildFlexxusKey({ codigoFlexxus, proveedor, codigo }) {
-  const flex = (codigoFlexxus || "").trim();
+  const flex = normalizeKeyPart(codigoFlexxus);
   if (flex) return flex;
 
-  const prov = (proveedor || "").trim();
-  const cod = (codigo || "").trim();
+  const prov = normalizeKeyPart(proveedor);
+  const cod = normalizeKeyPart(codigo);
 
   if (prov && cod) return `${prov}-${cod}`;
 
@@ -2628,12 +2802,19 @@ function buildFlexxusKey({ codigoFlexxus, proveedor, codigo }) {
 
 module.exports = {
   buildFlexxusKey,
+  normalizeKeyPart,
 };
 
 
 --------------------------------------------
 
+D:\empresas\ferreluc\gestion\.env:
+[archivo binario/no textual]
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\admin\import\page.jsx:
+// D:\empresas\catalogo\app\admin\import\page.jsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -3141,6 +3322,7 @@ export default function ImportPage() {
 --------------------------------------------
 
 D:\empresas\catalogo\app\admin\login\page.jsx:
+// D:\empresas\catalogo\app\admin\login\page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -3518,6 +3700,7 @@ export default function PipelineClient() {
 --------------------------------------------
 
 D:\empresas\catalogo\app\admin\productos\update\route.js:
+// D:\empresas\catalogo\app\admin\productos\update\route.js
 // PATCH { codigo_flexxus, changes: { venta, mayorista, inventario, marca, imagen, moneda, nombre_descripcion, categoria } }
 import fs from "fs";
 import { NextResponse } from "next/server";
@@ -3551,6 +3734,7 @@ export async function PATCH(req) {
 --------------------------------------------
 
 D:\empresas\catalogo\app\admin\users\page.jsx:
+// D:\empresas\catalogo\app\admin\users\page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -3711,6 +3895,7 @@ export default function AdminUsersPage() {
 --------------------------------------------
 
 D:\empresas\catalogo\app\admin\page.jsx:
+// D:\empresas\catalogo\app\admin\page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
@@ -5627,6 +5812,223 @@ export async function POST(req) {
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\api\payments\reconcile\route.js:
+// GET /api/payments/reconcile?payment_id=...&collection_id=...
+// Forza la consulta del pago en MP y actualiza Payment/Order igual que el webhook.
+// Útil en /checkout/success cuando el webhook no llegó.
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
+
+const MP_API = "https://api.mercadopago.com/v1/payments/";
+const PROVIDER = "mercadopago";
+
+function mapStatus(mp) {
+  const s = String(mp?.status || "").toLowerCase();
+  if (s === "approved") return { pay: "approved", order: "paid" };
+  if (s === "pending" || s === "in_process" || s === "in_mediation") return { pay: "pending", order: "pending" };
+  if (s === "rejected" || s === "cancelled") return { pay: "rejected", order: "pending" };
+  if (s === "refunded" || s === "charged_back") return { pay: "refunded", order: "pending" };
+  return { pay: "error", order: "pending" };
+}
+
+async function fetchPayment(mpId) {
+  const token = process.env.MP_ACCESS_TOKEN;
+  if (!token) throw new Error("MP_ACCESS_TOKEN missing");
+  const res = await fetch(`${MP_API}${encodeURIComponent(mpId)}`, {
+    headers: { Authorization: `Bearer ${token}` },
+    cache: "no-store",
+  });
+  const json = await res.json().catch(() => ({}));
+  if (!res.ok) throw new Error(`MP fetch ${res.status}: ${json?.message || ""}`);
+  return json;
+}
+
+async function recalcOrder(orderId) {
+  if (!orderId) return;
+  const { _sum } = await prisma.payment.aggregate({
+    where: { orderId, status: "approved" },
+    _sum: { amount: true },
+  });
+  const order = await prisma.order.findUnique({ where: { id: orderId } });
+  if (!order) return;
+  if ((_sum.amount || 0) >= (order.total || 0) && order.status !== "paid") {
+    await prisma.order.update({
+      where: { id: orderId },
+      data: { status: "paid", paidAt: order.paidAt || new Date() },
+    });
+  }
+}
+
+export async function GET(req) {
+  try {
+    const url = new URL(req.url);
+    const mpId = url.searchParams.get("payment_id") || url.searchParams.get("collection_id");
+    if (!mpId) return NextResponse.json({ error: "payment_id/collection_id requerido" }, { status: 400 });
+
+    // Consultar pago
+    const mpPayment = await fetchPayment(mpId);
+    const { pay } = mapStatus(mpPayment);
+    const amount = Math.round(Number(mpPayment?.transaction_amount || 0) * 100);
+    const currency = String(mpPayment?.currency_id || "ARS").toUpperCase();
+    const meta = mpPayment?.metadata || {};
+    const externalRef = mpPayment?.external_reference || null;
+
+    // Ubicar orden
+    let orderRow = null;
+    if (meta.orderId) {
+      orderRow = await prisma.order.findUnique({ where: { id: String(meta.orderId) } });
+    }
+    if (!orderRow && meta.orderCode) {
+      orderRow = await prisma.order.findUnique({ where: { code: String(meta.orderCode) } });
+    }
+    if (!orderRow && externalRef) {
+      orderRow = await prisma.order.findUnique({ where: { code: String(externalRef) } }).catch(() => null);
+    }
+
+    // eventId sintético por reconciliación (idempotente por mpId)
+    const eventId = `mp:reconcile:${mpId}`;
+
+    const payment = await prisma.payment.upsert({
+      where: { eventId },
+      update: {
+        provider: PROVIDER,
+        providerRef: String(mpPayment?.id || ""),
+        status: pay,
+        currency: currency === "USD" ? "USD" : "ARS",
+        amount: amount || 0,
+        rawPayload: JSON.stringify(mpPayment),
+        errorMessage: null,
+        orderId: orderRow?.id || null,
+        tenantId: orderRow?.tenantId || null,
+      },
+      create: {
+        eventId,
+        provider: PROVIDER,
+        providerRef: String(mpPayment?.id || ""),
+        status: pay,
+        currency: currency === "USD" ? "USD" : "ARS",
+        amount: amount || 0,
+        rawPayload: JSON.stringify(mpPayment),
+        errorMessage: null,
+        orderId: orderRow?.id || null,
+        tenantId: orderRow?.tenantId || null,
+      },
+    });
+
+    if (orderRow) await recalcOrder(orderRow.id);
+
+    return NextResponse.json({ ok: true, payment, orderCode: orderRow?.code || null });
+  } catch (e) {
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: 500 });
+  }
+}
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\api\payments\route.js:
+// app/api/payments/route.js
+import { NextResponse } from "next/server";
+import { prisma } from "@/lib/db";
+import { isAdminApi } from "@/lib/admin";
+
+export const dynamic = "force-dynamic";
+
+// GET /api/payments?status=&method=&order=&q=
+export async function GET(req) {
+  try {
+    const url = new URL(req.url);
+    const status = url.searchParams.get("status") || undefined;
+    const method = url.searchParams.get("method") || undefined;
+    const orderCode = url.searchParams.get("order") || undefined;
+    const q = url.searchParams.get("q") || undefined;
+
+    const where = {
+      ...(status ? { status } : {}),
+      ...(method ? { provider: method } : {}),
+      ...(orderCode ? { order: { code: orderCode } } : {}),
+      ...(q
+        ? {
+            OR: [
+              { id: q },
+              { providerRef: q },
+              { eventId: q },
+              { order: { code: q } },
+              { order: { buyerEmail: { contains: q } } },
+            ],
+          }
+        : {}),
+    };
+
+    const rows = await prisma.payment.findMany({
+      where,
+      orderBy: { createdAt: "desc" },
+      include: { order: { select: { code: true, total: true, buyerEmail: true, customerId: true } } },
+      take: 500,
+    });
+
+    return NextResponse.json(rows);
+  } catch (e) {
+    console.error("[GET /api/payments]", e);
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: 500 });
+  }
+}
+
+// POST -> carga manual (transfer/QR) enlazado a una orden
+// body: { orderCode, provider="transfer"|..., amount, currency="ARS", status="pending"|"approved"|"rejected"|"refunded", note }
+export async function POST(req) {
+  try {
+    const ok = await isAdminApi(req);
+    if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const body = await req.json().catch(() => ({}));
+    const { orderCode, provider = "transfer", amount, currency = "ARS", status = "pending", note = "" } = body;
+
+    if (!orderCode || !provider || typeof amount !== "number") {
+      return NextResponse.json({ error: "orderCode, provider y amount son obligatorios" }, { status: 400 });
+    }
+
+    const order = await prisma.order.findUnique({ where: { code: orderCode } });
+    if (!order) return NextResponse.json({ error: "Orden no encontrada" }, { status: 404 });
+
+    // Generamos un eventId sintético para idempotencia manual
+    const eventId = `manual:${provider}:${order.id}:${Date.now()}`;
+
+    const payment = await prisma.payment.create({
+      data: {
+        eventId,
+        provider,
+        providerRef: null,
+        status,
+        amount,
+        currency,
+        rawPayload: note ? JSON.stringify({ note }) : null,
+        orderId: order.id,
+        tenantId: order.tenantId,
+      },
+    });
+
+    // Si aprueba, recalculamos estado de la orden
+    if (payment.status === "approved") {
+      const { _sum } = await prisma.payment.aggregate({
+        where: { orderId: order.id, status: "approved" },
+        _sum: { amount: true },
+      });
+      if ((_sum.amount || 0) >= order.total) {
+        await prisma.order.update({ where: { id: order.id }, data: { status: "paid", paidAt: new Date() } });
+      }
+    }
+
+    return NextResponse.json({ ok: true, payment });
+  } catch (e) {
+    const code = e?.name === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: code });
+  }
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\api\productos\admin\import\route.js:
 // D:\empresas\catalogo\app\api\productos\admin\import\route.js
 // DEPRECADO: usar /api/admin/import
@@ -5947,20 +6349,106 @@ export async function POST(req) {
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\api\shipments\route.js:
+// app/api/shipments/route.js
+import { NextResponse } from "next/server";
+import { isAdminApi } from "@/lib/admin";
+import { listShipments, createShipment, updateShipment, getShipmentById } from "@/lib/shipments-store";
+import { notify } from "@/lib/notify";
+
+export const dynamic = "force-dynamic";
+
+// GET /api/shipments?status=pending|shipped|delivered|canceled&order=FL-2025-000123&q=...
+export async function GET(req) {
+  try {
+    const url = new URL(req.url);
+    const status = url.searchParams.get("status") || undefined;
+    const orderCode = url.searchParams.get("order") || undefined;
+    const q = url.searchParams.get("q") || undefined;
+    const list = await listShipments({ status, orderCode, q });
+    return NextResponse.json(list);
+  } catch (e) {
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: 500 });
+  }
+}
+
+// POST /api/shipments
+// body: { orderCode, address, eta, tracking, carrier, status="pending", notes }
+export async function POST(req) {
+  try {
+    await isAdminApi();
+    const body = await req.json().catch(() => ({}));
+    const s = await createShipment(body);
+
+    // Notificación de creación
+    await notify({
+      type: "shipment_created",
+      to: s.email || null,
+      subject: `Tu envío para ${s.orderCode} fue creado`,
+      text: `Estado actual: ${s.status}\nTracking: ${s.tracking || "-"}\nETA: ${s.eta || "-"}`,
+      meta: s,
+    });
+
+    return NextResponse.json({ ok: true, shipment: s });
+  } catch (e) {
+    const code = e?.name === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: code });
+  }
+}
+
+// PATCH /api/shipments  (update por id)
+// body: { id, ...fields }
+export async function PATCH(req) {
+  try {
+    await isAdminApi();
+    const body = await req.json().catch(() => ({}));
+    if (!body?.id) return NextResponse.json({ error: "id requerido" }, { status: 400 });
+
+    const prev = await getShipmentById(body.id);
+    if (!prev) return NextResponse.json({ error: "No encontrado" }, { status: 404 });
+
+    const updated = await updateShipment(body.id, body);
+
+    // Notificar cambios de estado
+    if (prev.status !== updated.status) {
+      await notify({
+        type: "shipment_status",
+        to: updated.email || null,
+        subject: `Actualización de envío ${updated.orderCode}: ${updated.status}`,
+        text: `Nuevo estado: ${updated.status}\nTracking: ${updated.tracking || "-"}\nETA: ${updated.eta || "-"}`,
+        meta: updated,
+      });
+    }
+
+    return NextResponse.json({ ok: true, shipment: updated });
+  } catch (e) {
+    const code = e?.name === "Unauthorized" ? 401 : 500;
+    return NextResponse.json({ error: e?.message || "Server error" }, { status: code });
+  }
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\api\webhooks\mercadopago\route.js:
-// Webhook Mercado Pago: persiste evento, consulta pago, actualiza orden/pago con idempotencia
+// Webhook Mercado Pago: persiste evento, consulta pago, firma opcional v2, idempotencia y actualización de orden
+// D:\empresas\catalogo\app\api\webhooks\mercadopago\route.js
+import crypto from "crypto";
 import { prisma } from "@/lib/db";
+import { notify } from "@/lib/notify";
 
 const MP_API = "https://api.mercadopago.com/v1/payments/";
 const PROVIDER = "mercadopago";
 
-async function getJsonSafe(req) {
-  try {
-    const txt = await req.text();
-    try { return JSON.parse(txt); } catch { return { raw: txt }; }
-  } catch { return {}; }
+/** Lee body crudo + intenta parsear JSON */
+async function readBody(req) {
+  const raw = await req.text();
+  let json = null;
+  try { json = JSON.parse(raw); } catch {}
+  return { raw, json };
 }
 
+/** Mapea status MP -> (Payment.status, Order.status proposición) */
 function mapStatus(mp) {
   const s = String(mp?.status || "").toLowerCase();
   if (s === "approved") return { pay: "approved", order: "paid" };
@@ -5970,6 +6458,7 @@ function mapStatus(mp) {
   return { pay: "error", order: "pending" };
 }
 
+/** Fetch pago en MP */
 async function fetchPayment(mpId) {
   const token = process.env.MP_ACCESS_TOKEN;
   if (!token) throw new Error("MP_ACCESS_TOKEN missing");
@@ -5981,36 +6470,79 @@ async function fetchPayment(mpId) {
   return res.json();
 }
 
+/** Valida firma v2 si se configuró MP_WEBHOOK_SECRET. 
+ *  Formato header: x-signature: ts=1699999999,v1=HEX
+ *  Mensaje canónico: id:{dataId};request-id:{x-request-id};ts:{ts}
+ */
+function validateSignatureV2({ header, ts, v1, dataId, requestId }) {
+  const secret = process.env.MP_WEBHOOK_SECRET || "";
+  if (!secret) return { ok: true, reason: "no-secret" };
+  if (!header || !ts || !v1 || !dataId || !requestId) return { ok: false, reason: "missing-parts" };
+
+  const canonical = `id:${dataId};request-id:${requestId};ts:${ts}`;
+  const hmac = crypto.createHmac("sha256", secret).update(canonical).digest("hex");
+  const ok = crypto.timingSafeEqual(Buffer.from(hmac), Buffer.from(String(v1).toLowerCase()));
+  return { ok, reason: ok ? "match" : "mismatch" };
+}
+
+/** Marca paid si suma de aprobados >= total */
+async function updateOrderPaymentState(order) {
+  if (!order) return;
+  const { _sum } = await prisma.payment.aggregate({
+    where: { orderId: order.id, status: "approved" },
+    _sum: { amount: true },
+  });
+  const approved = _sum.amount || 0;
+  const shouldBePaid = approved >= (order.total || 0);
+  if (shouldBePaid && order.status !== "paid") {
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { status: "paid", paidAt: order.paidAt || new Date(), updatedAt: new Date() },
+    });
+  }
+}
+
 export async function POST(req) {
   const receivedAt = new Date();
-  const signature = req.headers.get("x-signature") || null;
-  const requestId = req.headers.get("x-request-id") || null;
 
-  // MP manda info en query y/o body. Soportamos ambos.
+  // Headers
+  const sigHeader = req.headers.get("x-signature") || "";
+  const requestId = req.headers.get("x-request-id") || "";
+
+  // Query (MP manda info en query y/o body)
   const url = new URL(req.url);
-  const type = url.searchParams.get("type") || url.searchParams.get("topic") || null;
+  const typeQ = url.searchParams.get("type") || url.searchParams.get("topic") || null;
   const dataIdQ = url.searchParams.get("data.id") || null;
 
-  const body = await getJsonSafe(req);
+  // Body crudo + json
+  const { raw, json: body } = await readBody(req);
   const action = body?.action || null;
   const dataIdB = body?.data?.id || body?.id || null;
 
   const mpId = dataIdB || dataIdQ || null;
-  const eventType = action || type || "unknown";
+  const eventType = action || typeQ || "unknown";
   const eventId = requestId || `${eventType}:${mpId || "na"}:${receivedAt.getTime()}`;
 
-  // Idempotencia de evento de webhook
+  // Firma v2 (opcional, si hay secret set y header con ts/v1)
+  const parts = Object.fromEntries(String(sigHeader).split(",").map(s => s.trim().split("=").map((x,i)=> i?x:x)));
+  // parts.ts = "...", parts.v1 = "hex"
+  if (process.env.MP_WEBHOOK_SECRET) {
+    const { ok } = validateSignatureV2({ header: sigHeader, ts: parts.ts, v1: parts.v1, dataId: mpId, requestId });
+    if (!ok) return new Response("invalid-signature", { status: 400 });
+  }
+
+  // Idempotencia por eventId
   const already = await prisma.webhookEvent.findUnique({ where: { eventId } }).catch(() => null);
   if (already) return new Response("dup", { status: 200 });
 
-  // Guarda evento crudo (payload String)
+  // Persistimos el evento crudo
   const evt = await prisma.webhookEvent.create({
     data: {
       provider: PROVIDER,
       eventId,
       eventType,
-      signature,
-      payload: body ? JSON.stringify(body) : null,
+      signature: sigHeader || null,
+      payload: raw || null,
       receivedAt,
       processedOk: false,
     },
@@ -6022,71 +6554,66 @@ export async function POST(req) {
       return new Response("ok", { status: 200 });
     }
 
-    // Consulta pago en MP
+    // Consulta pago en MP (fuente de verdad)
     const mpPayment = await fetchPayment(mpId);
 
-    // Datos útiles
+    // Datos importantes
     const meta = mpPayment?.metadata || {};
     const amount = Math.round(Number(mpPayment?.transaction_amount || 0) * 100); // a centavos
     const currency = String(mpPayment?.currency_id || "ARS").toUpperCase();
-    const { pay, order } = mapStatus(mpPayment);
+    const { pay } = mapStatus(mpPayment);
 
-    // Ubicar orden por metadata (orderId o orderCode)
+    // Buscar orden por metadata
     let orderRow = null;
-    if (meta.orderId) {
-      orderRow = await prisma.order.findUnique({ where: { id: String(meta.orderId) } });
-    }
-    if (!orderRow && meta.orderCode) {
-      orderRow = await prisma.order.findUnique({ where: { code: String(meta.orderCode) } });
-    }
+    if (meta.orderId) orderRow = await prisma.order.findUnique({ where: { id: String(meta.orderId) } });
+    if (!orderRow && meta.orderCode) orderRow = await prisma.order.findUnique({ where: { code: String(meta.orderCode) } });
 
-    // Crear/actualizar Payment por eventId
+    // Upsert Payment por eventId (idempotente)
     const payRow = await prisma.payment.upsert({
-      where: { eventId }, // idempotencia x evento
+      where: { eventId },
       update: {
-        provider: "mercadopago",
+        provider: PROVIDER,
         providerRef: String(mpPayment?.id || ""),
         status: pay,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
-        rawPayload: mpPayment ? JSON.stringify(mpPayment) : null,
+        rawPayload: JSON.stringify(mpPayment),
         errorMessage: null,
         orderId: orderRow?.id || null,
         tenantId: orderRow?.tenantId || null,
       },
       create: {
         eventId,
-        provider: "mercadopago",
+        provider: PROVIDER,
         providerRef: String(mpPayment?.id || ""),
         status: pay,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
-        rawPayload: mpPayment ? JSON.stringify(mpPayment) : null,
+        rawPayload: JSON.stringify(mpPayment),
         errorMessage: null,
         orderId: orderRow?.id || null,
         tenantId: orderRow?.tenantId || null,
       },
     });
 
-    // Actualizar relación desde evento
+    // Vínculo desde el evento
     await prisma.webhookEvent.update({
       where: { id: evt.id },
-      data: {
-        paymentId: payRow.id,
-        orderId: orderRow?.id || null,
-        processedOk: true,
-        errorMessage: null,
-      },
+      data: { paymentId: payRow.id, orderId: orderRow?.id || null, processedOk: true, errorMessage: null },
     });
 
-    // Actualizar orden si existe
-    if (orderRow) {
-      const update = {
-        status: order === "paid" ? "paid" : orderRow.status,
-        paidAt: order === "paid" ? new Date() : orderRow.paidAt,
-        updatedAt: new Date(),
-      };
-      await prisma.order.update({ where: { id: orderRow.id }, data: update });
+    // Recalcular estado de orden por suma
+    if (orderRow) await updateOrderPaymentState(orderRow);
+
+    // Notificar si aprobado (usamos email de la orden)
+    if (payRow.status === "approved" && orderRow?.buyerEmail) {
+      await notify({
+        type: "payment_approved",
+        to: orderRow.buyerEmail,
+        subject: `Pago aprobado (${PROVIDER}) - Orden ${orderRow.code}`,
+        text: `Tu pago fue aprobado.\nOrden: ${orderRow.code}\nImporte: ${(payRow.amount / 100).toFixed(2)} ${payRow.currency}\nRef: ${payRow.providerRef}`,
+        meta: { provider: PROVIDER, paymentId: payRow.id, orderId: orderRow.id },
+      });
     }
 
     return new Response("ok", { status: 200 });
@@ -6095,7 +6622,7 @@ export async function POST(req) {
       where: { id: evt.id },
       data: { processedOk: false, errorMessage: String(err?.message || err) },
     });
-    return new Response("ok", { status: 200 }); // devolvemos 200 para evitar reintentos violentos
+    return new Response("ok", { status: 200 });
   }
 }
 
@@ -6106,8 +6633,26 @@ export const GET = async () => new Response("ok");
 
 D:\empresas\catalogo\app\api\webhooks\stripe\route.js:
 // Webhook Stripe: valida firma, persiste evento, actualiza orden/pago con idempotencia
+// D:\empresas\catalogo\app\api\webhooks\stripe\route.js
 import Stripe from "stripe";
 import { prisma } from "@/lib/db";
+import { notify } from "@/lib/notify";
+
+async function updateOrderPaymentState(order) {
+  if (!order) return;
+  const { _sum } = await prisma.payment.aggregate({
+    where: { orderId: order.id, status: "approved" },
+    _sum: { amount: true },
+  });
+  const approved = _sum.amount || 0;
+  const shouldBePaid = approved >= (order.total || 0);
+  if (shouldBePaid && order.status !== "paid") {
+    await prisma.order.update({
+      where: { id: order.id },
+      data: { status: "paid", paidAt: order.paidAt || new Date(), updatedAt: new Date() },
+    });
+  }
+}
 
 export async function POST(req) {
   const secret = process.env.STRIPE_WEBHOOK_SECRET;
@@ -6117,7 +6662,7 @@ export async function POST(req) {
   const stripe = new Stripe(sk, { apiVersion: "2024-06-20" });
 
   let event = null;
-  let payloadText = await req.text();
+  const payloadText = await req.text();
   try {
     if (secret) {
       const sig = req.headers.get("stripe-signature") || "";
@@ -6125,7 +6670,7 @@ export async function POST(req) {
     } else {
       event = JSON.parse(payloadText);
     }
-  } catch (err) {
+  } catch {
     return new Response("invalid", { status: 400 });
   }
 
@@ -6158,6 +6703,7 @@ export async function POST(req) {
     let currency = "ARS";
     let providerRef = null;
     let status = "pending";
+    let buyerEmail = null;
 
     if (type === "checkout.session.completed") {
       const sess = event.data.object;
@@ -6166,6 +6712,7 @@ export async function POST(req) {
       providerRef = String(sess?.payment_intent || sess?.id || "");
       orderId = sess?.metadata?.orderId || null;
       orderCode = sess?.metadata?.orderCode || null;
+      buyerEmail = sess?.customer_details?.email || sess?.customer_email || null;
       status = "approved";
     } else if (type === "payment_intent.succeeded") {
       const pi = event.data.object;
@@ -6174,6 +6721,7 @@ export async function POST(req) {
       providerRef = String(pi?.id || "");
       orderId = pi?.metadata?.orderId || null;
       orderCode = pi?.metadata?.orderCode || null;
+      buyerEmail = pi?.receipt_email || null;
       status = "approved";
     } else if (type === "payment_intent.payment_failed") {
       const pi = event.data.object;
@@ -6182,6 +6730,7 @@ export async function POST(req) {
       providerRef = String(pi?.id || "");
       orderId = pi?.metadata?.orderId || null;
       orderCode = pi?.metadata?.orderCode || null;
+      buyerEmail = pi?.receipt_email || null;
       status = "rejected";
     }
 
@@ -6201,6 +6750,7 @@ export async function POST(req) {
         status,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
+        buyerEmail: buyerEmail || null,
         rawPayload: event ? JSON.stringify(event) : null,
         errorMessage: null,
         orderId: orderRow?.id || null,
@@ -6213,6 +6763,7 @@ export async function POST(req) {
         status,
         currency: currency === "USD" ? "USD" : "ARS",
         amount: amount || 0,
+        buyerEmail: buyerEmail || null,
         rawPayload: event ? JSON.stringify(event) : null,
         errorMessage: null,
         orderId: orderRow?.id || null,
@@ -6225,10 +6776,15 @@ export async function POST(req) {
       data: { processedOk: true, paymentId: payRow.id, orderId: orderRow?.id || null, errorMessage: null },
     });
 
-    if (orderRow && status === "approved") {
-      await prisma.order.update({
-        where: { id: orderRow.id },
-        data: { status: "paid", paidAt: new Date() },
+    if (orderRow) await updateOrderPaymentState(orderRow);
+
+    if (payRow.status === "approved") {
+      await notify({
+        type: "payment_approved",
+        to: payRow.buyerEmail || orderRow?.customerEmail || null,
+        subject: `Pago aprobado (Stripe) - Orden ${orderRow?.code || "-"}`,
+        text: `Tu pago fue aprobado.\nOrden: ${orderRow?.code || "-"}\nImporte: ${(payRow.amount / 100).toFixed(2)} ${payRow.currency}\nRef: ${payRow.providerRef}`,
+        meta: { provider: "stripe", paymentId: payRow.id, orderId: orderRow?.id || null },
       });
     }
 
@@ -6243,6 +6799,8 @@ export async function POST(req) {
 }
 
 export const GET = async () => new Response("ok");
+
+/* FIN */
 
 
 --------------------------------------------
@@ -6534,115 +7092,161 @@ export default function CancelPage(){
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\checkout\pending\page.jsx:
+export const dynamic = "force-dynamic";
+
+export default function PendingPage() {
+  return (
+    <div style={{ maxWidth: 700, margin: "40px auto", fontFamily: "system-ui" }}>
+      <h1>Pago pendiente</h1>
+      <p>Tu pago quedó en revisión o pendiente. Te avisaremos cuando se acredite.</p>
+      <a href="/" style={{ color: "#2563eb", textDecoration: "underline" }}>Volver al catálogo</a>
+    </div>
+  );
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\checkout\success\page.jsx:
 "use client";
 
-import { useEffect, useState } from "react";
-import Link from "next/link";
+import { useEffect, useMemo, useState } from "react";
 
-function useOrderCode() {
-  const [code, setCode] = useState("");
-  useEffect(() => {
-    try {
-      const url = new URL(window.location.href);
-      const fromQuery = url.searchParams.get("order");
-      if (fromQuery) setCode(fromQuery);
-      else {
-        const last = localStorage.getItem("last_order_code");
-        if (last) setCode(last);
-      }
-    } catch {}
-  }, []);
-  return code;
+export const dynamic = "force-dynamic";
+
+function currency(amount = 0, cur = "ARS") {
+  try {
+    return new Intl.NumberFormat("es-AR", { style: "currency", currency: cur }).format((amount || 0) / 100);
+  } catch {
+    return `${(amount || 0) / 100} ${cur}`;
+  }
 }
 
-export default function SuccessPage(){
-  const code = useOrderCode();
-  const [order, setOrder] = useState(null);
-  const [err, setErr] = useState("");
+export default function SuccessPage() {
+  const [loading, setLoading] = useState(true);
+  const [reconciled, setReconciled] = useState(false);
+  const [payments, setPayments] = useState([]);
 
-  useEffect(() => {
-    if (!code) return;
-    (async () => {
-      try {
-        const res = await fetch(`/api/orders/${encodeURIComponent(code)}`, { cache: "no-store" });
-        const data = await res.json();
-        if (!res.ok) throw new Error(data?.error || "error");
-        setOrder(data);
-      } catch (e) {
-        setErr(e?.message || "No se pudo leer la orden");
-      }
-    })();
-  }, [code]);
+  // Lee params de la URL que manda MP en el back_url
+  const params = typeof window !== "undefined" ? new URLSearchParams(window.location.search) : new URLSearchParams();
+  const orderCode = params.get("order") || params.get("external_reference") || "";
+  const paymentId = params.get("payment_id") || params.get("collection_id") || "";
+  const mpStatus = params.get("status") || "";
 
-  if (!code) {
-    return (
-      <main className="container">
-        <h1>Pago recibido ✅</h1>
-        <p>Gracias. Podés cerrar esta pestaña.</p>
-        <p style={{color:"#6b7280"}}>No se detectó código de orden.</p>
-        <Link href="/" className="btn btn-primary">Ir al catálogo</Link>
-      </main>
-    );
+  async function reconcileIfNeeded() {
+    // Si MP te devolvió un payment_id, reconciliamos (por si el webhook no llegó)
+    if (!paymentId) return;
+    try {
+      await fetch(`/api/payments/reconcile?payment_id=${encodeURIComponent(paymentId)}`, { cache: "no-store" });
+      setReconciled(true);
+    } catch {
+      // ignoramos; igual mostramos lo que tengamos
+    }
   }
 
+  async function loadPayments() {
+    if (!orderCode) return;
+    setLoading(true);
+    const res = await fetch(`/api/payments?order=${encodeURIComponent(orderCode)}`, { cache: "no-store" });
+    const rows = await res.json().catch(() => []);
+    setPayments(Array.isArray(rows) ? rows : []);
+    setLoading(false);
+  }
+
+  useEffect(() => {
+    // 1) Intento de reconciliar
+    reconcileIfNeeded().then(() => {
+      // 2) Carga inicial
+      loadPayments();
+      // 3) Breve re-poll (por si el webhook entra segundos después)
+      const t1 = setTimeout(loadPayments, 2000);
+      const t2 = setTimeout(loadPayments, 5000);
+      return () => { clearTimeout(t1); clearTimeout(t2); };
+    });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Resumen rápido de pagos
+  const summary = useMemo(() => {
+    if (!payments.length) return { approved: 0, total: 0, currency: "ARS" };
+    const currency = payments[0]?.currency || "ARS";
+    const approved = payments.filter(p => p.status === "approved").reduce((a, b) => a + (b.amount || 0), 0);
+    const total = payments.reduce((a, b) => a + (b.amount || 0), 0);
+    return { approved, total, currency };
+  }, [payments]);
+
+  const hasApproved = summary.approved > 0;
+
   return (
-    <main className="container">
-      <h1>Pago recibido ✅</h1>
-      <p>Orden: <strong>{code}</strong></p>
-      {err && <p style={{color:"#ef4444"}}>{err}</p>}
-      {!order && !err && <p>Cargando datos reales de la orden…</p>}
-      {order && (
-        <>
-          <div style={{background:"#fff", border:"1px solid var(--border)", borderRadius:10, padding:10, marginTop:8}}>
-            <div style={{display:"grid", gridTemplateColumns:"1fr 1fr", gap:8}}>
-              <div><span className="k">Estado</span><div><strong>{order.status}</strong></div></div>
-              <div><span className="k">Total</span><div><strong>${Number(order.total).toLocaleString("es-AR")}</strong></div></div>
-              <div><span className="k">Email</span><div>{order.buyerEmail}</div></div>
-              <div><span className="k">Fecha</span><div>{new Date(order.createdAt).toLocaleString("es-AR")}</div></div>
-            </div>
+    <div style={{ maxWidth: 900, margin: "40px auto", fontFamily: "system-ui", padding: "0 16px" }}>
+      <h1 style={{ marginBottom: 4 }}>{hasApproved ? "Pago recibido ✅" : "Operación registrada"}</h1>
+      {orderCode && <p style={{ marginTop: 0, color: "#475569" }}>Orden: <strong>{orderCode}</strong></p>}
 
-            <h3 style={{marginTop:12}}>Ítems</h3>
-            <div className="list">
-              {order.items.map(it => (
-                <div key={it.id} className="list-item" style={{gridTemplateColumns:"1fr auto auto"}}>
-                  <div className="list-main">
-                    <div className="list-title">{it.title}</div>
-                    <div className="list-meta">
-                      <span className="k">SKU</span><span className="v">{it.sku}</span>
-                      <span className="k">Marca</span><span className="v">{it.brand || ""}</span>
-                      <span className="k">Cat.</span><span className="v">{it.category || ""}</span>
-                    </div>
-                  </div>
-                  <div className="list-price">${Number(it.unitPrice).toLocaleString("es-AR")}</div>
-                  <div className="list-price">x{it.quantity} = ${Number(it.total).toLocaleString("es-AR")}</div>
-                </div>
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit,minmax(220px,1fr))", gap: 12, margin: "16px 0 24px" }}>
+        <Card title="Estado">
+          <b style={{ color: hasApproved ? "#059669" : "#b45309" }}>
+            {hasApproved ? "paid" : (mpStatus || "pending")}
+          </b>
+          {reconciled && <small style={{ display: "block", color: "#6b7280", marginTop: 6 }}>Confirmado por reconciliación</small>}
+        </Card>
+        <Card title="Monto aprobado">{currency(summary.approved, summary.currency)}</Card>
+        <Card title="Pagos totales">{currency(summary.total, summary.currency)}</Card>
+      </div>
+
+      <section style={{ marginTop: 8 }}>
+        <h2 style={{ fontSize: 18, margin: "8px 0" }}>Pagos</h2>
+        <div style={{ overflowX: "auto", border: "1px solid #e5e7eb", borderRadius: 8 }}>
+          <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse", fontSize: 13 }}>
+            <thead>
+              <tr style={{ background: "#f8fafc" }}>
+                <th align="left">Fecha</th>
+                <th align="left">Proveedor</th>
+                <th align="left">Estado</th>
+                <th align="right">Importe</th>
+                <th align="left">Moneda</th>
+                <th align="left">Ref</th>
+              </tr>
+            </thead>
+            <tbody>
+              {payments.map(p => (
+                <tr key={p.id}>
+                  <td>{new Date(p.createdAt).toLocaleString()}</td>
+                  <td>{p.provider || "-"}</td>
+                  <td style={{ color: p.status === "approved" ? "#059669" : p.status === "rejected" ? "#dc2626" : "#92400e" }}>
+                    {p.status}
+                  </td>
+                  <td align="right">{currency(p.amount, p.currency)}</td>
+                  <td>{p.currency}</td>
+                  <td style={{ maxWidth: 260, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                    {p.providerRef || p.eventId}
+                  </td>
+                </tr>
               ))}
-            </div>
+              {!loading && payments.length === 0 && (
+                <tr><td colSpan={6} style={{ padding: 16, color: "#6b7280" }}>Sin pagos registrados aún.</td></tr>
+              )}
+              {loading && (
+                <tr><td colSpan={6} style={{ padding: 16, color: "#6b7280" }}>Cargando…</td></tr>
+              )}
+            </tbody>
+          </table>
+        </div>
+      </section>
 
-            <h3 style={{marginTop:12}}>Pagos</h3>
-            <div className="list">
-              {order.payments.length === 0 && <div className="list-item"><div>Sin pagos registrados aún.</div></div>}
-              {order.payments.map(p => (
-                <div key={p.id} className="list-item" style={{gridTemplateColumns:"1fr auto auto"}}>
-                  <div className="list-main">
-                    <div className="list-title">{p.provider} · {p.status}</div>
-                    <div className="list-meta">
-                      <span className="k">Ref</span><span className="v">{p.providerRef || "-"}</span>
-                      <span className="k">Evento</span><span className="v">{p.eventId || "-"}</span>
-                    </div>
-                  </div>
-                  <div className="list-price">{p.currency} ${Number(p.amount).toLocaleString("es-AR")}</div>
-                  <div className="list-price">{new Date(p.createdAt).toLocaleString("es-AR")}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </>
-      )}
+      <div style={{ marginTop: 24 }}>
+        <a href="/" style={{ color: "#2563eb", textDecoration: "underline" }}>Volver al catálogo</a>
+      </div>
+    </div>
+  );
+}
 
-      <Link href="/" className="btn btn-primary" style={{marginTop:10}}>Volver al catálogo</Link>
-    </main>
+function Card({ title, children }) {
+  return (
+    <div style={{ border: "1px solid #e5e7eb", borderRadius: 12, padding: 12 }}>
+      <div style={{ fontSize: 12, color: "#6b7280", marginBottom: 6 }}>{title}</div>
+      <div style={{ fontSize: 16 }}>{children}</div>
+    </div>
   );
 }
 
@@ -7440,11 +8044,124 @@ export default function ClientePage() {
 
 --------------------------------------------
 
+D:\empresas\catalogo\app\envios\page.jsx:
+// app/envios/page.jsx
+"use client";
+
+import { useEffect, useState } from "react";
+import { isAdminPage } from "@/lib/admin";
+export const dynamic = "force-dynamic";
+
+export default function EnviosPage() {
+  useEffect(() => { isAdminPage?.().catch(()=>{}); }, []);
+  const [rows, setRows] = useState([]);
+  const [form, setForm] = useState({ orderCode: "", address: "", status: "pending", tracking: "", carrier: "", eta: "", email: "" });
+  const [filter, setFilter] = useState({ q: "", status: "" });
+  const [loading, setLoading] = useState(false);
+
+  async function load() {
+    setLoading(true);
+    const p = new URLSearchParams();
+    if (filter.q) p.set("q", filter.q);
+    if (filter.status) p.set("status", filter.status);
+    const res = await fetch(`/api/shipments?${p}`, { cache: "no-store" });
+    setRows(await res.json());
+    setLoading(false);
+  }
+  useEffect(() => { load(); }, []);
+
+  async function createShipment() {
+    const res = await fetch("/api/shipments", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(form) });
+    const j = await res.json();
+    if (!res.ok) return alert(j?.error || "Error");
+    setForm({ orderCode: "", address: "", status: "pending", tracking: "", carrier: "", eta: "", email: "" });
+    load();
+  }
+
+  async function updateShipment(id, patch) {
+    const res = await fetch("/api/shipments", { method: "PATCH", headers: { "content-type": "application/json" }, body: JSON.stringify({ id, ...patch }) });
+    const j = await res.json();
+    if (!res.ok) return alert(j?.error || "Error");
+    load();
+  }
+
+  return (
+    <div style={{ maxWidth: 1100, margin: "24px auto", fontFamily: "system-ui" }}>
+      <h1>Envíos</h1>
+
+      {/* Alta */}
+      <div style={{ display: "grid", gap: 8, gridTemplateColumns: "repeat(6, 1fr)", margin: "8px 0 16px" }}>
+        <input placeholder="Orden (code)" value={form.orderCode} onChange={e=>setForm({...form, orderCode:e.target.value})} />
+        <input placeholder="Dirección" value={form.address} onChange={e=>setForm({...form, address:e.target.value})} />
+        <select value={form.status} onChange={e=>setForm({...form, status:e.target.value})}>
+          <option>pending</option><option>shipped</option><option>delivered</option><option>canceled</option>
+        </select>
+        <input placeholder="Tracking" value={form.tracking} onChange={e=>setForm({...form, tracking:e.target.value})} />
+        <input placeholder="Carrier" value={form.carrier} onChange={e=>setForm({...form, carrier:e.target.value})} />
+        <input placeholder="ETA (ISO o texto)" value={form.eta} onChange={e=>setForm({...form, eta:e.target.value})} />
+        <input placeholder="Email cliente (opcional)" value={form.email} onChange={e=>setForm({...form, email:e.target.value})} style={{ gridColumn: "span 3" }} />
+        <button onClick={createShipment} style={{ gridColumn: "span 3" }}>Crear envío</button>
+      </div>
+
+      {/* Filtros */}
+      <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
+        <input placeholder="Buscar..." value={filter.q} onChange={e=>setFilter({...filter, q:e.target.value})} />
+        <select value={filter.status} onChange={e=>setFilter({...filter, status:e.target.value})}>
+          <option value="">Estado</option>
+          <option>pending</option><option>shipped</option><option>delivered</option><option>canceled</option>
+        </select>
+        <button onClick={load} disabled={loading}>{loading ? "..." : "Actualizar"}</button>
+      </div>
+
+      {/* Tabla */}
+      <div style={{ overflow: "auto", border: "1px solid #e5e7eb", borderRadius: 8 }}>
+        <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse", fontSize: 13 }}>
+          <thead>
+            <tr style={{ background: "#f8fafc" }}>
+              <th align="left">Fecha</th>
+              <th align="left">Orden</th>
+              <th align="left">Dirección</th>
+              <th align="left">Estado</th>
+              <th align="left">Tracking</th>
+              <th align="left">Carrier</th>
+              <th align="left">ETA</th>
+              <th align="left">Email</th>
+              <th align="left">Acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(s => (
+              <tr key={s.id}>
+                <td style={{ whiteSpace:"nowrap" }}>{new Date(s.createdAt).toLocaleString()}</td>
+                <td><a href={`/orders/${s.orderCode}`} style={{ textDecoration: "underline" }}>{s.orderCode}</a></td>
+                <td>{s.address}</td>
+                <td>{s.status}</td>
+                <td>{s.tracking || "-"}</td>
+                <td>{s.carrier || "-"}</td>
+                <td>{s.eta || "-"}</td>
+                <td>{s.email || "-"}</td>
+                <td>
+                  {s.status !== "shipped" && <button onClick={()=>updateShipment(s.id, { status:"shipped" })}>Marcar enviado</button>}
+                  {s.status !== "delivered" && <button onClick={()=>updateShipment(s.id, { status:"delivered" })}>Marcar entregado</button>}
+                  {s.status !== "canceled" && <button onClick={()=>updateShipment(s.id, { status:"canceled" })}>Cancelar</button>}
+                </td>
+              </tr>
+            ))}
+            {rows.length === 0 && <tr><td colSpan={9} style={{ opacity:.6, padding: 16 }}>Sin envíos</td></tr>}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\app\imagenes\[...path]\route.js:
 // D:\empresas\catalogo\app\imagenes\[...path]\route.js
-// Sirve imágenes físicas desde CFG.imgsDir con tolerancia de nombre
-// para que lo que escriben los scripts (/imagenes/... o rutas absolutas)
-// se pueda consumir desde el Next sin 404 raros.
+// Sirve imágenes físicas desde CFG.imgsDir con tolerancia de nombre.
+// Protecciones: path traversal, extensión permitida, ETag/304.
 
 import fs from "fs";
 import path from "path";
@@ -7462,13 +8179,15 @@ const MIME = {
   ".svg": "image/svg+xml",
 };
 
-// Normaliza un nombre que venga como "/imagenes/..." o con backslashes
 function normalizeRequestedPath(parts) {
-  // parts viene tipo ["imagenes", "producto.png"] o ["producto.png"]
   const joined = parts.join("/");
-  const s = toPosix(joined).replace(/^\/+/, ""); // saca slashes al inicio
-  // si empieza con "imagenes/", lo sacamos porque acá ya estamos parados en CFG.imgsDir
+  const s = toPosix(joined).replace(/^\/+/, "");
   return s.startsWith("imagenes/") ? s.slice("imagenes/".length) : s;
+}
+
+function segmentsAreSafe(parts) {
+  // bloquear traversal y segmentos vacíos sospechosos
+  return parts.every(p => p && p !== "." && p !== ".." && !p.includes("\0"));
 }
 
 function safeJoin(baseDir, relPath) {
@@ -7479,9 +8198,7 @@ function safeJoin(baseDir, relPath) {
   return normPath;
 }
 
-// Busca ignorando mayúsculas y tolerando que no venga la extensión
 function findFileLoose(absBase) {
-  // si existe exacto → listo
   if (fs.existsSync(absBase) && fs.statSync(absBase).isFile()) return absBase;
 
   const dir = path.dirname(absBase);
@@ -7490,7 +8207,7 @@ function findFileLoose(absBase) {
 
   if (!fs.existsSync(dir)) return null;
 
-  // 1) match case-insensitive
+  // 1) case-insensitive
   for (const f of fs.readdirSync(dir)) {
     if (f.toLowerCase() === wantLow) {
       const fp = path.join(dir, f);
@@ -7498,14 +8215,13 @@ function findFileLoose(absBase) {
     }
   }
 
-  // 2) no vino con extensión → probamos todas las permitidas
+  // 2) sin extensión → probar permitidas
   if (!path.extname(wantLow)) {
     for (const ext of ALLOWED_IMAGE_EXTS) {
       const cand = path.join(dir, wantBase + ext);
       if (fs.existsSync(cand) && fs.statSync(cand).isFile()) return cand;
     }
   }
-
   return null;
 }
 
@@ -7523,10 +8239,10 @@ function buildResponseForFile(filePath) {
       "Content-Length": String(buf.length),
       "Last-Modified": stat.mtime.toUTCString(),
       ETag: etag,
-      // 1 hora + stale 1 día. Ajustable.
       "Cache-Control": "public, max-age=3600, stale-while-revalidate=86400",
       "Content-Disposition": "inline",
       "X-Content-Type-Options": "nosniff",
+      "Accept-Ranges": "none",
     },
   });
 }
@@ -7534,28 +8250,17 @@ function buildResponseForFile(filePath) {
 export async function GET(req, { params }) {
   try {
     const parts = Array.isArray(params?.path) ? params.path : [];
-    if (!parts.length) {
-      return new NextResponse("Not Found", { status: 404 });
-    }
+    if (!parts.length) return new NextResponse("Not Found", { status: 404 });
+    if (!segmentsAreSafe(parts)) return new NextResponse("Forbidden", { status: 403 });
 
-    // Decodificar cada segmento
     const decoded = parts.map((p) => {
-      try {
-        return decodeURIComponent(p);
-      } catch {
-        return p;
-      }
+      try { return decodeURIComponent(p); } catch { return p; }
     });
 
-    // Acomodar "/imagenes/..." → relativo a CFG.imgsDir
     const rel = normalizeRequestedPath(decoded);
-
     const joined = safeJoin(CFG.imgsDir, rel);
-    if (!joined) {
-      return new NextResponse("Forbidden", { status: 403 });
-    }
+    if (!joined) return new NextResponse("Forbidden", { status: 403 });
 
-    // Validar extensión SOLO si el request la trae
     const reqExt = path.extname(joined).toLowerCase();
     if (reqExt && !ALLOWED_IMAGE_EXTS.includes(reqExt)) {
       return new NextResponse("Unsupported Media Type", { status: 415 });
@@ -7563,24 +8268,18 @@ export async function GET(req, { params }) {
 
     let filePath = findFileLoose(joined);
 
-    // Fallback común: sin_imagen.png
     if (!filePath) {
       const fallback = path.join(CFG.imgsDir, "sin_imagen.png");
-      if (!fs.existsSync(fallback)) {
-        return new NextResponse("Not Found", { status: 404 });
-      }
+      if (!fs.existsSync(fallback)) return new NextResponse("Not Found", { status: 404 });
       filePath = fallback;
     }
 
-    // Soporte HTTP condicional
+    // Condicionales
     const stat = fs.statSync(filePath);
     const etag = `"${stat.size}-${Number(stat.mtimeMs)}"`;
     const ifNone = req.headers.get("if-none-match");
     const ifMod = req.headers.get("if-modified-since");
-    if (
-      (ifNone && ifNone === etag) ||
-      (ifMod && new Date(ifMod) >= stat.mtime)
-    ) {
+    if ((ifNone && ifNone === etag) || (ifMod && new Date(ifMod) >= stat.mtime)) {
       return new NextResponse(null, {
         status: 304,
         headers: {
@@ -7600,10 +8299,78 @@ export async function GET(req, { params }) {
 
 export async function HEAD(req, ctx) {
   const res = await GET(req, ctx);
-  return new NextResponse(null, {
-    status: res.status,
-    headers: res.headers,
-  });
+  return new NextResponse(null, { status: res.status, headers: res.headers });
+}
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\informes\page.jsx:
+// app/informes/page.jsx
+"use client";
+
+import { useEffect, useState } from "react";
+
+export const dynamic = "force-dynamic";
+
+async function fetchJson(url) {
+  const res = await fetch(url, { cache: "no-store" });
+  return res.json();
+}
+
+export default function InformesPage() {
+  const [byPayment, setByPayment] = useState([]);
+  const [byShipment, setByShipment] = useState([]);
+
+  async function load() {
+    // pagos por estado (pedimos varias y agregamos)
+    const statuses = ["approved","pending","canceled"];
+    const arr = await Promise.all(statuses.map(s => fetchJson(`/api/payments?status=${s}`)));
+    const pay = statuses.map((s, i) => ({
+      status: s,
+      count: arr[i].length,
+      amount: arr[i].reduce((a, b) => a + (b.amount || 0), 0),
+    }));
+    setByPayment(pay);
+
+    // envíos por estado
+    const s2 = ["pending","shipped","delivered","canceled"];
+    const arr2 = await Promise.all(s2.map(s => fetchJson(`/api/shipments?status=${s}`)));
+    const ship = s2.map((s, i) => ({ status: s, count: arr2[i].length }));
+    setByShipment(ship);
+  }
+
+  useEffect(() => { load(); }, []);
+
+  return (
+    <div style={{ maxWidth: 900, margin: "24px auto", fontFamily: "system-ui" }}>
+      <h1>Informes</h1>
+
+      <h2 style={{ marginTop: 12 }}>Pagos por estado</h2>
+      <table cellPadding={8} style={{ borderCollapse: "collapse", border: "1px solid #e5e7eb", borderRadius: 8, width: "100%" }}>
+        <thead><tr style={{ background:"#f8fafc" }}><th align="left">Estado</th><th align="right">Cantidad</th><th align="right">Total</th></tr></thead>
+        <tbody>
+          {byPayment.map(r => (
+            <tr key={r.status}>
+              <td>{r.status}</td><td align="right">{r.count}</td><td align="right">{r.amount.toLocaleString()}</td>
+            </tr>
+          ))}
+          {byPayment.length === 0 && <tr><td colSpan={3} style={{ opacity:.6, padding: 16 }}>Sin datos</td></tr>}
+        </tbody>
+      </table>
+
+      <h2 style={{ marginTop: 24 }}>Envíos por estado</h2>
+      <table cellPadding={8} style={{ borderCollapse: "collapse", border: "1px solid #e5e7eb", borderRadius: 8, width: "100%" }}>
+        <thead><tr style={{ background:"#f8fafc" }}><th align="left">Estado</th><th align="right">Cantidad</th></tr></thead>
+        <tbody>
+          {byShipment.map(r => (
+            <tr key={r.status}><td>{r.status}</td><td align="right">{r.count}</td></tr>
+          ))}
+          {byShipment.length === 0 && <tr><td colSpan={2} style={{ opacity:.6, padding: 16 }}>Sin datos</td></tr>}
+        </tbody>
+      </table>
+    </div>
+  );
 }
 
 
@@ -7939,6 +8706,102 @@ export default function OrdersPage() {
         )}
       </section>
     </main>
+  );
+}
+
+
+--------------------------------------------
+
+D:\empresas\catalogo\app\pagos\page.jsx:
+// app/pagos/page.jsx
+"use client";
+
+import { useEffect, useState } from "react";
+import { isAdminPage } from "@/lib/admin";
+export const dynamic = "force-dynamic";
+
+export default function PagosPage() {
+  useEffect(() => { isAdminPage?.().catch(()=>{}); }, []);
+  const [rows, setRows] = useState([]);
+  const [q, setQ] = useState("");
+  const [status, setStatus] = useState("");
+  const [method, setMethod] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  async function load() {
+    setLoading(true);
+    const params = new URLSearchParams();
+    if (q) params.set("q", q);
+    if (status) params.set("status", status);
+    if (method) params.set("method", method);
+    const res = await fetch(`/api/payments?${params.toString()}`, { cache: "no-store" });
+    const json = await res.json();
+    setRows(Array.isArray(json) ? json : []);
+    setLoading(false);
+  }
+
+  useEffect(() => { load(); }, []);
+
+  return (
+    <div style={{ maxWidth: 1100, margin: "24px auto", fontFamily: "system-ui" }}>
+      <h1>Pagos</h1>
+      <div style={{ display: "flex", gap: 8, flexWrap: "wrap", margin: "8px 0 16px" }}>
+        <input placeholder="Buscar (orden, email, id...)" value={q} onChange={e=>setQ(e.target.value)} />
+        <select value={status} onChange={e=>setStatus(e.target.value)}>
+          <option value="">Estado</option>
+          <option value="approved">approved</option>
+          <option value="pending">pending</option>
+          <option value="rejected">rejected</option>
+          <option value="refunded">refunded</option>
+          <option value="canceled">canceled</option>
+        </select>
+        <select value={method} onChange={e=>setMethod(e.target.value)}>
+          <option value="">Proveedor</option>
+          <option>mercadopago</option>
+          <option>stripe</option>
+          <option>transfer</option>
+          <option>paypal</option>
+          <option>qr</option>
+        </select>
+        <button onClick={load} disabled={loading}>{loading ? "Cargando..." : "Actualizar"}</button>
+      </div>
+
+      <div style={{ overflow: "auto", border: "1px solid #e5e7eb", borderRadius: 8 }}>
+        <table width="100%" cellPadding={8} style={{ borderCollapse: "collapse", fontSize: 13 }}>
+          <thead>
+            <tr style={{ background: "#f8fafc" }}>
+              <th align="left">Fecha</th>
+              <th align="left">Orden</th>
+              <th align="left">Proveedor</th>
+              <th align="left">Estado</th>
+              <th align="right">Importe</th>
+              <th align="left">Moneda</th>
+              <th align="left">Email comprador</th>
+              <th align="left">Ref/Provider</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map(p => (
+              <tr key={p.id}>
+                <td>{new Date(p.createdAt).toLocaleString()}</td>
+                <td><a href={`/orders/${p.order?.code || ""}`} style={{ textDecoration: "underline" }}>{p.order?.code || "-"}</a></td>
+                <td>{p.provider || p.method || "-"}</td>
+                <td>{p.status}</td>
+                <td align="right">{(p.amount || 0).toLocaleString()}</td>
+                <td>{p.currency || "ARS"}</td>
+                <td>{p.order?.buyerEmail || "-"}</td>
+                <td style={{ maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+                  {p.providerRef || p.note || "-"}
+                </td>
+              </tr>
+            ))}
+            {rows.length === 0 && (
+              <tr><td colSpan={8} style={{ opacity: .6, padding: 16 }}>Sin resultados</td></tr>
+            )}
+          </tbody>
+        </table>
+      </div>
+    </div>
   );
 }
 
@@ -9946,6 +10809,27 @@ export async function isAdminPage() {
   }
 }
 
+// Nuevos helpers que lanzan error (para endpoints que esperan throw)
+export async function assertAdminApi(req) {
+  const ok = await isAdminApi(req);
+  if (!ok) {
+    const err = new Error("Unauthorized");
+    err.name = "Unauthorized";
+    throw err;
+  }
+  return true;
+}
+
+export async function assertAdminPage() {
+  const ok = await isAdminPage();
+  if (!ok) {
+    const err = new Error("Unauthorized");
+    err.name = "Unauthorized";
+    throw err;
+  }
+  return true;
+}
+
 /* fin */
 
 
@@ -10258,7 +11142,7 @@ export const CFG = {
   adminToken: process.env.ADMIN_TOKEN || "",
   adminCookieName: process.env.AUTH_COOKIE_NAME || "admin_token",
 
-  // === REGLAS DE CALCULO ===
+  // === REGLAS DE CALCULO (solo catálogo; la pipeline usa su propio CALC) ===
   ivaRate: Number(process.env.GESTION_IVA_RATE ?? 0.21),
   gananciaRate: Number(process.env.GESTION_GANANCIA_RATE ?? 0.40),
 };
@@ -10267,50 +11151,77 @@ export const ALLOWED_IMAGE_EXTS = Object.freeze([
   ".png", ".jpg", ".jpeg", ".webp", ".gif", ".bmp", ".ico",
 ]);
 
-export function ensureDir(absPath) { try { fs.mkdirSync(absPath, { recursive: true }); } catch {} }
+export function ensureDir(absPath) {
+  try { fs.mkdirSync(absPath, { recursive: true }); } catch {}
+}
 export function toWin(p) { return String(p || "").replace(/\//g, "\\"); }
 export function toPosix(p) { return String(p || "").replace(/\\/g, "/"); }
 
+// === Utils internos de imagen ===
+function lowerExt(fname) {
+  const ext = path.extname(fname || "").toLowerCase();
+  const base = path.basename(fname || "", ext);
+  return { base, ext };
+}
+function fileNameFromAnyPath(p) {
+  const s = String(p || "").replace(/\\/g, "/");
+  const parts = s.split("/");
+  return parts[parts.length - 1] || "";
+}
+
+/**
+ * Normaliza una referencia de imagen a un path web:
+ *  - Mantiene URLs http(s)
+ *  - Acepta rutas ya bajo /imagenes, "imagenes/", o paths absolutos bajo CFG.imgsDir
+ *  - Case-insensitive y tolerante a UNC / Windows
+ *  - Valida extensión contra ALLOWED_IMAGE_EXTS
+ */
 export function sanitizeImage(val, imgsDir = CFG.imgsDir) {
   if (!val) return "/imagenes/sin_imagen.png";
   let s = String(val).trim();
   if (!s) return "/imagenes/sin_imagen.png";
+
+  // URL absoluta → dejar pasar
   if (/^https?:\/\//i.test(s)) return s;
+
+  // Normalizar separadores
   s = s.replace(/\\/g, "/");
+
+  // Normalizar alias comunes
   if (s.startsWith("/_imagenes_")) s = s.replace(/^\/_imagenes_/, "/imagenes/");
   if (s.startsWith("_imagenes_")) s = s.replace(/^_imagenes_/, "imagenes/");
+
   const lowerAll = s.toLowerCase();
-  if (lowerAll.startsWith("/imagenes/")) {
-    const fname = s.split("/").slice(-1)[0].toLowerCase();
-    const ext = path.extname(fname).toLowerCase();
+
+  // Ya en /imagenes o imagenes/
+  if (lowerAll.startsWith("/imagenes/") || lowerAll.startsWith("imagenes/")) {
+    const fname = fileNameFromAnyPath(s).toLowerCase();
+    const { ext } = lowerExt(fname);
     return ALLOWED_IMAGE_EXTS.includes(ext) ? `/imagenes/${fname}` : "/imagenes/sin_imagen.png";
   }
-  if (lowerAll.startsWith("imagenes/")) {
-    const fname = s.split("/").slice(-1)[0].toLowerCase();
-    const ext = path.extname(fname).toLowerCase();
-    return ALLOWED_IMAGE_EXTS.includes(ext) ? `/${lowerAll}` : "/imagenes/sin_imagen.png";
-  }
+
+  // Si es un path absoluto (Windows o POSIX), ver si cae dentro de imgsDir
   const imgsNorm = String(imgsDir || "").replace(/\\/g, "/");
-  const imgsLower = imgsNorm.toLowerCase().replace(/^[a-z]:\//, "");
-  if (/^[a-z]:\//i.test(lowerAll)) {
-    const trimmed = lowerAll.replace(/^[a-z]:\//i, "");
-    if (imgsLower && trimmed.startsWith(imgsLower + "/")) {
-      const fname = s.split("/").slice(-1)[0].toLowerCase();
-      const ext = path.extname(fname).toLowerCase();
-      return ALLOWED_IMAGE_EXTS.includes(ext) ? `/imagenes/${fname}` : "/imagenes/sin_imagen.png";
-    }
-  }
-  if (lowerAll.includes("/gestion/imagenes/")) {
-    const fname = s.split("/").slice(-1)[0].toLowerCase();
-    const ext = path.extname(fname).toLowerCase();
+  const imgsLower = imgsNorm.toLowerCase()
+    .replace(/^([a-z]):\//i, "/$1/") // D:/ → /d/
+    .replace(/^\/+/, "/");
+
+  // Normalizar Windows drive para comparar "case-insensitive"
+  const valLower = lowerAll
+    .replace(/^([a-z]):\//i, "/$1/")
+    .replace(/^\/+/, "/");
+
+  if (imgsLower && valLower.startsWith(imgsLower.replace(/^([a-z]):\//i, "/$1/"))) {
+    const fname = fileNameFromAnyPath(s).toLowerCase();
+    const { ext } = lowerExt(fname);
     return ALLOWED_IMAGE_EXTS.includes(ext) ? `/imagenes/${fname}` : "/imagenes/sin_imagen.png";
   }
-  const fname = s.split("/").slice(-1)[0].toLowerCase();
-  const ext = path.extname(fname).toLowerCase();
+
+  // Cualquier otra ruta: tomar solo el nombre de archivo
+  const fname = fileNameFromAnyPath(s).toLowerCase();
+  const { ext } = lowerExt(fname);
   return ALLOWED_IMAGE_EXTS.includes(ext) ? `/imagenes/${fname}` : "/imagenes/sin_imagen.png";
 }
-
-/* fin */
 
 
 --------------------------------------------
@@ -10471,7 +11382,7 @@ if (process.env.NODE_ENV !== "production") g.__prisma__ = prisma;
 --------------------------------------------
 
 D:\empresas\catalogo\lib\etl-grais-shared.js:
-// lib/etl-grais-shared.js
+// D:\empresas\catalogo\lib\etl-grais-shared.js
 import fs from "fs";
 import path from "path";
 import * as XLSX from "xlsx";
@@ -10583,8 +11494,7 @@ function writeJsonAtomic(finalPath, data) {
   fs.renameSync(tmp, finalPath);
 }
 
-/* ===== números (coma/pto) robusto =====
-   Acepta "$ 12.640,69", "12,640.69", "12640,69", etc. */
+/* ===== números (coma/pto) robusto ===== */
 function toNumber(x) {
   if (x == null) return 0;
   if (typeof x === "number") return isFinite(x) ? x : 0;
@@ -10598,18 +11508,18 @@ function toNumber(x) {
   const hasComma = s.includes(",");
   const hasDot = s.includes(".");
   if (hasComma && hasDot) {
-    // Caso típico es-AR: "12.640,69"  -> quitar miles ".", decimal ","
+    // Caso típico es-AR: "12.640,69" → "." miles, "," decimal
     if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
       s = s.replace(/\./g, "").replace(/,/g, ".");
     } else {
-      // Caso en-US con miles comma: "12,640.69"
+      // Caso en-US con miles coma: "12,640.69"
       s = s.replace(/,/g, "");
     }
   } else if (hasComma && !hasDot) {
-    // Solo coma => usar coma como decimal
+    // Solo coma => decimal
     s = s.replace(/\./g, "").replace(/,/g, ".");
   } else {
-    // Solo punto o ninguno => quitar separadores de miles (coma) si quedaron
+    // Solo punto o ninguno => quitar comas de miles
     s = s.replace(/,(?=\d{3}\b)/g, "");
   }
 
@@ -10660,9 +11570,15 @@ function resolvePaths(overrides = {}) {
    ========================= */
 function listImages(dir) {
   if (!fs.existsSync(dir)) return [];
-  return fs.readdirSync(dir)
+  return fs
+    .readdirSync(dir)
     .filter((f) => ALLOWED_IMAGE_EXTS.includes(path.extname(f).toLowerCase()))
-    .map((f) => ({ name: f, base: path.basename(f, path.extname(f)), ext: path.extname(f).toLowerCase(), abs: path.join(dir, f) }));
+    .map((f) => ({
+      name: f,
+      base: path.basename(f, path.extname(f)),
+      ext: path.extname(f).toLowerCase(),
+      abs: path.join(dir, f),
+    }));
 }
 function stripAccents(s) {
   return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "");
@@ -10678,7 +11594,15 @@ function toKey(s) {
       .replace(/[^a-z0-9 ]+/g, " ")
   );
 }
-const EXT_SCORE = new Map([[".png",5],[".jpg",4],[".jpeg",4],[".webp",3],[".gif",2],[".bmp",1],[".ico",1]]);
+const EXT_SCORE = new Map([
+  [".png", 5],
+  [".jpg", 4],
+  [".jpeg", 4],
+  [".webp", 3],
+  [".gif", 2],
+  [".bmp", 1],
+  [".ico", 1],
+]);
 function jaccard(aSet, bSet) {
   let inter = 0;
   for (const t of aSet) if (bSet.has(t)) inter++;
@@ -10691,13 +11615,24 @@ function* categoryCandidates(category) {
   const noAcc = stripAccents(raw).toLowerCase();
   const coll = normSpaces(low);
   const collNoAcc = normSpaces(noAcc);
-  const v = new Set([raw,low,noAcc,coll,collNoAcc,coll.replace(/ /g,"_"),coll.replace(/ /g,"-"),collNoAcc.replace(/ /g,"_"),collNoAcc.replace(/ /g,"-")]);
+  const v = new Set([
+    raw,
+    low,
+    noAcc,
+    coll,
+    collNoAcc,
+    coll.replace(/ /g, "_"),
+    coll.replace(/ /g, "-"),
+    collNoAcc.replace(/ /g, "_"),
+    collNoAcc.replace(/ /g, "-"),
+  ]);
   for (const s of v) yield s;
 }
 function findImagePathForCategory(category, imgsDir) {
   const files = listImages(imgsDir);
   if (files.length === 0) return null;
 
+  // 1) exactos
   for (const cand of categoryCandidates(category)) {
     for (const f of files) {
       if (f.base.toLowerCase() === cand.toLowerCase()) return f.abs;
@@ -10708,24 +11643,53 @@ function findImagePathForCategory(category, imgsDir) {
     }
   }
 
+  // 2) fuzzy (Jaccard de tokens) + desempate por extensión
   const catKey = toKey(category);
   const toksCat = new Set(catKey.split(" ").filter(Boolean));
-  let best = null, bestScore = 0;
+  let best = null,
+    bestScore = 0;
   for (const f of files) {
     const toks = new Set(toKey(f.base).split(" ").filter(Boolean));
-    const score = jaccard(toksCat, toks) + ((EXT_SCORE.get(f.ext)||0)/100);
-    if (score > bestScore) { best = f; bestScore = score; }
+    const score = jaccard(toksCat, toks) + ((EXT_SCORE.get(f.ext) || 0) / 100);
+    if (score > bestScore) {
+      best = f;
+      bestScore = score;
+    }
   }
   return best && bestScore >= 0.35 ? best.abs : null;
+}
+
+/** Export explícito para usar desde import-service.js */
+export function findImageForCategory(category, preferExt = ".png") {
+  const abs = findImagePathForCategory(category, CFG.imgsDir);
+  if (abs) return abs;
+  // pequeño fallback por extensión preferida
+  const cand = path.join(CFG.imgsDir, `${toKey(category).replace(/ /g, "-")}${preferExt}`);
+  return fs.existsSync(cand) ? cand : null;
 }
 
 /* =========================
    Grais I/O
    ========================= */
 const HEADERS_NORMAL = [
-  "codigo flexxus","nombre descripcion","costo","venta","mayorista","inventario",
-  "inv_minimo","inv_máximo","proveedor","descripcion flexxus","precio venta","caja",
-  "iva","ganancia","imagen","marca","categoria","moneda",
+  "codigo flexxus",
+  "nombre descripcion",
+  "costo",
+  "venta",
+  "mayorista",
+  "inventario",
+  "inv_minimo",
+  "inv_maximo",
+  "proveedor",
+  "descripcion flexxus",
+  "precio venta",
+  "caja",
+  "iva",
+  "ganancia",
+  "imagen",
+  "marca",
+  "categoria",
+  "moneda",
 ];
 
 export function leerOrigen(overrides = {}) {
@@ -10753,11 +11717,13 @@ export function escribirNormalizada(rows, overrides = {}) {
   });
   const sheet = jsonToSheet(out);
   // Forzar formato 0.00 a columnas monetarias
-  applyMoneyFormatToSheet(
-    sheet,
-    HEADERS_NORMAL,
-    ["costo","venta","precio venta","iva","ganancia"]
-  );
+  applyMoneyFormatToSheet(sheet, HEADERS_NORMAL, [
+    "costo",
+    "venta",
+    "precio venta",
+    "iva",
+    "ganancia",
+  ]);
   wb.Sheets[name] = sheet;
   writeWorkbookAtomic(wb, destino, "Excel DESTINO (normalizada)");
 }
@@ -10769,7 +11735,8 @@ export function escribirNoEncontrados(rows, overrides = {}) {
     PROVEEDOR: r["PROVEEDOR"] ?? "",
     CODIGO: r["CODIGO"] ?? "",
     "CODIGO FLEXXUS": r["CODIGO FLEXXUS"] ?? "",
-    "DESCRIPCION FLEXXUS": r["DESCRIPCION FLEXXUS"] ?? r["Descripcion Flexxus"] ?? "",
+    "DESCRIPCION FLEXXUS":
+      r["DESCRIPCION FLEXXUS"] ?? r["Descripcion Flexxus"] ?? "",
     "PRECIO VENTA": toNumber(r["PRECIO VENTA"] ?? 0),
   }));
   const wb = { SheetNames: ["no_encontrados"], Sheets: {} };
@@ -10807,37 +11774,42 @@ export function aplicarPrecios(overrides = {}) {
   }
 
   // Reporte: filas del ORIGEN sin "CODIGO FLEXXUS" o vacío
-  const noVinculadosOrigen = origenRows.filter((r) => !String(r["CODIGO FLEXXUS"] ?? "").trim());
-  const rep = escribirNoEncontrados(noVinculadosOrigen, { reportePath: reporte });
+  const noVinculadosOrigen = origenRows.filter(
+    (r) => !String(r["CODIGO FLEXXUS"] ?? "").trim()
+  );
+  const rep = escribirNoEncontrados(noVinculadosOrigen, {
+    reportePath: reporte,
+  });
 
   const normRows = leerNormalizada({ destinoPath: destino });
-  let applied = 0, missingInOrigen = 0;
+  let applied = 0,
+    missingInOrigen = 0;
 
   const out = normRows.map((r) => {
     const codigo = String(r["codigo flexxus"] ?? "").trim();
     const caja = Math.max(1, toNumber(r["caja"] ?? 1)); // evita /0
-    let k = toNumber(r["precio venta"]);                // K actual como número
+    let k = toNumber(r["precio venta"]); // K actual
 
     if (codigo && mapOrigen.has(codigo)) {
-      k = toNumber(mapOrigen.get(codigo));              // K desde ORIGEN
+      k = toNumber(mapOrigen.get(codigo)); // K desde ORIGEN
       applied += 1;
     } else if (codigo) {
       missingInOrigen += 1;
     }
 
     const precioUnidad = k / caja;
-    const costo = round2(precioUnidad * 1.21);          // C
-    const venta = round2(costo * 1.40);                 // D
-    const ivaMonto = round2(precioUnidad * 0.21);       // Monto de IVA
-    const gananciaMonto = round2(costo * 0.40);         // Monto de ganancia
+    const costo = round2(precioUnidad * 1.21); // C
+    const venta = round2(costo * 1.4); // D
+    const ivaMonto = round2(precioUnidad * 0.21);
+    const gananciaMonto = round2(costo * 0.4);
 
     return {
       ...r,
-      "precio venta": round2(k),         // K (2 dec)
-      "costo": costo,                    // C
-      "venta": venta,                    // D
-      "iva": ivaMonto,                   // M (monto, no %)
-      "ganancia": gananciaMonto,         // N (monto)
+      "precio venta": round2(k), // K (2 dec)
+      costo,
+      venta,
+      iva: ivaMonto,
+      ganancia: gananciaMonto,
     };
   });
 
@@ -10890,7 +11862,7 @@ export function exportarJson(overrides = {}) {
     mayorista: toNumber(r["mayorista"]),
     inventario: toNumber(r["inventario"]),
     inv_minimo: toNumber(r["inv_minimo"]),
-    inv_maximo: toNumber(r["inv_máximo"]),
+    inv_maximo: toNumber(r["inv_maximo"]),
     proveedor: String(r["proveedor"] ?? "").trim(),
     descripcion_flexxus: String(r["descripcion flexxus"] ?? "").trim(),
     precio_venta: toNumber(r["precio venta"]),
@@ -10929,8 +11901,6 @@ export function runAll(overrides = {}) {
   return { precios: p1, imagenes: p2, json: p3 };
 }
 
-/* fin */
-
 
 --------------------------------------------
 
@@ -10943,7 +11913,10 @@ D:\empresas\catalogo\lib\headers.json:
       "código flexxus",
       "codigo",
       "cod_flexxus",
-      "cod"
+      "cod",
+      "codigo_articulo",
+      "article_code",
+      "item_code"
     ],
     "nombre_descripcion": [
       "nombre_descripcion",
@@ -10953,86 +11926,132 @@ D:\empresas\catalogo\lib\headers.json:
       "descripcion_flexxus",
       "descripcion flexxus",
       "nombre",
-      "detalle"
+      "detalle",
+      "nombre_producto",
+      "product_name",
+      "titulo",
+      "title"
     ],
     "costo": [
       "costo",
       "costo_iva_no_incluido",
-      "costo_sin_iva"
+      "costo_sin_iva",
+      "cost",
+      "precio_costo"
     ],
     "venta": [
       "venta",
       "precio",
       "precio_venta_final",
-      "pvp"
+      "pvp",
+      "price",
+      "precio_final",
+      "valor_venta"
     ],
     "mayorista": [
       "mayorista",
-      "precio_mayorista"
+      "precio_mayorista",
+      "wholesale_price",
+      "mayoreo"
     ],
     "inventario": [
       "inventario",
       "stock",
-      "existencia"
+      "existencia",
+      "cantidad",
+      "disponible",
+      "available_stock"
     ],
     "inv_minimo": [
       "inv_minimo",
       "stock_minimo",
-      "minimo"
+      "minimo",
+      "min",
+      "min_stock"
     ],
     "inv_maximo": [
       "inv_maximo",
       "stock_maximo",
       "maximo",
-      "inv_máximo"
+      "inv_máximo",
+      "max",
+      "max_stock"
     ],
     "proveedor": [
-      "proveedor"
+      "proveedor",
+      "vendor",
+      "supplier",
+      "fabricante"
     ],
     "descripcion_flexxus": [
       "descripcion_flexxus",
-      "descripcion flexxus"
+      "descripcion flexxus",
+      "desc_flexxus"
     ],
     "precio_venta": [
       "precio_venta",
       "precio venta",
       "precio_base",
-      "precio_lista"
+      "precio_lista",
+      "unit_price",
+      "punit"
     ],
     "caja": [
       "caja",
       "pack",
-      "unidad_por_caja"
+      "unidad_por_caja",
+      "unidades_por_caja",
+      "units_per_box",
+      "presentation"
     ],
     "iva": [
-      "iva"
+      "iva",
+      "impuesto",
+      "tax",
+      "vat"
     ],
     "ganancia": [
       "ganancia",
       "margen",
-      "utilidad"
+      "utilidad",
+      "profit",
+      "markup"
     ],
     "imagen": [
       "imagen",
       "foto",
-      "img"
+      "img",
+      "imagen_url",
+      "image",
+      "image_url",
+      "foto_url"
     ],
     "marca": [
-      "marca"
+      "marca",
+      "brand"
     ],
     "categoria": [
       "categoria",
       "categoría",
-      "rubro"
+      "rubro",
+      "familia",
+      "subrubro",
+      "grupo",
+      "category"
     ],
     "moneda": [
       "moneda",
-      "currency"
+      "currency",
+      "divisa"
     ],
     "sku": [
       "sku",
       "codigo_sku",
-      "id_sku"
+      "id_sku",
+      "ean",
+      "upc",
+      "gtin",
+      "barcode"
     ]
   },
   "defaultAllowed": [
@@ -11074,7 +12093,13 @@ D:\empresas\catalogo\lib\import-constants.js:
 // D:\empresas\catalogo\lib\import-constants.js
 import headers from "@/lib/headers.json";
 
-// Normaliza: minúsculas, sin acentos, separadores a "_", colapsa múltiples "_"
+/**
+ * Normaliza una etiqueta de header a una clave estable:
+ * - minúsculas
+ * - sin acentos
+ * - no alfanumérico -> "_"
+ * - colapsa múltiples "_" y recorta extremos
+ */
 export function normalizeHeaderKey(label) {
   if (label === null || label === undefined) return "";
   const lower = String(label).trim().toLowerCase();
@@ -11085,29 +12110,47 @@ export function normalizeHeaderKey(label) {
   return collapsed;
 }
 
-const HEADER_ALIASES = headers.aliases || {};
-export const DEFAULT_ALLOWED = Object.freeze(headers.defaultAllowed || []);
-export const PREFERRED_ORDER = Object.freeze(headers.preferredOrder || []);
+// Fallbacks defensivos si headers.json viniera incompleto (o con campos faltantes)
+const SAFE_ALIASES = (headers && headers.aliases) || {};
+export const DEFAULT_ALLOWED = Object.freeze((headers && headers.defaultAllowed) || []);
+export const PREFERRED_ORDER = Object.freeze((headers && headers.preferredOrder) || []);
 
-// Construimos HEADER_MAP canónico con normalización
-export const HEADER_MAP = Object.freeze(
-  Object.entries(HEADER_ALIASES).reduce((acc, [canonical, list]) => {
+/**
+ * Construimos un mapa canónico:
+ * - Para cada alias dado en headers.json → canonical
+ * - También mapeamos el propio nombre canónico (y su normalizado) a sí mismo,
+ *   para tolerar inputs que ya vengan en snake_case.
+ */
+const map = {};
+for (const [canonical, list] of Object.entries(SAFE_ALIASES)) {
+  // 1) aliases definidos
+  if (Array.isArray(list)) {
     for (const variant of list) {
       const norm = normalizeHeaderKey(variant);
-      if (norm) acc[norm] = canonical;
+      if (norm) map[norm] = canonical;
     }
-    return acc;
-  }, {})
-);
+  }
+  // 2) autopassthrough del canónico (tanto crudo como normalizado)
+  const canNorm = normalizeHeaderKey(canonical);
+  if (canNorm) {
+    map[canNorm] = canonical;         // "precio_venta" -> "precio_venta"
+    map[canonical] = canonical;       // por si ya viene exacto
+  }
+}
 
-// Dada una etiqueta cruda, devuelve la clave canónica final
+export const HEADER_MAP = Object.freeze(map);
+
+/**
+ * Dada una etiqueta cruda, devuelve la clave canónica final
+ * Si no hay alias conocido, retorna la versión normalizada.
+ */
 export function getCanonicalHeader(label) {
   const norm = normalizeHeaderKey(label);
   if (!norm) return "";
   return HEADER_MAP[norm] || norm;
 }
 
-// Útil para validaciones rápidas o UI de mapping
+/** Útil para validaciones rápidas o UI de mapping */
 export const CANONICAL_FIELDS = Object.freeze(
   Array.from(new Set(Object.values(HEADER_MAP)))
 );
@@ -11126,7 +12169,7 @@ import {
 import { validateRow } from "./validate.js";
 import { sanitizeImage, CFG } from "./config.js";
 import { tryReadJson, saveJson } from "./catalog.js";
-// 👇 antes: "./image-match.js" (BORRAR) → ahora usamos el shared
+// antes: "./image-match.js" (BORRAR) → ahora usamos el shared real
 import { findImageForCategory } from "./etl-grais-shared.js";
 
 /** --- Headers --- */
@@ -11177,7 +12220,7 @@ function isEmptyOrFallbackImage(val) {
   if (!val) return true;
   const s = String(val).trim().toLowerCase().replace(/\\/g, "/");
   if (!s) return true;
-  return s.endsWith("/sin_imagen.png") || s.endsWith("\\sin_imagen.png");
+  return s.endsWith("/sin_imagen.png") || s === "sin_imagen.png";
 }
 
 /**
@@ -11202,7 +12245,7 @@ export function buildCanonicalRow(input, headersCanon = null) {
     return null;
   }
 
-  // Sanear imagen inicial
+  // Sanear imagen inicial (si vino algo)
   if (obj.imagen) {
     try {
       obj.imagen = sanitizeImage(obj.imagen);
@@ -11211,24 +12254,23 @@ export function buildCanonicalRow(input, headersCanon = null) {
     }
   }
 
-  // Si imagen vacía/fallback -> buscar por categoría
+  // Si imagen vacía/fallback -> buscar por categoría / descripciones
   const cat = (
-    obj.categoria ??
-    obj.nombre_descripcion ??
-    obj.descripcion_flexxus ??
-    ""
+    obj.categoria ?? obj.nombre_descripcion ?? obj.descripcion_flexxus ?? ""
   )
     .toString()
     .trim();
 
   if (isEmptyOrFallbackImage(obj.imagen) && cat) {
-    // usa el mismo motor de imagen que la pipeline de Grais
-    const abs = findImageForCategory(cat, ".png");
+    // usa el mismo motor que la pipeline de Grais
+    const abs = findImageForCategory(cat, ".png"); // preferencia ligera por .png
     if (abs) obj.imagen = sanitizeImage(abs);
     else obj.imagen = "/imagenes/sin_imagen.png";
-  } else {
-    // asegurar formato final aunque venga con ruta absoluta válida
+  } else if (obj.imagen) {
+    // asegurar formato final aunque venga absoluta
     obj.imagen = sanitizeImage(obj.imagen);
+  } else {
+    obj.imagen = "/imagenes/sin_imagen.png";
   }
 
   // Validación/coerción
@@ -11317,7 +12359,10 @@ export async function runImportPipeline({
 
   for (const row of rows) {
     stats.total += 1;
-    const { data, errors } = buildCanonicalRow(row, headersCanon);
+    const built = buildCanonicalRow(row, headersCanon);
+    if (!built) continue;
+
+    const { data, errors } = built;
     if (errors?.length) {
       stats.invalid += 1;
       if (stats.errors.length < 100)
@@ -11352,6 +12397,47 @@ export async function runImportPipeline({
 
 --------------------------------------------
 
+D:\empresas\catalogo\lib\notify.js:
+// lib/notify.js
+// Envío opcional por SMTP. Sin SMTP_URL -> no envía, sólo loguea.
+let transporterPromise = null;
+
+async function getTransporter() {
+  const url = process.env.SMTP_URL || "";
+  if (!url) return null;
+  if (!transporterPromise) {
+    transporterPromise = import("nodemailer")
+      .then((m) => m.default.createTransport(url))
+      .catch(() => null);
+  }
+  return await transporterPromise;
+}
+
+/**
+ * notify({ type, to, subject, text, html, meta })
+ * Si hay SMTP_URL -> envía mail; si no -> console.log y sigue.
+ */
+export async function notify({ type = "", to = "", subject = "", text = "", html = "", meta = null }) {
+  const tx = await getTransporter();
+  const from = process.env.NOTIFY_FROM || "no-reply@localhost";
+
+  if (!tx) {
+    console.log("[notify:dev-log]", { type, to, subject, text, meta });
+    return { ok: false, skipped: true };
+  }
+
+  try {
+    await tx.sendMail({ from, to, subject, text: text || undefined, html: html || undefined });
+    return { ok: true };
+  } catch (err) {
+    console.error("[notify:error]", err);
+    return { ok: false, error: String(err?.message || err) };
+  }
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\lib\pipeline-grais.js:
 // D:\empresas\catalogo\lib\pipeline-grais.js
 // Ahora este archivo solo organiza y reexpone la pipeline.
@@ -11372,15 +12458,126 @@ export {
 
 --------------------------------------------
 
+D:\empresas\catalogo\lib\shipments-store.js:
+// lib/shipments-store.js
+import fs from "fs";
+import path from "path";
+
+const FILE = path.join(process.cwd(), "uploads", "shipments.json");
+
+function ensureFile() {
+  const dir = path.dirname(FILE);
+  if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+  if (!fs.existsSync(FILE)) fs.writeFileSync(FILE, "[]", "utf-8");
+}
+
+function readAll() {
+  ensureFile();
+  try { return JSON.parse(fs.readFileSync(FILE, "utf-8")); } catch { return []; }
+}
+
+function writeAll(rows) {
+  ensureFile();
+  fs.writeFileSync(FILE, JSON.stringify(rows, null, 2), "utf-8");
+}
+
+export async function listShipments({ status, orderCode, q } = {}) {
+  const all = readAll();
+  return all
+    .filter(s => (status ? s.status === status : true))
+    .filter(s => (orderCode ? s.orderCode === orderCode : true))
+    .filter(s => (q ? JSON.stringify(s).toLowerCase().includes(q.toLowerCase()) : true))
+    .sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+    .slice(0, 1000);
+}
+
+let nextIdCache = 1;
+function nextId(rows) {
+  nextIdCache = Math.max(nextIdCache, ...rows.map(r => Number(r.id) || 0)) + 1;
+  return String(nextIdCache);
+}
+
+export async function createShipment(data) {
+  const required = ["orderCode", "address"];
+  for (const k of required) if (!data?.[k]) throw new Error(`Campo obligatorio: ${k}`);
+
+  const rows = readAll();
+  const row = {
+    id: nextId(rows),
+    orderCode: String(data.orderCode),
+    address: String(data.address),
+    status: String(data.status || "pending"),
+    tracking: data.tracking ? String(data.tracking) : null,
+    carrier: data.carrier ? String(data.carrier) : null,
+    eta: data.eta ? String(data.eta) : null, // ISO date o texto
+    email: data.email ? String(data.email) : null,
+    phone: data.phone ? String(data.phone) : null,
+    notes: data.notes ? String(data.notes) : "",
+    createdAt: new Date().toISOString(),
+    updatedAt: new Date().toISOString(),
+  };
+  rows.push(row);
+  writeAll(rows);
+  return row;
+}
+
+export async function updateShipment(id, patch) {
+  const rows = readAll();
+  const i = rows.findIndex(r => r.id === String(id));
+  if (i === -1) throw new Error("No encontrado");
+  const prev = rows[i];
+  const allowed = new Set(["address","status","tracking","carrier","eta","email","phone","notes"]);
+  const next = { ...prev };
+  for (const [k, v] of Object.entries(patch || {})) {
+    if (!allowed.has(k)) continue;
+    next[k] = v == null ? null : String(v);
+  }
+  next.updatedAt = new Date().toISOString();
+  rows[i] = next;
+  writeAll(rows);
+  return next;
+}
+
+export async function getShipmentById(id) {
+  const rows = readAll();
+  return rows.find(r => r.id === String(id)) || null;
+}
+
+
+--------------------------------------------
+
 D:\empresas\catalogo\lib\validate.js:
 // D:\empresas\catalogo\lib\validate.js (SIN zod)
 
-// ---- helpers de coerción ----
+/* ===== Parser numérico robusto (coma/punto, símbolos) =====
+   Admite "$ 12.640,69", "12,640.69", "12640,69", "1 234,56", etc. */
 export function toNumberSafe(v) {
   if (v === null || v === undefined) return undefined;
   if (typeof v === "number") return Number.isFinite(v) ? v : undefined;
-  // admite "1.234,56" o "1234,56" -> 1234.56
-  const s = String(v).trim().replace(/\./g, "").replace(",", ".");
+  let s = String(v).trim();
+  if (!s) return undefined;
+
+  // quitar todo lo que no sea dígito, separadores o signo
+  s = s.replace(/[^\d.,\-]/g, "");
+
+  const hasComma = s.includes(",");
+  const hasDot = s.includes(".");
+  if (hasComma && hasDot) {
+    // es-AR: "12.640,69"  -> "." miles, "," decimal
+    if (s.lastIndexOf(",") > s.lastIndexOf(".")) {
+      s = s.replace(/\./g, "").replace(/,/g, ".");
+    } else {
+      // en-US: "12,640.69" -> quitar comas de miles
+      s = s.replace(/,/g, "");
+    }
+  } else if (hasComma && !hasDot) {
+    // Solo coma => decimal
+    s = s.replace(/\./g, "").replace(/,/g, ".");
+  } else {
+    // Solo punto o ninguno => quitar comas de miles si quedaron
+    s = s.replace(/,(?=\d{3}\b)/g, "");
+  }
+
   const n = Number(s);
   return Number.isFinite(n) ? n : undefined;
 }
@@ -11392,7 +12589,6 @@ export function toStringSafe(v) {
 }
 
 // ---- validación mínima: tipos y no-negativos donde aplica ----
-// Reglas por campo (simples; ampliables si hace falta)
 const rules = {
   // strings opcionales
   sku: { type: "string", min: 1, optional: true },
@@ -11504,8 +12700,6 @@ export function validateRow(raw) {
   if (errors.length) return { ok: false, data: null, errors };
   return { ok: true, data, errors: [] };
 }
-
-/* fin */
 
 
 --------------------------------------------
@@ -11991,6 +13185,7 @@ D:\empresas\catalogo\package.json:
     "bcryptjs": "^2.4.3",
     "mercadopago": "^2.2.8",
     "next": "14.2.7",
+    "nodemailer": "^7.0.10",
     "react": "18.3.1",
     "react-dom": "18.3.1",
     "stripe": "^16.8.0",

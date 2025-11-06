@@ -1,7 +1,9 @@
-// importar_precios.cjs
+// D:\empresas\ferreluc\gestion\scripts\importar_precios.cjs
 // Actualiza precios y recalcula IVA, costo, ganancia y venta.
 // Genera reporte de origenes que NO están en el destino.
 // Requisitos: npm i exceljs
+
+"use strict";
 
 const path = require("path");
 const ExcelJS = require("exceljs");
@@ -13,6 +15,7 @@ const {
   parsePrecio,
   round2,
   ensureDir,
+  getWorksheetByNameOrFirst,
 } = require("./common.cjs");
 const { buildFlexxusKey } = require("./shared-keys.cjs");
 
@@ -33,17 +36,19 @@ function getIdxSafe(idx, names) {
 async function leerOrigen(ruta) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(ruta);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[importar_precios] ORIGEN sin worksheet");
+
   const idx = buildHeaderIndex(ws);
 
   const colProv = getIdxSafe(idx, ["PROVEEDOR", "proveedor"]);
   const colCod = getIdxSafe(idx, ["CODIGO", "codigo"]);
-  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus"]);
-  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus"]);
-  const colPrecio = getIdxSafe(idx, ["PRECIO VENTA", "precio venta"]);
+  const colFlex = getIdxSafe(idx, ["CODIGO FLEXXUS", "codigo flexxus", "codigo_flexxus"]);
+  const colDesc = getIdxSafe(idx, ["Descripcion Flexxus", "descripcion flexxus", "descripcion_flexxus"]);
+  const colPrecio = getIdxSafe(idx, ["PRECIO VENTA", "precio venta", "precio_venta"]);
 
   if (!colProv || !colCod || !colDesc || !colPrecio) {
-    throw new Error("[importar_precios] ORIGEN sin encabezados esperados.");
+    throw new Error("[importar_precios] ORIGEN sin encabezados esperados (proveedor, codigo, descripcion, precio venta).");
   }
 
   const map = new Map();
@@ -78,7 +83,9 @@ async function leerOrigen(ruta) {
 async function procesarDestino(rutaDestino, origenMap) {
   const wb = new ExcelJS.Workbook();
   await wb.xlsx.readFile(rutaDestino);
-  const ws = wb.worksheets[0];
+  const ws = getWorksheetByNameOrFirst(wb);
+  if (!ws) throw new Error("[importar_precios] DESTINO sin worksheet");
+
   const idx = buildHeaderIndex(ws);
 
   const colFlex = getIdxSafe(idx, ["codigo flexxus", "codigo_flexxus"]);
@@ -110,7 +117,7 @@ async function procesarDestino(rutaDestino, origenMap) {
     if (!src) continue;
 
     const precioOrigen = src.precioOrigen;
-    if (precioOrigen == null) {
+    if (precioOrigen == null || Number.isNaN(precioOrigen) || precioOrigen <= 0) {
       sinPrecio++;
       continue;
     }
@@ -119,9 +126,11 @@ async function procesarDestino(rutaDestino, origenMap) {
     let caja = parsePrecio(row.getCell(colCaja).value);
     if (!caja || caja <= 0) caja = 1;
 
-    // K — PRECIO VENTA (del origen)
-    const precioUnidad = precioOrigen / caja;
+    // K — PRECIO VENTA (valor del origen tal como viene)
     row.getCell(colPrecioVenta).value = round2(precioOrigen);
+
+    // Calcular por unidad
+    const precioUnidad = precioOrigen / caja;
 
     // M — IVA (monto)
     const iva = precioUnidad * CALC.IVA;
@@ -195,7 +204,7 @@ async function main() {
     );
 
     console.log(
-      `[importar_precios] Actualizados: ${actualizados} | Sin precio válido: ${sinPrecio} | No encontrados: ${noEncontrados}`
+      `[importar_precios] Actualizados: ${actualizados} | Sin precio válido: ${sinPrecio} | No encontrados: ${noEncontrados} | IVA: ${CALC.IVA} | GANANCIA: ${CALC.GANANCIA}`
     );
   } catch (err) {
     console.error("[importar_precios] ERROR:", err.message);

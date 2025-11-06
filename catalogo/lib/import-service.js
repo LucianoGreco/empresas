@@ -8,7 +8,7 @@ import {
 import { validateRow } from "./validate.js";
 import { sanitizeImage, CFG } from "./config.js";
 import { tryReadJson, saveJson } from "./catalog.js";
-// 👇 antes: "./image-match.js" (BORRAR) → ahora usamos el shared
+// antes: "./image-match.js" (BORRAR) → ahora usamos el shared real
 import { findImageForCategory } from "./etl-grais-shared.js";
 
 /** --- Headers --- */
@@ -59,7 +59,7 @@ function isEmptyOrFallbackImage(val) {
   if (!val) return true;
   const s = String(val).trim().toLowerCase().replace(/\\/g, "/");
   if (!s) return true;
-  return s.endsWith("/sin_imagen.png") || s.endsWith("\\sin_imagen.png");
+  return s.endsWith("/sin_imagen.png") || s === "sin_imagen.png";
 }
 
 /**
@@ -84,7 +84,7 @@ export function buildCanonicalRow(input, headersCanon = null) {
     return null;
   }
 
-  // Sanear imagen inicial
+  // Sanear imagen inicial (si vino algo)
   if (obj.imagen) {
     try {
       obj.imagen = sanitizeImage(obj.imagen);
@@ -93,24 +93,23 @@ export function buildCanonicalRow(input, headersCanon = null) {
     }
   }
 
-  // Si imagen vacía/fallback -> buscar por categoría
+  // Si imagen vacía/fallback -> buscar por categoría / descripciones
   const cat = (
-    obj.categoria ??
-    obj.nombre_descripcion ??
-    obj.descripcion_flexxus ??
-    ""
+    obj.categoria ?? obj.nombre_descripcion ?? obj.descripcion_flexxus ?? ""
   )
     .toString()
     .trim();
 
   if (isEmptyOrFallbackImage(obj.imagen) && cat) {
-    // usa el mismo motor de imagen que la pipeline de Grais
-    const abs = findImageForCategory(cat, ".png");
+    // usa el mismo motor que la pipeline de Grais
+    const abs = findImageForCategory(cat, ".png"); // preferencia ligera por .png
     if (abs) obj.imagen = sanitizeImage(abs);
     else obj.imagen = "/imagenes/sin_imagen.png";
-  } else {
-    // asegurar formato final aunque venga con ruta absoluta válida
+  } else if (obj.imagen) {
+    // asegurar formato final aunque venga absoluta
     obj.imagen = sanitizeImage(obj.imagen);
+  } else {
+    obj.imagen = "/imagenes/sin_imagen.png";
   }
 
   // Validación/coerción
@@ -199,7 +198,10 @@ export async function runImportPipeline({
 
   for (const row of rows) {
     stats.total += 1;
-    const { data, errors } = buildCanonicalRow(row, headersCanon);
+    const built = buildCanonicalRow(row, headersCanon);
+    if (!built) continue;
+
+    const { data, errors } = built;
     if (errors?.length) {
       stats.invalid += 1;
       if (stats.errors.length < 100)
