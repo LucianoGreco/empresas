@@ -1,10 +1,13 @@
-// D:\empresas\catalogo\components\HeaderCart.jsx
 "use client";
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
 import styled from "styled-components";
 import { useCart } from "@/components/CartContext";
+import dynamic from "next/dynamic";
+
+// Carga diferida del monitor para no afectar TTFB
+const AdminHeaderMonitor = dynamic(() => import("@/components/AdminHeaderMonitor"), { ssr: false });
 
 /* ========== styled-components ========== */
 const Topbar = styled.header`
@@ -221,6 +224,9 @@ export default function HeaderCart() {
           {isLogged && isAdmin && <NavLink href="/admin/pipeline">Pipeline</NavLink>}
         </NavLeft>
 
+        {/* Monitor admin en vivo */}
+        {isLogged && isAdmin && <AdminHeaderMonitor />}
+
         {/* Derecha */}
         <NavRight>
           {isLogged && (
@@ -250,5 +256,3 @@ export default function HeaderCart() {
     </Topbar>
   );
 }
-
-/* fin */

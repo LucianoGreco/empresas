@@ -1,9 +1,13 @@
-// app/pagos/page.jsx
 "use client";
 
 import { useEffect, useState } from "react";
 import { isAdminPage } from "@/lib/admin";
 export const dynamic = "force-dynamic";
+
+function fmtMoneyCents(cents = 0, currency = "ARS") {
+  const n = Number(cents || 0) / 100;
+  return n.toLocaleString("es-AR", { style: "currency", currency, maximumFractionDigits: 0 });
+}
 
 export default function PagosPage() {
   useEffect(() => { isAdminPage?.().catch(()=>{}); }, []);
@@ -25,7 +29,7 @@ export default function PagosPage() {
     setLoading(false);
   }
 
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load(); }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
     <div style={{ maxWidth: 1100, margin: "24px auto", fontFamily: "system-ui" }}>
@@ -38,7 +42,7 @@ export default function PagosPage() {
           <option value="pending">pending</option>
           <option value="rejected">rejected</option>
           <option value="refunded">refunded</option>
-          <option value="canceled">canceled</option>
+          <option value="error">error</option>
         </select>
         <select value={method} onChange={e=>setMethod(e.target.value)}>
           <option value="">Proveedor</option>
@@ -68,11 +72,11 @@ export default function PagosPage() {
           <tbody>
             {rows.map(p => (
               <tr key={p.id}>
-                <td>{new Date(p.createdAt).toLocaleString()}</td>
+                <td>{new Date(p.createdAt).toLocaleString("es-AR")}</td>
                 <td><a href={`/orders/${p.order?.code || ""}`} style={{ textDecoration: "underline" }}>{p.order?.code || "-"}</a></td>
                 <td>{p.provider || p.method || "-"}</td>
                 <td>{p.status}</td>
-                <td align="right">{(p.amount || 0).toLocaleString()}</td>
+                <td align="right">{fmtMoneyCents(p.amount, p.currency || "ARS")}</td>
                 <td>{p.currency || "ARS"}</td>
                 <td>{p.order?.buyerEmail || "-"}</td>
                 <td style={{ maxWidth: 220, overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>

@@ -1,4 +1,3 @@
-// app/api/payments/route.js
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 import { isAdminApi } from "@/lib/admin";
@@ -9,10 +8,16 @@ export const dynamic = "force-dynamic";
 export async function GET(req) {
   try {
     const url = new URL(req.url);
-    const status = url.searchParams.get("status") || undefined;
+    const rawStatus = url.searchParams.get("status") || "";
     const method = url.searchParams.get("method") || undefined;
     const orderCode = url.searchParams.get("order") || undefined;
     const q = url.searchParams.get("q") || undefined;
+
+    // Normalizamos el status: UI antes mandaba "canceled" (no existe en enum)
+    const status =
+      rawStatus === "canceled" || rawStatus === "cancelled"
+        ? "rejected"
+        : rawStatus || undefined;
 
     const where = {
       ...(status ? { status } : {}),
@@ -59,10 +64,9 @@ export async function POST(req) {
       return NextResponse.json({ error: "orderCode, provider y amount son obligatorios" }, { status: 400 });
     }
 
-    const order = await prisma.order.findUnique({ where: { code: orderCode } });
+    const order = await prisma.order.findFirst({ where: { code: orderCode } });
     if (!order) return NextResponse.json({ error: "Orden no encontrada" }, { status: 404 });
 
-    // Generamos un eventId sintético para idempotencia manual
     const eventId = `manual:${provider}:${order.id}:${Date.now()}`;
 
     const payment = await prisma.payment.create({
@@ -70,7 +74,7 @@ export async function POST(req) {
         eventId,
         provider,
         providerRef: null,
-        status,
+        status: status === "canceled" ? "rejected" : status,
         amount,
         currency,
         rawPayload: note ? JSON.stringify({ note }) : null,
@@ -79,7 +83,6 @@ export async function POST(req) {
       },
     });
 
-    // Si aprueba, recalculamos estado de la orden
     if (payment.status === "approved") {
       const { _sum } = await prisma.payment.aggregate({
         where: { orderId: order.id, status: "approved" },

@@ -1,7 +1,5 @@
-// app/api/orders/[code]/route.js
 // Devuelve una orden por "code" con items, pagos y (opcionalmente) eventos/cliente.
 // Uso: GET /api/orders/FL-2025-000123
-
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
@@ -12,12 +10,12 @@ export async function GET(_req, { params }) {
       return NextResponse.json({ error: "code es requerido" }, { status: 400 });
     }
 
-    const order = await prisma.order.findUnique({
+    // IMPORTANTE: code no es unique global (solo tenantId+code). Usamos findFirst.
+    const order = await prisma.order.findFirst({
       where: { code },
       include: {
         items: true,
         payments: true,
-        // Útiles para pantallas de “success” y auditoría
         customer: true,
         events: true,
       },

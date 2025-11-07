@@ -9,7 +9,7 @@ const XLSX = require('xlsx'); // 👈 importante: npm install xlsx
 // ====== Config ======
 const ROOTS = [
 
-  'D:\\empresas\\catalogo',
+  'D:\\empresas\\catalogo\\app\\api',
 
 ];
 

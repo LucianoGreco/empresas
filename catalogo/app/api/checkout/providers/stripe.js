@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\app\api\checkout\providers\stripe.js
 import Stripe from "stripe";
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 

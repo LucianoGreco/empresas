@@ -1,3 +1,4 @@
+// D:\empresas\catalogo\app\api\checkout\providers\mercadopago.js
 import { MercadoPagoConfig, Preference } from "mercadopago";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";

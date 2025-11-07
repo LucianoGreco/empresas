@@ -1,4 +1,3 @@
-// app/api/shipments/route.js
 import { NextResponse } from "next/server";
 import { isAdminApi } from "@/lib/admin";
 import { listShipments, createShipment, updateShipment, getShipmentById } from "@/lib/shipments-store";
@@ -16,6 +15,7 @@ export async function GET(req) {
     const list = await listShipments({ status, orderCode, q });
     return NextResponse.json(list);
   } catch (e) {
+    console.error("[GET /api/shipments]", e);
     return NextResponse.json({ error: e?.message || "Server error" }, { status: 500 });
   }
 }
@@ -24,11 +24,12 @@ export async function GET(req) {
 // body: { orderCode, address, eta, tracking, carrier, status="pending", notes }
 export async function POST(req) {
   try {
-    await isAdminApi();
+    const ok = await isAdminApi(req); // <<<< antes no pasaba req
+    if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const body = await req.json().catch(() => ({}));
     const s = await createShipment(body);
 
-    // Notificación de creación
     await notify({
       type: "shipment_created",
       to: s.email || null,
@@ -48,7 +49,9 @@ export async function POST(req) {
 // body: { id, ...fields }
 export async function PATCH(req) {
   try {
-    await isAdminApi();
+    const ok = await isAdminApi(req); // <<<< antes no pasaba req
+    if (!ok) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
     const body = await req.json().catch(() => ({}));
     if (!body?.id) return NextResponse.json({ error: "id requerido" }, { status: 400 });
 
@@ -57,7 +60,6 @@ export async function PATCH(req) {
 
     const updated = await updateShipment(body.id, body);
 
-    // Notificar cambios de estado
     if (prev.status !== updated.status) {
       await notify({
         type: "shipment_status",

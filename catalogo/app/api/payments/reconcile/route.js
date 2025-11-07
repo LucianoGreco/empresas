@@ -1,6 +1,4 @@
 // GET /api/payments/reconcile?payment_id=...&collection_id=...
-// Forza la consulta del pago en MP y actualiza Payment/Order igual que el webhook.
-// Útil en /checkout/success cuando el webhook no llegó.
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/db";
 
@@ -50,7 +48,6 @@ export async function GET(req) {
     const mpId = url.searchParams.get("payment_id") || url.searchParams.get("collection_id");
     if (!mpId) return NextResponse.json({ error: "payment_id/collection_id requerido" }, { status: 400 });
 
-    // Consultar pago
     const mpPayment = await fetchPayment(mpId);
     const { pay } = mapStatus(mpPayment);
     const amount = Math.round(Number(mpPayment?.transaction_amount || 0) * 100);
@@ -58,19 +55,17 @@ export async function GET(req) {
     const meta = mpPayment?.metadata || {};
     const externalRef = mpPayment?.external_reference || null;
 
-    // Ubicar orden
     let orderRow = null;
     if (meta.orderId) {
       orderRow = await prisma.order.findUnique({ where: { id: String(meta.orderId) } });
     }
     if (!orderRow && meta.orderCode) {
-      orderRow = await prisma.order.findUnique({ where: { code: String(meta.orderCode) } });
+      orderRow = await prisma.order.findFirst({ where: { code: String(meta.orderCode) } });
     }
     if (!orderRow && externalRef) {
-      orderRow = await prisma.order.findUnique({ where: { code: String(externalRef) } }).catch(() => null);
+      orderRow = await prisma.order.findFirst({ where: { code: String(externalRef) } }).catch(() => null);
     }
 
-    // eventId sintético por reconciliación (idempotente por mpId)
     const eventId = `mp:reconcile:${mpId}`;
 
     const payment = await prisma.payment.upsert({
